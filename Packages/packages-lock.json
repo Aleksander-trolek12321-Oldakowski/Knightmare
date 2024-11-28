@@ -40,6 +40,8 @@
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.services.analytics": "1.0.4"
+        "com.unity.services.analytics": "1.0.4",
+        "com.unity.ugui": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -130,6 +132,9 @@
       "source": "registry",
       "dependencies": {
         "com.unity.sysroot": "2.0.10"
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.androidjni": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },

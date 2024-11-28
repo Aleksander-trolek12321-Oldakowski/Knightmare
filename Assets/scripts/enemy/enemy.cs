@@ -6,6 +6,7 @@ using UnityEngine.Analytics;
 namespace enemy
 {
 public class enemy : MonoBehaviour
+public class enemy
 {
     public int id;
     public string name;
@@ -26,6 +27,8 @@ public class enemy : MonoBehaviour
     {
         Movement();
     }
+
+    public GameObject player;
 
     protected virtual void Attack()
     {
