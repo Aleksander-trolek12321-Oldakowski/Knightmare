@@ -5,7 +5,7 @@ using UnityEngine.Analytics;
 
 namespace enemy
 {
-public class enemy
+public class enemy : MonoBehaviour
 {
     public int id;
     public string name;
@@ -13,16 +13,27 @@ public class enemy
     public float speed;
     public float damage;
     public float attackRange;
+    
+    public Transform playerTransform;
     public GameObject player;
+
+    private void Start()
+    {
+        playerTransform = player.transform;
+    }
+
+    private void Update()
+    {
+        Movement();
+    }
 
     protected virtual void Attack()
     {
 
     }
 
-    public void Movement()
+    public virtual void Movement()
     {
-
     }
 }
 }
