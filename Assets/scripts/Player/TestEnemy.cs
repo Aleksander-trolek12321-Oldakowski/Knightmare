@@ -6,7 +6,7 @@ public class TestEnemy : MonoBehaviour, IDamageable
 {
 
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
 
         Debug.Log("Damage " + damageAmount);

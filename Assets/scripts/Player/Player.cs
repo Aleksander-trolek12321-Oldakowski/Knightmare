@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     Vector2 movementVector;
-    [SerializeField] float speed = 3f;
     Animator animator;
     PlayerInput playerInputActions;
     private bool isAttacking = false;
@@ -15,10 +14,12 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject attackSpherePrefab;
     private bool isHoldingAttack = false;
     float damageRadius = 0.75f;
-    [SerializeField] int damage = 10;
-    float attackSpeed = 1f;
-    float baseRange = 1f; 
-    float rangeUpgrade = 1f; 
+    [SerializeField] private float health = 10;
+    [SerializeField] private float damage = 10;
+    [SerializeField] private float speed = 3f;
+    [SerializeField] private float range = 1f;
+    [SerializeField] private float attackSpeed = 1f;
+   
 
     void Awake()
     {
@@ -108,9 +109,9 @@ public class Player : MonoBehaviour
         Vector3 spherePosition = transform.position + (Vector3)attackDirection * 1.3f ;
 
         GameObject sphere = Instantiate(attackSpherePrefab, spherePosition, Quaternion.identity);       
-        sphere.transform.localScale = Vector3.one * 1.5f;
+        sphere.transform.localScale = Vector3.one * 1.5f * range;
         Destroy(sphere, 0.3f);
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(spherePosition, damageRadius * (baseRange* rangeUpgrade));
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(spherePosition, damageRadius * range);
         foreach (Collider2D collider in hitObjects)
         {
             IDamageable target = collider.GetComponent<IDamageable>();
