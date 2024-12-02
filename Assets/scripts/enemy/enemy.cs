@@ -25,12 +25,11 @@ public class enemy : MonoBehaviour
     public float minimumDistance = 15f;
 
 
-    public virtual void Attack()
-    {
-
-    }
 
     public virtual void Movement()
+    {
+    }
+    public virtual void Attack()
     {
     }
 }
