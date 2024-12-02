@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-
 
 namespace enemy
 {
-public class Zombie : enemy
+public class Skeleton_Meele : enemy
 {
     [SerializeField] private Player player;
     private bool isAttacking = false;

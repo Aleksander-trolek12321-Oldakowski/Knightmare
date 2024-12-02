@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject attackSpherePrefab;
     private bool isHoldingAttack = false;
     float damageRadius = 0.75f;
-    [SerializeField] private float health = 10;
+    [SerializeField] public float health = 10;
     [SerializeField] private float damage = 10;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float range = 1f;
