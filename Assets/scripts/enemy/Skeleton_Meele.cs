@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-
 
 namespace enemy
 {
-public class Zombie : enemy
+public class Skeleton_Meele : enemy
 {
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Player player;
@@ -30,9 +28,9 @@ public class Zombie : enemy
         {
         base.Movement();
 
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        Vector2 direction = (player.transform.position - transform.position).normalized;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         if (distanceToPlayer > attackRange)
         {
@@ -40,9 +38,9 @@ public class Zombie : enemy
 
             Debug.DrawRay(transform.position, direction * attackRange, Color.red);
 
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
             {
-                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             }
             else
             {
@@ -69,20 +67,19 @@ public class Zombie : enemy
 
         Debug.Log("Zombie rozpoczyna atak");
 
-        currentAttackDirection = (playerTransform.position - transform.position).normalized;
+        currentAttackDirection = (player.transform.position - transform.position).normalized;
         StartCoroutine(PerformAttack());
     }
 
     IEnumerator PerformAttack()
     {
         float attackTime = attackSpeed;
-
-        while(attackTime > 0)
+        
+        while (attackTime > 0)
         {
             attackTime -= Time.deltaTime;
 
-            Vector2 targetDirection = (playerTransform.position - transform.position).normalized;
-
+            Vector2 targetDirection = (player.transform.position - transform.position).normalized;
             targetDirection += new Vector2(
                 Random.Range(-attackInaccuracy, attackInaccuracy),
                 Random.Range(-attackInaccuracy, attackInaccuracy)
@@ -92,11 +89,6 @@ public class Zombie : enemy
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange, ~enemyLayer);
             Debug.DrawRay(transform.position, currentAttackDirection * attackRange, Color.green);
-
-            if(hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                Debug.Log("Zombie trafia gracza");
-            }
 
             yield return null;
         }
@@ -110,16 +102,15 @@ public class Zombie : enemy
         }
 
         Debug.Log("Zombie zakończył atak.");
-
         yield return new WaitForSeconds(attackCooldown);
-
         isAttacking = false;
         canAttack = true;
     }
 
+
     private void Update()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         if(distanceToPlayer <= attackRange && canAttack && !isAttacking)
         {
