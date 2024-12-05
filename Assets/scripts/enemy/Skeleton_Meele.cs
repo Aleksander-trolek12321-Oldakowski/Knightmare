@@ -6,6 +6,7 @@ namespace enemy
 {
 public class Skeleton_Meele : enemy
 {
+    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Player player;
     private bool isAttacking = false;
     private bool canAttack = true;
@@ -14,6 +15,13 @@ public class Skeleton_Meele : enemy
     public float attackInaccuracy = 0.05f;
 
     private Vector2 currentAttackDirection;
+
+
+    void Awake()
+    {
+        player = FindFirstObjectByType<Player>();
+    }
+
     public override void Movement()
     {
         if(!isAttacking)
@@ -26,7 +34,7 @@ public class Skeleton_Meele : enemy
 
         if (distanceToPlayer > attackRange)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, minimumDistance);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, minimumDistance, ~enemyLayer);
 
             Debug.DrawRay(transform.position, direction * attackRange, Color.red);
 
@@ -79,13 +87,13 @@ public class Skeleton_Meele : enemy
 
             currentAttackDirection = Vector2.Lerp(currentAttackDirection, targetDirection, Time.deltaTime * turnSpeed).normalized;
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange, ~enemyLayer);
             Debug.DrawRay(transform.position, currentAttackDirection * attackRange, Color.green);
 
             yield return null;
         }
 
-        RaycastHit2D finalHit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange);
+        RaycastHit2D finalHit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange, ~enemyLayer);
 
         if (finalHit.collider != null && finalHit.collider.GetComponent<Player>() == player)
         {

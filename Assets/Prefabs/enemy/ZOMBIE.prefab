@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6243304534387074071}
   - component: {fileID: 7574260258722594216}
   - component: {fileID: 5634277985361065652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZOMBIE
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,9 +101,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 0.1
+  m_LinearDrag: 4
+  m_AngularDrag: 4
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -177,12 +177,14 @@ MonoBehaviour:
   id: 1
   name: ZOMBIE
   health: 15
-  speed: 2
+  speed: 3
   damage: 5
   attackRange: 5
   attackSpeed: 3
-  minimumDistance: 10
-  playerTransform: {fileID: 0}
+  minimumDistance: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
   player: {fileID: 0}
   attackCooldown: 1.5
   turnSpeed: 15

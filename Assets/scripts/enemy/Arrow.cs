@@ -20,6 +20,8 @@ public class Arrow : MonoBehaviour
             Debug.Log("Strzała trafiła gracza!");
             Destroy(gameObject);
         }
+        else if(collision.gameObject.TryGetComponent<enemy>(out enemy enemy))
+        {}
         else
         {
             Destroy(gameObject);

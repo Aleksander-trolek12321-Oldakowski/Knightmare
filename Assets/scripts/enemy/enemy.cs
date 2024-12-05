@@ -23,8 +23,6 @@ public class enemy : MonoBehaviour
     public float attackSpeed;
     [SerializeField]
     public float minimumDistance = 15f;
-
-
     public virtual void Attack()
     {
 
