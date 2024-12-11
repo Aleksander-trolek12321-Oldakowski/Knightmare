@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private float range = 1f;
     [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] private bool canFire = false;
+    [SerializeField] private bool canPoison = false;
+
    
 
     void Awake()
@@ -119,6 +122,15 @@ public class Player : MonoBehaviour
             {
 
                 target.TakeDamage(damage);
+                if (canFire)
+                {
+                    target.ApplyDamageOverTime(DamageOverTime.Fire, 5f, 1f); 
+                }
+
+                if (canPoison)
+                {
+                    target.ApplyDamageOverTime(DamageOverTime.Poison, 5f, 1f); 
+                }
             }
         }
 
@@ -138,5 +150,22 @@ public class Player : MonoBehaviour
 
         isAttacking = false;
     }
+    public void ApplyItemStats(ItemData itemData)
+    {
+        if (itemData == null) return;
 
+        health += itemData.health;
+        damage += itemData.damage;
+        speed += itemData.speed;
+        attackSpeed += itemData.attackSpeed;
+        range += itemData.range;
+        canFire = itemData.canFire;
+        canPoison = itemData.canPoison;
+
+        damage = Mathf.Max(damage, 0.1f);
+        speed = Mathf.Max(speed, 0.1f);
+        attackSpeed = Mathf.Max(attackSpeed, 0.1f);
+        range = Mathf.Max(range, 0.1f);
+
+    }
 }
