@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Animator animator;
     PlayerInput playerInputActions;
     private bool isAttacking = false;
+    private float attackSpeedUI;
 
     [SerializeField] GameObject attackSpherePrefab;
     private bool isHoldingAttack = false;
@@ -22,10 +23,11 @@ public class Player : MonoBehaviour
     [SerializeField] private bool canFire = false;
     [SerializeField] private bool canPoison = false;
 
-   
+
 
     void Awake()
     {
+      
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -37,6 +39,14 @@ public class Player : MonoBehaviour
         playerInputActions.Player.Fire.canceled += OnAttackCanceled;
 
         playerInputActions.Player.Enable();
+
+    }
+    private void Start()
+    {
+        attackSpeedUI =  attackSpeed;
+
+        Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
+
     }
 
     void OnDestroy()
@@ -153,7 +163,7 @@ public class Player : MonoBehaviour
     public void ApplyItemStats(ItemData itemData)
     {
         if (itemData == null) return;
-
+        attackSpeedUI= attackSpeedUI + (itemData.attackSpeed* -1);
         health += itemData.health;
         damage += itemData.damage;
         speed += itemData.speed;
@@ -162,10 +172,14 @@ public class Player : MonoBehaviour
         canFire = itemData.canFire;
         canPoison = itemData.canPoison;
 
-        damage = Mathf.Max(damage, 0.1f);
-        speed = Mathf.Max(speed, 0.1f);
-        attackSpeed = Mathf.Max(attackSpeed, 0.1f);
-        range = Mathf.Max(range, 0.1f);
+        damage = Mathf.Clamp(damage, 0.1f, 5f);
+        speed = Mathf.Clamp(speed, 0.1f, 5f);
+        attackSpeed = Mathf.Clamp(attackSpeed, 0.1f, 3f);
+        range = Mathf.Clamp(range, 0.1f, 3f);
+
+
+
+        Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
 
     }
 }
