@@ -23,15 +23,6 @@ public class enemy : MonoBehaviour
     public float attackSpeed;
     [SerializeField]
     public float minimumDistance = 15f;
-    
-    public Transform playerTransform;
-    public GameObject player;
-
-    private void Start()
-    {
-        playerTransform = player.transform;
-    }
-
     public virtual void Attack()
     {
 
