@@ -1,0 +1,933 @@
+fileFormatVersion: 2
+guid: c4aeb65e9b07204488bf4945232e2c0e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_0"
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 2122
+        width: 129
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e58f95c6b7aee14bbe578ca1a0fdf02
+      internalID: 1156819375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_1"
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 2122
+        width: 133
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d86bf0cbe3ae5b42bfe608164142525
+      internalID: -2139612608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_2"
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 2122
+        width: 128
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e163a6399809f0c4db96c401bd0d394a
+      internalID: 199547709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_3"
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 2122
+        width: 130
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff67c7b3101fd349908c04e14bc4bec
+      internalID: -9776923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_4"
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 2122
+        width: 133
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c04974dad79121e4e9714ae584d103fb
+      internalID: 572917535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_5"
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 2122
+        width: 127
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ba538bca5ba2f42b3f78734409e33e
+      internalID: 277321385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_6"
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 1801
+        width: 134
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fec0f67f64419e4c950adcc5225e8e5
+      internalID: 1820624252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_7"
+      rect:
+        serializedVersion: 2
+        x: 1704
+        y: 1801
+        width: 121
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85b21a8efb441c448cf6f2b29bd8d34
+      internalID: 1336985009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_8"
+      rect:
+        serializedVersion: 2
+        x: 1837
+        y: 1804
+        width: 161
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ea82af5b9bfe624bb8c83912f15a3b9
+      internalID: -68907604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_9"
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 1482
+        width: 130
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3071ec0e08cfcbd46a39f44c97bf4d3c
+      internalID: 1253625280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_10"
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 1482
+        width: 131
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e3957b589b9944f8e19d282a370731
+      internalID: -78783849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_11"
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 1482
+        width: 131
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce1f7ce5b88e7624aa4cfa6b95190ea7
+      internalID: 1415708788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_12"
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 1161
+        width: 225
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd01b75bffb765c4f8139847c45e4bbe
+      internalID: 71524545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_13"
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 1164
+        width: 176
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b5432255d1b94744ae17fe6ab916938
+      internalID: -782232715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_15"
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 1162
+        width: 150
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c0e575654d46bc46b27a6cf60d073a6
+      internalID: 681852616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_16"
+      rect:
+        serializedVersion: 2
+        x: 1823
+        y: 1162
+        width: 133
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 074c409c74f321e4ba79fa53b8b07838
+      internalID: -1296242261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_17"
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 1161
+        width: 237
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b401740b3fd47b046ab29400a17e2ace
+      internalID: -1897873608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_20"
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 1162
+        width: 258
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9064226f86d82f4f85c569b1425a599
+      internalID: 1131535145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_23"
+      rect:
+        serializedVersion: 2
+        x: 1825
+        y: 1003
+        width: 159
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1ff4d7d381f67849bc73adbb607504a
+      internalID: -220000967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_24"
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 683
+        width: 123
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f557d00eff4e91945bae869d8c822bee
+      internalID: -380459715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_25"
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 685
+        width: 127
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f560432c3edffb44c901de2d34614ae3
+      internalID: 1531131199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_26"
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 683
+        width: 124
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d35f5e1150e06449932dd5ec66581ae
+      internalID: 1808282921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_27"
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 682
+        width: 123
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae2f8e6e91fb884a8531befa8441928
+      internalID: -1825278928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_28"
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 682
+        width: 124
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a2c793ed95523d4a840195be61a5781
+      internalID: 224941277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_29"
+      rect:
+        serializedVersion: 2
+        x: 1859
+        y: 685
+        width: 122
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6ff7f579ce63054c9215196126b037c
+      internalID: 161965291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_30"
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 363
+        width: 112
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66885e880267c934fb240f4307ef18db
+      internalID: 644290181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_31"
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 363
+        width: 118
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c601327fc50638b46840567855d6242f
+      internalID: -292528197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_32"
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 363
+        width: 140
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e677af05ea3c3fc47af0da7a6e3d7f46
+      internalID: 603697173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_33"
+      rect:
+        serializedVersion: 2
+        x: 1527
+        y: 363
+        width: 140
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 691ea1cb71addba409e3ae308abc44e5
+      internalID: -632540279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_34"
+      rect:
+        serializedVersion: 2
+        x: 1684
+        y: 363
+        width: 139
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76966ddb1772d0744a452740d8039906
+      internalID: -29652957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_35"
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 363
+        width: 152
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8fbb305ca87a5b4aa3f616325283f16
+      internalID: -1013694902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_36"
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 43
+        width: 140
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed0e05aabfd805841b04c0139de341c6
+      internalID: 1238244433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_37"
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 43
+        width: 146
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e72eb2b5e66dad46ba7217e42c72786
+      internalID: -1617002326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_38"
+      rect:
+        serializedVersion: 2
+        x: 1366
+        y: 43
+        width: 140
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9597e11b9457fac4ca670d647dd95052
+      internalID: -181045401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_39"
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 43
+        width: 140
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd028721e8eb1674ba73c58402fec048
+      internalID: 1548111454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_40"
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 43
+        width: 140
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88543684ce4460419693773ed4cd888
+      internalID: -880012467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Grafika_bez_nazwy \u2014 kopia_41"
+      rect:
+        serializedVersion: 2
+        x: 1844
+        y: 43
+        width: 140
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6891d7f13f2a48045ab83520002b5053
+      internalID: -1895024116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: bde81bb88643abf4884b9b826fcb6a04
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "Grafika_bez_nazwy \u2014 kopia_0": 1156819375
+      "Grafika_bez_nazwy \u2014 kopia_1": -2139612608
+      "Grafika_bez_nazwy \u2014 kopia_10": -78783849
+      "Grafika_bez_nazwy \u2014 kopia_11": 1415708788
+      "Grafika_bez_nazwy \u2014 kopia_12": 71524545
+      "Grafika_bez_nazwy \u2014 kopia_13": -782232715
+      "Grafika_bez_nazwy \u2014 kopia_14": -1456241459
+      "Grafika_bez_nazwy \u2014 kopia_15": 681852616
+      "Grafika_bez_nazwy \u2014 kopia_16": -1296242261
+      "Grafika_bez_nazwy \u2014 kopia_17": -1897873608
+      "Grafika_bez_nazwy \u2014 kopia_18": 402431606
+      "Grafika_bez_nazwy \u2014 kopia_19": -1596872740
+      "Grafika_bez_nazwy \u2014 kopia_2": 199547709
+      "Grafika_bez_nazwy \u2014 kopia_20": 1131535145
+      "Grafika_bez_nazwy \u2014 kopia_21": -1234039198
+      "Grafika_bez_nazwy \u2014 kopia_22": 223415053
+      "Grafika_bez_nazwy \u2014 kopia_23": -220000967
+      "Grafika_bez_nazwy \u2014 kopia_24": -380459715
+      "Grafika_bez_nazwy \u2014 kopia_25": 1531131199
+      "Grafika_bez_nazwy \u2014 kopia_26": 1808282921
+      "Grafika_bez_nazwy \u2014 kopia_27": -1825278928
+      "Grafika_bez_nazwy \u2014 kopia_28": 224941277
+      "Grafika_bez_nazwy \u2014 kopia_29": 161965291
+      "Grafika_bez_nazwy \u2014 kopia_3": -9776923
+      "Grafika_bez_nazwy \u2014 kopia_30": 644290181
+      "Grafika_bez_nazwy \u2014 kopia_31": -292528197
+      "Grafika_bez_nazwy \u2014 kopia_32": 603697173
+      "Grafika_bez_nazwy \u2014 kopia_33": -632540279
+      "Grafika_bez_nazwy \u2014 kopia_34": -29652957
+      "Grafika_bez_nazwy \u2014 kopia_35": -1013694902
+      "Grafika_bez_nazwy \u2014 kopia_36": 1238244433
+      "Grafika_bez_nazwy \u2014 kopia_37": -1617002326
+      "Grafika_bez_nazwy \u2014 kopia_38": -181045401
+      "Grafika_bez_nazwy \u2014 kopia_39": 1548111454
+      "Grafika_bez_nazwy \u2014 kopia_4": 572917535
+      "Grafika_bez_nazwy \u2014 kopia_40": -880012467
+      "Grafika_bez_nazwy \u2014 kopia_41": -1895024116
+      "Grafika_bez_nazwy \u2014 kopia_5": 277321385
+      "Grafika_bez_nazwy \u2014 kopia_6": 1820624252
+      "Grafika_bez_nazwy \u2014 kopia_7": 1336985009
+      "Grafika_bez_nazwy \u2014 kopia_8": -68907604
+      "Grafika_bez_nazwy \u2014 kopia_9": 1253625280
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
