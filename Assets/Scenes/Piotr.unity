@@ -1023,7 +1023,7 @@ MonoBehaviour:
   health: 10
   damage: 2
   speed: 3
-  range: 1
+  range: 1.2
   attackSpeed: 1
   canFire: 0
   canPoison: 0
