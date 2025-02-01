@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool canPoison = false;
 
     [SerializeField] private Vector2 respawnPoint;
-
+    private bool isDead = false;
 
 
     void Awake()
@@ -188,6 +188,8 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        if (isDead) return;
+
         health -= damageAmount;
 
         if (health <= 0)
@@ -198,6 +200,9 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         rb.velocity = Vector2.zero; 
         playerInputActions.Player.Disable();
 
@@ -218,7 +223,8 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Start");
         yield return new WaitForSeconds(0.5f);
 
-        health = 10; 
+        health = 10;
+        isDead = false;
         playerInputActions.Player.Enable(); 
     }
 
