@@ -102,10 +102,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: Knight - respawn_1
       rect:
         serializedVersion: 2
-        x: 288
+        x: 319
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: Knight - respawn_2
       rect:
         serializedVersion: 2
-        x: 576
+        x: 638
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: Knight - respawn_3
       rect:
         serializedVersion: 2
-        x: 864
+        x: 957
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Knight - respawn_4
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 1276
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Knight - respawn_5
       rect:
         serializedVersion: 2
-        x: 1440
+        x: 1595
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +226,12 @@ TextureImporter:
       name: Knight - respawn_6
       rect:
         serializedVersion: 2
-        x: 1728
+        x: 1914
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: Knight - respawn_7
       rect:
         serializedVersion: 2
-        x: 2016
+        x: 2233
         y: 0
-        width: 288
+        width: 319
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +268,12 @@ TextureImporter:
       name: Knight - respawn_8
       rect:
         serializedVersion: 2
-        x: 2304
+        x: 2552
         y: 0
-        width: 288
+        width: 328
         height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.22, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,27 +281,6 @@ TextureImporter:
       bones: []
       spriteID: cb04d7414d78ecc458b66872a495a5ce
       internalID: -1414051309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Knight - respawn_9
-      rect:
-        serializedVersion: 2
-        x: 2592
-        y: 0
-        width: 288
-        height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5768676b22f407942bf3d8c642ecd035
-      internalID: -745619227
       vertices: []
       indices: 
       edges: []
@@ -326,7 +305,6 @@ TextureImporter:
       Knight - respawn_6: -2085090719
       Knight - respawn_7: -2128679464
       Knight - respawn_8: -1414051309
-      Knight - respawn_9: -745619227
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
