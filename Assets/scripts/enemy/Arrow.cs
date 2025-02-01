@@ -16,7 +16,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            player.health -= damage;
+            player.TakeDamage(damage);
             Debug.Log("Strzała trafiła gracza!");
             Destroy(gameObject);
         }
