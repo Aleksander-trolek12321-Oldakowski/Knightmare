@@ -228,12 +228,6 @@ public class Player : MonoBehaviour
         playerInputActions.Player.Enable(); 
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(10f); 
-        }
-    }
+
 
 }
