@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private bool canFire = false;
     [SerializeField] private bool canPoison = false;
+
+    [SerializeField] private Vector2 respawnPoint;
 
 
 
@@ -182,4 +185,49 @@ public class Player : MonoBehaviour
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
 
     }
+
+    public void TakeDamage(float damageAmount)
+    {
+        health -= damageAmount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        rb.velocity = Vector2.zero; 
+        playerInputActions.Player.Disable();
+
+        animator.SetTrigger("Death");
+
+
+        StartCoroutine(Respawn());
+    }
+
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(1f); 
+
+        transform.position = respawnPoint;
+        animator.SetTrigger("Respawn");
+
+        yield return new WaitForSeconds(0.6f);
+        animator.SetTrigger("Start");
+        yield return new WaitForSeconds(0.5f);
+
+        health = 10; 
+        playerInputActions.Player.Enable(); 
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(10f); 
+        }
+    }
+
 }
