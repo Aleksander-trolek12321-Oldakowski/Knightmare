@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9569fd042ecfb2446ad700230f336ef9
+guid: af299b1396918d84ebb6ad0f8fbf99c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -162,13 +162,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dead_0
+      name: Attack_flipped_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 305
         y: 0
-        width: 65
-        height: 64
+        width: 45
+        height: 69
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83fc28685f4f7ed4fab09f15916dfe91
-      internalID: 1515456823
+      spriteID: 834a7d575d846804b95863855e590d82
+      internalID: -1601325329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_1
+      name: Attack_flipped_1
       rect:
         serializedVersion: 2
-        x: 121
+        x: 210
         y: 0
-        width: 42
-        height: 58
+        width: 46
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25da7823abd78184b9f62247356fada3
-      internalID: -734504036
+      spriteID: 1d93652b2b2d1564497b1777ea39ed95
+      internalID: 1828173733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_2
+      name: Attack_flipped_2
       rect:
         serializedVersion: 2
-        x: 223
+        x: 92
         y: 0
-        width: 33
-        height: 55
+        width: 67
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 476091b4d0d8a4245befb251dc88766e
-      internalID: 1750569645
+      spriteID: ccf559bfd203d1442965348a785ccfe6
+      internalID: 1904473828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_3
+      name: Attack_flipped_3
       rect:
         serializedVersion: 2
-        x: 313
+        x: 10
         y: 0
-        width: 66
-        height: 36
+        width: 55
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,29 +239,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5d820e1f9417aa409e47df3881db452
-      internalID: 2062221677
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dead_4
-      rect:
-        serializedVersion: 2
-        x: 410
-        y: 0
-        width: 70
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39a293caf162c0547be21c81c30325d6
-      internalID: -997165873
+      spriteID: a61d062e487f0d44f9a6eef58b1c71e8
+      internalID: -95604155
       vertices: []
       indices: 
       edges: []
@@ -269,7 +248,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 24a887f1a9c8521468d884e3e168c32d
+    spriteID: 5a1df1742e300844485b1f0fd6dc106e
     internalID: 0
     vertices: []
     indices: 
@@ -277,11 +256,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dead_0: 1515456823
-      Dead_1: -734504036
-      Dead_2: 1750569645
-      Dead_3: 2062221677
-      Dead_4: -997165873
+      Attack_flipped_0: -1601325329
+      Attack_flipped_1: 1828173733
+      Attack_flipped_2: 1904473828
+      Attack_flipped_3: -95604155
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

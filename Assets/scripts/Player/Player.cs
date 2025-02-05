@@ -124,9 +124,6 @@ public class Player : MonoBehaviour
         Vector2 attackDirection = (mousePosition - transform.position).normalized;
         Vector3 spherePosition = transform.position + (Vector3)attackDirection * 1.3f ;
 
-        GameObject sphere = Instantiate(attackSpherePrefab, spherePosition, Quaternion.identity);       
-        sphere.transform.localScale = Vector3.one * 1.5f * range;
-        Destroy(sphere, 0.3f);
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(spherePosition, damageRadius * range);
         foreach (Collider2D collider in hitObjects)
         {
