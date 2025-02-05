@@ -120,7 +120,7 @@ namespace enemy
 
             if (finalHit.collider != null && finalHit.collider.GetComponent<Player>() == player)
             {
-                player.health -= damage;
+                player.TakeDamage(damage);
                 Debug.Log("Zombie zadał obrażenia graczowi po zakończeniu ataku!");
             }
 

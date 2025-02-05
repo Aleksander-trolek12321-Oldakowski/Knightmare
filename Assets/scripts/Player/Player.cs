@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject attackSpherePrefab;
     private bool isHoldingAttack = false;
     float damageRadius = 0.75f;
-    [SerializeField] public float health = 10;
     [SerializeField] private float damage = 10;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float range = 1f;
@@ -27,6 +27,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 respawnPoint;
     private bool isDead = false;
 
+    [SerializeField] private int maxHearts = 3; 
+    private int healthPerHeart = 4; 
+    [SerializeField] private float currentHealth;
+
+    [SerializeField] private List<Image> heartImages;
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite threeQuartersHeart;
+    [SerializeField] private Sprite halfHeart;
+    [SerializeField] private Sprite quarterHeart;
+    [SerializeField] private Sprite emptyHeart;
 
     void Awake()
     {
@@ -48,8 +58,11 @@ public class Player : MonoBehaviour
     {
         attackSpeedUI =  attackSpeed;
 
+        currentHealth = maxHearts * healthPerHeart; 
+
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
 
+        UpdateHearts(); 
     }
 
     void OnDestroy()
@@ -163,8 +176,8 @@ public class Player : MonoBehaviour
     public void ApplyItemStats(ItemData itemData)
     {
         if (itemData == null) return;
-        attackSpeedUI= attackSpeedUI + (itemData.attackSpeed* -1);
-        health += itemData.health;
+
+        attackSpeedUI += (itemData.attackSpeed * -1);
         damage += itemData.damage;
         speed += itemData.speed;
         attackSpeed += itemData.attackSpeed;
@@ -177,19 +190,25 @@ public class Player : MonoBehaviour
         attackSpeed = Mathf.Clamp(attackSpeed, 0.1f, 3f);
         range = Mathf.Clamp(range, 0.1f, 3f);
 
-
+        if (itemData.health > 0)
+        {
+            IncreaseMaxHealth(1); 
+        }
 
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
-
     }
+
 
     public void TakeDamage(float damageAmount)
     {
         if (isDead) return;
 
-        health -= damageAmount;
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
 
-        if (health <= 0)
+        UpdateHearts(); 
+
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -200,18 +219,17 @@ public class Player : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        rb.velocity = Vector2.zero; 
+        rb.velocity = Vector2.zero;
         playerInputActions.Player.Disable();
 
         animator.SetTrigger("Death");
-
 
         StartCoroutine(Respawn());
     }
 
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
 
         transform.position = respawnPoint;
         animator.SetTrigger("Respawn");
@@ -220,10 +238,48 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Start");
         yield return new WaitForSeconds(0.5f);
 
-        health = 10;
+        currentHealth = maxHearts * healthPerHeart; 
         isDead = false;
-        playerInputActions.Player.Enable(); 
+        playerInputActions.Player.Enable();
+
+        UpdateHearts(); 
     }
+    public void IncreaseMaxHealth(int heartAmount)
+    {
+        maxHearts += heartAmount;
+        currentHealth = maxHearts * healthPerHeart; 
+
+        UpdateHearts(); 
+    }
+
+    private void UpdateHearts()
+    {
+        while (heartImages.Count < maxHearts)
+        {
+            GameObject newHeart = Instantiate(heartImages[0].gameObject, heartImages[0].transform.parent);
+            newHeart.transform.SetSiblingIndex(heartImages.Count);
+            heartImages.Add(newHeart.GetComponent<Image>());
+        }
+
+        for (int i = 0; i < heartImages.Count; i++)
+        {
+            float heartHealth = currentHealth - (i * healthPerHeart);
+
+            if (heartHealth >= 4)
+                heartImages[i].sprite = fullHeart;
+            else if (heartHealth == 3)
+                heartImages[i].sprite = threeQuartersHeart;
+            else if (heartHealth == 2)
+                heartImages[i].sprite = halfHeart;
+            else if (heartHealth == 1)
+                heartImages[i].sprite = quarterHeart;
+            else
+                heartImages[i].sprite = emptyHeart; 
+
+            heartImages[i].enabled = (i < maxHearts);
+        }
+    }
+
 
 
 
