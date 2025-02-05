@@ -48,12 +48,12 @@ namespace enemy
                     Patrol();
                 }
 
-                RotateTowardsTarget(); // Realistyczny obrót w stronę gracza
+                RotateTowardsTarget();
             }
             else
             {
                 Patrol();
-                DetectPlayer(); // Sprawdź, czy gracz jest w pobliżu
+                DetectPlayer();
             }
         }
 
