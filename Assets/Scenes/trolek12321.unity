@@ -47459,6 +47459,7 @@ MonoBehaviour:
   attackSpeed: 1
   canFire: 0
   canPoison: 0
+  respawnPoint: {x: 0, y: 0}
 --- !u!95 &1154876052
 Animator:
   serializedVersion: 7
