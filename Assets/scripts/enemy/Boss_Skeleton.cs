@@ -8,24 +8,16 @@ namespace enemy
         [SerializeField] private GameObject arrowPrefab;
         [SerializeField] private Transform shootPoint;
         [SerializeField] private float tripleShotDelay = 0.3f;
-        [SerializeField] private Vector2 patrolAreaMin;
-        [SerializeField] private Vector2 patrolAreaMax;
-        [SerializeField] private float patrolWaitTime = 2f;
-        [SerializeField] private LayerMask obstacleLayer;
         [SerializeField] private LayerMask targetLayer;
-        [SerializeField] private float rayDistance = 1.5f;
         [SerializeField] private float detectionRadius = 10f;
         [SerializeField] private float rotationSpeed = 5f;
+        [SerializeField] private Animator animator;
+        [SerializeField] private float shootPointRadius = 2f;
+        public float attackCooldown = 1.5f;
 
         private Transform target;
-        private Vector2 nextPatrolPoint;
-        private bool isChasing = false;
         private bool isAttacking = false;
-
-        void Start()
-        {
-            SetNextPatrolPoint();
-        }
+        private bool canAttack = true;
 
         void Update()
         {
@@ -33,116 +25,80 @@ namespace enemy
             {
                 float distanceToTarget = Vector2.Distance(transform.position, target.position);
 
-                if (distanceToTarget <= attackRange)
+                UpdateMovementAnimation();
+                
+                if (distanceToTarget <= attackRange && canAttack)
                 {
                     Attack();
                 }
-                else if (distanceToTarget <= minimumDistance)
+                else if (distanceToTarget > attackRange)
                 {
-                    isChasing = true;
-                    MoveTowards(target.position);
-                }
-                else
-                {
-                    isChasing = false;
-                    Patrol();
+                    ChasePlayer();
                 }
 
-                RotateTowardsTarget(); // Realistyczny obrót w stronę gracza
+                RotateShootPoint();
+                UpdateShootPointPosition();
             }
             else
             {
-                Patrol();
-                DetectPlayer(); // Sprawdź, czy gracz jest w pobliżu
+                DetectPlayer();
             }
-        }
 
-        private void Patrol()
-        {
-            if (isChasing || isAttacking) return;
-
-            float distanceToPatrolPoint = Vector2.Distance(transform.position, nextPatrolPoint);
-
-            if (distanceToPatrolPoint > 0.1f)
+            if (health <= 0)
             {
-                MoveTowards(nextPatrolPoint);
-            }
-            else
-            {
-                StartCoroutine(SwitchPatrolPoint());
+                animator.SetTrigger("Death_Zombie");
             }
         }
 
-        private void SetNextPatrolPoint()
+        private void UpdateShootPointPosition()
         {
-            float randomX = Random.Range(patrolAreaMin.x, patrolAreaMax.x);
-            float randomY = Random.Range(patrolAreaMin.y, patrolAreaMax.y);
-            nextPatrolPoint = new Vector2(randomX, randomY);
+            if(target == null) return;
+            
+            Vector2 directionToTarget = (target.position - transform.position).normalized;
+            shootPoint.position = (Vector2)transform.position + directionToTarget * shootPointRadius;
         }
 
-        private IEnumerator SwitchPatrolPoint()
+        private void RotateShootPoint()
         {
-            yield return new WaitForSeconds(patrolWaitTime);
-            SetNextPatrolPoint();
-        }
-
-        private void MoveTowards(Vector2 destination)
-        {
-            Vector2 direction = (destination - (Vector2)transform.position).normalized;
-
-            if (IsPathBlocked(direction))
-            {
-                direction = FindAlternativeDirection(direction);
-            }
-
-            transform.position += (Vector3)(direction * speed * Time.deltaTime);
-        }
-
-        private bool IsPathBlocked(Vector2 direction)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayDistance, obstacleLayer);
-            return hit.collider != null;
-        }
-
-        private Vector2 FindAlternativeDirection(Vector2 originalDirection)
-        {
-            Vector2 leftDirection = Quaternion.Euler(0, 0, 45) * originalDirection;
-            Vector2 rightDirection = Quaternion.Euler(0, 0, -45) * originalDirection;
-
-            if (!IsPathBlocked(leftDirection))
-            {
-                return leftDirection.normalized;
-            }
-            if (!IsPathBlocked(rightDirection))
-            {
-                return rightDirection.normalized;
-            }
-
-            return Vector2.zero;
-        }
-
-        private void RotateTowardsTarget()
-        {
-            if (target == null) return;
-
-            Vector2 direction = (target.position - transform.position).normalized;
+            if(target == null) return;
+            
+            Vector2 direction = (target.position - shootPoint.position).normalized;
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * rotationSpeed);
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            
+            shootPoint.rotation = Quaternion.Lerp(
+                shootPoint.rotation,
+                Quaternion.Euler(0, 0, targetAngle),
+                Time.deltaTime * rotationSpeed
+            );
+        }
+
+        private void UpdateMovementAnimation()
+        {
+            if (target != null && !isAttacking)
+            {
+                Vector2 direction = (target.position - transform.position).normalized;
+                animator.SetFloat("Xinput", direction.x);
+                animator.SetFloat("Yinput", direction.y);
+                animator.SetFloat("LastXinput", direction.x);
+                animator.SetFloat("LastYinput", direction.y);
+            }
+        }
+
+        private void ChasePlayer()
+        {
+            Vector2 direction = (target.position - transform.position).normalized;
+            transform.position += (Vector3)(direction * speed * Time.deltaTime);
         }
 
         private void DetectPlayer()
         {
             Collider2D detected = Physics2D.OverlapCircle(transform.position, detectionRadius, targetLayer);
-            if (detected != null)
-            {
-                target = detected.transform;
-            }
+            if (detected != null) target = detected.transform;
         }
 
         public override void Attack()
         {
-            if (!isAttacking)
+            if (!isAttacking && canAttack)
             {
                 StartCoroutine(PerformAttack());
             }
@@ -151,20 +107,21 @@ namespace enemy
         private IEnumerator PerformAttack()
         {
             isAttacking = true;
+            canAttack = false;
+
+            Vector2 attackDir = (target.position - transform.position).normalized;
+            animator.SetFloat("AttackXinput", attackDir.x);
+            animator.SetFloat("AttackYinput", attackDir.y);
+            animator.SetBool("IsAttacking", true);
 
             int attackType = Random.Range(0, 2);
+            yield return attackType == 0 ? SingleShot() : TripleShot();
 
-            if (attackType == 0)
-            {
-                yield return SingleShot();
-            }
-            else
-            {
-                yield return TripleShot();
-            }
-
-            yield return new WaitForSeconds(attackSpeed);
+            animator.SetBool("IsAttacking", false);
+            yield return new WaitForSeconds(attackCooldown);
+            
             isAttacking = false;
+            canAttack = true;
         }
 
         private IEnumerator SingleShot()
@@ -184,21 +141,22 @@ namespace enemy
 
         private void ShootArrow()
         {
-            if (arrowPrefab != null && shootPoint != null)
+            if (arrowPrefab && shootPoint)
             {
-                GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation);
-                Vector2 direction = (target.position - shootPoint.position).normalized;
-                arrow.GetComponent<Rigidbody2D>().velocity = direction * speed;
+                GameObject arrow = Instantiate(
+                    arrowPrefab, 
+                    shootPoint.position, 
+                    shootPoint.rotation
+                );
+                
+                arrow.GetComponent<Rigidbody2D>().velocity = shootPoint.right * speed;
             }
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, detectionRadius);
-
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, nextPatrolPoint);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, shootPointRadius);
         }
     }
 }

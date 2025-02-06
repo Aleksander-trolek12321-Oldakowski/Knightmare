@@ -24,11 +24,13 @@ public class Zombie : enemy
         player = FindFirstObjectByType<Player>();
     }
 
-    public override void Movement()
-    {
-        if(!isAttacking)
+
+        private Vector2 currentAttackDirection;
+
+        void Awake()
         {
-        base.Movement();
+            player = FindFirstObjectByType<Player>();
+        }
 
         Vector2 direction = (player.transform.position - transform.position).normalized;
 
@@ -42,17 +44,95 @@ public class Zombie : enemy
 
             if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
             {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            }
-            else
-            {
-                Debug.Log("Zombie nie widzi gracza.");
+                base.Movement();
+
+                Vector2 direction = (player.transform.position - transform.position).normalized;
+                float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+                if (distanceToPlayer > attackRange)
+                {
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, minimumDistance, ~enemyLayer);
+                    Debug.DrawRay(transform.position, direction * attackRange, Color.red);
+
+                    if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
+                    {
+                        animator.SetFloat("Xinput", direction.x);
+                        animator.SetFloat("Yinput", direction.y);
+                        animator.SetFloat("LastXinput", direction.x);
+                        animator.SetFloat("LastYinput", direction.y);
+
+                        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        Debug.Log("Zombie nie widzi gracza.");
+                    }
+                }
+                else
+                {
+                    animator.SetFloat("Xinput", 0);
+                    animator.SetFloat("Yinput", 0);
+                    Debug.Log("Zombie jest w zasięgu ataku, nie porusza się.");
+                }
             }
         }
         else
         {
-            Debug.Log("Zombie jest w zasięgu ataku, nie porusza się.");
+            base.Attack();
+            if (isAttacking || !canAttack)
+            {
+                return;
+            }
+
+            isAttacking = true;
+            canAttack = false;
+
+            Vector2 attackDir = (player.transform.position - transform.position).normalized;
+
+            animator.SetFloat("AttackXinput", attackDir.x);
+            animator.SetFloat("AttackYinput", attackDir.y);
+            animator.SetBool("IsAttacking", true);
+
+            Debug.Log("Zombie rozpoczyna atak");
+            currentAttackDirection = attackDir;
+            StartCoroutine(PerformAttack());
         }
+
+        IEnumerator PerformAttack()
+        {
+            yield return new WaitForSeconds(attackSpeed);
+
+            RaycastHit2D finalHit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange, ~enemyLayer);
+
+            if (finalHit.collider != null && finalHit.collider.GetComponent<Player>() == player)
+            {
+                player.TakeDamage(damage);
+                Debug.Log("Zombie zadał obrażenia graczowi!");
+            }
+
+            Debug.Log("Zombie zakończył atak.");
+            animator.SetBool("IsAttacking", false);
+
+            yield return new WaitForSeconds(attackCooldown);
+            isAttacking = false;
+            canAttack = true;
+        }
+
+        private void Update()
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+            if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
+            {
+                Attack();
+            }
+
+            Movement();
+
+            if (health <= 0)
+            {
+                animator.SetTrigger("Death_Zombie");
+            }
         }
     }
 
