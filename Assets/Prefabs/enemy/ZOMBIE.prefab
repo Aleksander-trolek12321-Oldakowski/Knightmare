@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6243304534387074071}
   - component: {fileID: 7574260258722594216}
   - component: {fileID: 5634277985361065652}
+  - component: {fileID: 8024524685503616884}
+  - component: {fileID: 8372343444972926827}
   m_Layer: 6
   m_Name: ZOMBIE
   m_TagString: Enemy
@@ -101,9 +103,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
-  m_LinearDrag: 4
-  m_AngularDrag: 4
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -115,8 +117,41 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &7574260258722594216
+  m_Constraints: 4
+--- !u!114 &5634277985361065652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187004520313135688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70aa85ed30b81784c805bf3a1c0d5155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  name: ZOMBIE
+  health: 15
+  speed: 3
+  damage: 5
+  attackRange: 1
+  attackSpeed: 3
+  minimumDistance: 5
+  isOnFire: 0
+  isPoisoned: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  player: {fileID: 0}
+  attackCooldown: 1.5
+  turnSpeed: 10
+  attackInaccuracy: 0.05
+  animator: {fileID: 8372343444972926827}
+--- !u!61 &8024524685503616884
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,30 +197,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5634277985361065652
-MonoBehaviour:
+--- !u!95 &8372343444972926827
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4187004520313135688}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70aa85ed30b81784c805bf3a1c0d5155, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
-  name: ZOMBIE
-  health: 15
-  speed: 3
-  damage: 5
-  attackRange: 5
-  attackSpeed: 3
-  minimumDistance: 15
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  player: {fileID: 0}
-  attackCooldown: 1.5
-  turnSpeed: 15
-  attackInaccuracy: 0.05
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52270d0a5ef761542a2f93eab22cd1cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
