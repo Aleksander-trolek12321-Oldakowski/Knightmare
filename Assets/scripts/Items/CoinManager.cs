@@ -20,19 +20,19 @@ public class CoinManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        coinText.text = "Coins: " + totalCoins;
+        coinText.text = "" + totalCoins;
 
     }
 
     public void AddCoins(int amount)
     {
         totalCoins += amount;
-        coinText.text = "Coins: " + totalCoins;
+        coinText.text = "" + totalCoins;
     }  
     public void RemoveCoins(int amount)
     {
         totalCoins -= amount;
-        coinText.text = "Coins: " + totalCoins;
+        coinText.text = "" + totalCoins;
     }
 
 

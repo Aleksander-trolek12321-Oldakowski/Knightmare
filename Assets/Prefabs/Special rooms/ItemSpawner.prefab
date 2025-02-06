@@ -147,10 +147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleItems:
-  - {fileID: 11400000, guid: 2d10e8e3a8c66f045a94039f225b64a5, type: 2}
-  - {fileID: 11400000, guid: 8f953e708e02a0748a07b58cdc7c3ab1, type: 2}
-  - {fileID: 11400000, guid: e5178ff5b268ecd4c86861d37eae32d0, type: 2}
-  - {fileID: 11400000, guid: ba237825f200d844ba4462c16316c0d9, type: 2}
+  - {fileID: 11400000, guid: f10ea4c593fe59b4b98957170c3e409d, type: 2}
+  - {fileID: 11400000, guid: 061380b9737d7e34495c6d99c55f5ebd, type: 2}
+  - {fileID: 11400000, guid: 6967ae76192e95a4dafcdf4b63444e44, type: 2}
+  - {fileID: 11400000, guid: 186c36b4840592043a72b8bc65032b10, type: 2}
   isInShop: 0
   treasureRoom: {fileID: 0}
   itemPriceText: {fileID: 0}
