@@ -8,6 +8,7 @@ namespace enemy
     public class Zombie : enemy
     {
         [SerializeField] private LayerMask enemyLayer;
+        [SerializeField] private LayerMask playerLayer;
         [SerializeField] private Player player;
         private bool isAttacking = false;
         private bool canAttack = true;
@@ -15,7 +16,7 @@ namespace enemy
         public float turnSpeed = 10f;
         public float attackInaccuracy = 0.05f;
         public Animator animator;
-
+        private bool isWalking = false;  // Flaga kontrolująca animację chodzenia
 
         private Vector2 currentAttackDirection;
 
@@ -26,44 +27,45 @@ namespace enemy
 
         public override void Movement()
         {
-            if (!isAttacking)
+            if (isAttacking)
             {
-                base.Movement();
+                isWalking = false;
+                return; // Jeśli atakujemy, nie poruszamy się
+            }
 
-                Vector2 direction = (player.transform.position - transform.position).normalized;
-                float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-                if (distanceToPlayer > attackRange)
+            if (distanceToPlayer > attackRange)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, playerLayer);
+                Debug.DrawRay(transform.position, direction * attackRange, Color.red);
+
+                if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, minimumDistance, ~enemyLayer);
-                    Debug.DrawRay(transform.position, direction * attackRange, Color.red);
+                    animator.SetFloat("Xinput", direction.x);
+                    animator.SetFloat("Yinput", direction.y);
+                    animator.SetFloat("LastXinput", direction.x);
+                    animator.SetFloat("LastYinput", direction.y);
 
-                    if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
-                    {
-                        animator.SetFloat("Xinput", direction.x);
-                        animator.SetFloat("Yinput", direction.y);
-                        animator.SetFloat("LastXinput", direction.x);
-                        animator.SetFloat("LastYinput", direction.y);
-
-                        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        Debug.Log("Zombie nie widzi gracza.");
-                    }
+                    transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                    isWalking = true;  // Ustawiamy flagę na true, gdy zombie się porusza
                 }
                 else
                 {
-                    animator.SetFloat("Xinput", 0);
-                    animator.SetFloat("Yinput", 0);
-                    Debug.Log("Zombie jest w zasięgu ataku, nie porusza się.");
+                    isWalking = false; // Jeśli nie widzimy gracza, zatrzymujemy animację chodzenia
                 }
             }
+            else
+            {
+                isWalking = false; // Jeśli jesteśmy w zasięgu ataku, nie chodzimy
+            }
+
+            animator.SetBool("IsWalking", isWalking);  // Przekazujemy flagę do animacji
         }
 
         public override void Attack()
         {
-            base.Attack();
             if (isAttacking || !canAttack)
             {
                 return;
@@ -120,4 +122,5 @@ namespace enemy
             }
         }
     }
+
 }
