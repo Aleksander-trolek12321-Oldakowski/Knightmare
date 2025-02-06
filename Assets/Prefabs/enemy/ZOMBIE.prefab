@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6243304534387074071}
   - component: {fileID: 5634277985361065652}
   - component: {fileID: 8024524685503616884}
+  - component: {fileID: 8372343444972926827}
   m_Layer: 6
   m_Name: ZOMBIE
   m_TagString: Enemy
@@ -102,8 +103,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.0001
-  m_LinearDrag: 4
-  m_AngularDrag: 4
+  m_LinearDrag: 0
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -135,15 +136,20 @@ MonoBehaviour:
   damage: 5
   attackRange: 1
   attackSpeed: 3
-  minimumDistance: 2
+  minimumDistance: 5
+  isOnFire: 0
+  isPoisoned: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
   player: {fileID: 0}
-  detectionRadius: 5
   attackCooldown: 1.5
-  rotationSpeed: 5
-  collisionRadius: 0.5
+  turnSpeed: 10
+  attackInaccuracy: 0.05
+  animator: {fileID: 8372343444972926827}
 --- !u!61 &8024524685503616884
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,3 +196,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2784198, y: 0.6446599}
   m_EdgeRadius: 0
+--- !u!95 &8372343444972926827
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187004520313135688}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52270d0a5ef761542a2f93eab22cd1cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
