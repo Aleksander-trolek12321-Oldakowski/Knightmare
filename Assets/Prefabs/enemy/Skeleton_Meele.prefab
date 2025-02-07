@@ -79,15 +79,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1418379558, guid: 6667d688bdc903046a9981f3434ad6ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.280786, y: 4.88}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &6802307203804627947
@@ -155,8 +155,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.5308459, y: 4.87}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 3.280786, y: 4.88}
+    newSize: {x: 3.280786, y: 4.88}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   name: SKELETON_MEELE
-  health: 20
+  health: 15
   speed: 3
-  damage: 4
+  damage: 2
   attackRange: 3
   attackSpeed: 2
   minimumDistance: 5
@@ -188,7 +188,11 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
   player: {fileID: 0}
+  moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
   attackCooldown: 2
   turnSpeed: 8
   attackInaccuracy: 0.02
@@ -203,7 +207,7 @@ Animator:
   m_GameObject: {fileID: 6180504647281122939}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4de6fc1b2944e943a3eb186605d0704, type: 2}
+  m_Controller: {fileID: 9100000, guid: a3b6595a978a39b4286c80f1bec55de5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
