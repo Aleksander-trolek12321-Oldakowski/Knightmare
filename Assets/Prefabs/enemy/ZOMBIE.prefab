@@ -134,7 +134,7 @@ MonoBehaviour:
   health: 10
   speed: 3
   damage: 1
-  attackRange: 3
+  attackRange: 2
   attackSpeed: 3
   minimumDistance: 5
   isOnFire: 0

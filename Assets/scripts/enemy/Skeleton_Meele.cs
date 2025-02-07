@@ -31,7 +31,7 @@ namespace enemy
 
             if (distanceToPlayer > attackRange)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, ~enemyLayer);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, minimumDistance, ~enemyLayer);
                 Debug.DrawRay(transform.position, direction * attackRange, Color.red);
 
                 if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
