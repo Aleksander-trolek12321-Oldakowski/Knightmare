@@ -100,8 +100,9 @@ namespace enemy
 
             if (health <= 0)
             {
-                animator.SetTrigger("Skeleton_Death");
+                animator.SetTrigger("Death");
                 DropLoot();
+                Die();
             }
         }
 

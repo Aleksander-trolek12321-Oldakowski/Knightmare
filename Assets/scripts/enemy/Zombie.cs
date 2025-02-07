@@ -120,6 +120,7 @@ public class Zombie : enemy
             {
                 animator.SetTrigger("Death_Zombie");
                 DropLoot();
+                Die();
             }
         }
 

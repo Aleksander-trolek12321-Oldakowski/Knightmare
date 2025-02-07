@@ -46,7 +46,8 @@ namespace enemy
 
             if (health <= 0)
             {
-                animator.SetTrigger("Death_Zombie");
+                animator.SetTrigger("Death");
+                Die();
             }
         }
 
