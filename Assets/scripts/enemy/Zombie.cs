@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace enemy
@@ -16,7 +15,7 @@ namespace enemy
         public float turnSpeed = 10f;
         public float attackInaccuracy = 0.05f;
         public Animator animator;
-        private bool isWalking = false;  // Flaga kontrolująca animację chodzenia
+        private bool isWalking = false;
 
         private Vector2 currentAttackDirection;
 
@@ -30,7 +29,7 @@ namespace enemy
             if (isAttacking)
             {
                 isWalking = false;
-                return; // Jeśli atakujemy, nie poruszamy się
+                return;
             }
 
             Vector2 direction = (player.transform.position - transform.position).normalized;
@@ -43,25 +42,76 @@ namespace enemy
 
                 if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
                 {
-                    animator.SetFloat("Xinput", direction.x);
-                    animator.SetFloat("Yinput", direction.y);
-                    animator.SetFloat("LastXinput", direction.x);
-                    animator.SetFloat("LastYinput", direction.y);
+                    // Sprawdzamy, czy nie ma przeszkód na drodze do gracza
+                    if (!CheckForObstacles(direction))
+                    {
+                        animator.SetFloat("Xinput", direction.x);
+                        animator.SetFloat("Yinput", direction.y);
+                        animator.SetFloat("LastXinput", direction.x);
+                        animator.SetFloat("LastYinput", direction.y);
 
-                    transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                    isWalking = true;  // Ustawiamy flagę na true, gdy zombie się porusza
+                        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                        isWalking = true;
+                    }
+                    else
+                    {
+                        // Jeśli są przeszkody, próbujemy znaleźć alternatywną ścieżkę
+                        Vector2 alternativeDirection = FindAlternativeDirection(direction);
+                        if (alternativeDirection != Vector2.zero)
+                        {
+                            animator.SetFloat("Xinput", alternativeDirection.x);
+                            animator.SetFloat("Yinput", alternativeDirection.y);
+                            animator.SetFloat("LastXinput", alternativeDirection.x);
+                            animator.SetFloat("LastYinput", alternativeDirection.y);
+
+                            transform.position = Vector2.MoveTowards(transform.position, (Vector2)transform.position + alternativeDirection, speed * Time.deltaTime);
+                            isWalking = true;
+                        }
+                        else
+                        {
+                            isWalking = false;
+                        }
+                    }
                 }
                 else
                 {
-                    isWalking = false; // Jeśli nie widzimy gracza, zatrzymujemy animację chodzenia
+                    isWalking = false;
                 }
             }
             else
             {
-                isWalking = false; // Jeśli jesteśmy w zasięgu ataku, nie chodzimy
+                isWalking = false;
             }
 
-            animator.SetBool("IsWalking", isWalking);  // Przekazujemy flagę do animacji
+            animator.SetBool("IsWalking", isWalking);
+        }
+
+        private bool CheckForObstacles(Vector2 direction)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, ~playerLayer);
+            return hit.collider != null;
+        }
+
+        private Vector2 FindAlternativeDirection(Vector2 originalDirection)
+        {
+            // Sprawdzamy kilka alternatywnych kierunków
+            Vector2[] directions = new Vector2[]
+            {
+                new Vector2(originalDirection.y, -originalDirection.x), // 90 stopni w prawo
+                new Vector2(-originalDirection.y, originalDirection.x), // 90 stopni w lewo
+                new Vector2(originalDirection.x, originalDirection.y + 0.5f).normalized, // lekko w górę
+                new Vector2(originalDirection.x, originalDirection.y - 0.5f).normalized // lekko w dół
+            };
+
+            foreach (Vector2 dir in directions)
+            {
+                if (!CheckForObstacles(dir))
+                {
+                    return dir;
+                }
+            }
+
+            return Vector2.zero;
         }
 
         public override void Attack()
@@ -122,5 +172,4 @@ namespace enemy
             }
         }
     }
-
 }
