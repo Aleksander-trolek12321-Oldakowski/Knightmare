@@ -103,6 +103,7 @@ namespace enemy
             {
                 animator.SetTrigger("Death_Zombie");
                 DropLoot();
+                Die();
             }
         }
 
