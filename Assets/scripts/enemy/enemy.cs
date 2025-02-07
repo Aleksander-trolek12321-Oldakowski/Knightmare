@@ -40,10 +40,6 @@ public class enemy : MonoBehaviour, IDamageable
         public virtual void TakeDamage(float damageAmount)
         {
             health -= damageAmount;
-            if (health <= 0)
-            {
-                Die();
-            }
         }
 
         public virtual void ApplyDamageOverTime(DamageOverTime effect, float duration, float damage)
