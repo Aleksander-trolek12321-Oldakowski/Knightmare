@@ -21,6 +21,10 @@ namespace enemy
         private void Start()
         {
             player = FindFirstObjectByType<Player>();
+            if (player == null)
+            {
+                Debug.LogError("Brak obiektu Player w scenie!");
+            }
         }
 
         private void Update()
@@ -39,6 +43,12 @@ namespace enemy
 
         private void SpawnEnemies()
         {
+            if (enemyPrefabs == null || enemyPrefabs.Count == 0)
+            {
+                Debug.LogError("Lista enemyPrefabs jest pusta! Dodaj przeciwników do listy.");
+                return;
+            }
+
             int numberOfEnemies = Random.Range(minEnemies, maxEnemies);
 
             for (int i = 0; i < numberOfEnemies; i++)
@@ -60,6 +70,12 @@ namespace enemy
 
         private Vector2 FindValidSpawnPosition()
         {
+            if (player == null)
+            {
+                Debug.LogError("Nie znaleziono gracza. Przerywam wyszukiwanie pozycji.");
+                return Vector2.zero;
+            }
+
             for (int i = 0; i < 10; i++)
             {
                 Vector2 randomPosition = (Vector2)transform.position + Random.insideUnitCircle * spawnRadius;
@@ -67,12 +83,15 @@ namespace enemy
                 if (Vector2.Distance(randomPosition, player.transform.position) < minDistanceFromPlayer)
                     continue;
 
+                if (Physics2D.OverlapPoint(randomPosition) != null) // Sprawdzenie kolizji z terenem
+                    continue;
+
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(randomPosition, minDistanceBetweenEnemies);
                 bool isPositionValid = true;
 
                 foreach (Collider2D collider in colliders)
                 {
-                    if (collider.GetComponent<enemy>() != null)
+                    if (collider != null && collider.GetComponent<enemy>() != null) // Unikamy null
                     {
                         isPositionValid = false;
                         break;
