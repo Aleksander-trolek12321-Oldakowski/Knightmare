@@ -7,14 +7,15 @@ namespace enemy
     public class Skeleton_Meele : enemy
     {
         [SerializeField] private LayerMask enemyLayer;
+        [SerializeField] private LayerMask playerLayer;
         [SerializeField] private Player player;
+        [SerializeField] private GameObject moneyPrefab; // Prefab hajsu
         private bool isAttacking = false;
         private bool canAttack = true;
         public float attackCooldown = 1.5f;
         public float turnSpeed = 10f;
         public float attackInaccuracy = 0.05f;
         public Animator animator;
-
 
         private Vector2 currentAttackDirection;
 
@@ -25,44 +26,28 @@ namespace enemy
 
         public override void Movement()
         {
-            if (!isAttacking)
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+            if (distanceToPlayer > attackRange)
             {
-                base.Movement();
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, ~enemyLayer);
+                Debug.DrawRay(transform.position, direction * attackRange, Color.red);
 
-                Vector2 direction = (player.transform.position - transform.position).normalized;
-                float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-
-                if (distanceToPlayer > attackRange)
+                if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, minimumDistance, ~enemyLayer);
-                    Debug.DrawRay(transform.position, direction * attackRange, Color.red);
+                    animator.SetFloat("Xinput", direction.x);
+                    animator.SetFloat("Yinput", direction.y);
+                    animator.SetFloat("LastXinput", direction.x);
+                    animator.SetFloat("LastYinput", direction.y);
 
-                    if (hit.collider != null && hit.collider.GetComponent<Player>() == player)
-                    {
-                        animator.SetFloat("Xinput", direction.x);
-                        animator.SetFloat("Yinput", direction.y);
-                        animator.SetFloat("LastXinput", direction.x);
-                        animator.SetFloat("LastYinput", direction.y);
-
-                        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        Debug.Log("Zombie nie widzi gracza.");
-                    }
-                }
-                else
-                {
-                    animator.SetFloat("Xinput", 0);
-                    animator.SetFloat("Yinput", 0);
-                    Debug.Log("Zombie jest w zasięgu ataku, nie porusza się.");
+                    transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
                 }
             }
         }
 
         public override void Attack()
         {
-            base.Attack();
             if (isAttacking || !canAttack)
             {
                 return;
@@ -86,7 +71,7 @@ namespace enemy
         {
             yield return new WaitForSeconds(attackSpeed);
 
-            RaycastHit2D finalHit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange, ~enemyLayer);
+            RaycastHit2D finalHit = Physics2D.Raycast(transform.position, currentAttackDirection, attackRange, playerLayer);
 
             if (finalHit.collider != null && finalHit.collider.GetComponent<Player>() == player)
             {
@@ -115,8 +100,20 @@ namespace enemy
 
             if (health <= 0)
             {
-                animator.SetTrigger("Death_Zombie");
+                animator.SetTrigger("Skeleton_Death");
+                DropLoot();
+            }
+        }
+
+        private void DropLoot()
+        {
+            float dropChance = Random.value; // Losowa wartość 0-1
+            if (dropChance <= 0.2f) // 20% szansy
+            {
+                Instantiate(moneyPrefab, transform.position, Quaternion.identity);
+                Debug.Log("Zombie wyrzucił hajs!");
             }
         }
     }
 }
+
