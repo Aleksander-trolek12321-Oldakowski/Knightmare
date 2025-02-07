@@ -131,9 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   name: ZOMBIE
-  health: 15
+  health: 10
   speed: 3
-  damage: 5
+  damage: 1
   attackRange: 3
   attackSpeed: 3
   minimumDistance: 5
@@ -146,6 +146,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   player: {fileID: 0}
+  moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
   attackCooldown: 1.5
   turnSpeed: 10
   attackInaccuracy: 0.05
