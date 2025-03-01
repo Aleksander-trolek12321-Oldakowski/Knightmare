@@ -22,6 +22,10 @@ public class ItemSpawner : MonoBehaviour
             itemPriceText.text=selectedItem.priceInShop +"";
         }
     }
+    void Awake()
+    {
+        spawnedItems.Clear(); 
+    }
 
     private void GenerateRandomItem()
     {
