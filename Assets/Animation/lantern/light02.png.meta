@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: acd060104eda63341b93267260f10b34
+guid: ad339aa190bf36044aabbaad3c69d047
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 836472a192a13d44991ead3bfad0b67f
+    spriteID: 8c387de7d1a94044bb28421f69258a1a
     vertices: []
     indices: 
     edges: []
@@ -113,5 +113,5 @@ AssetOrigin:
   productId: 164725
   packageName: Rogue Fantasy Castle
   packageVersion: 1.0
-  assetPath: Assets/RF Castle/Animated/lightA01.png
+  assetPath: Assets/Prefabs/background/lila/enviro/Animated/lightA02.png
   uploadId: 357221
