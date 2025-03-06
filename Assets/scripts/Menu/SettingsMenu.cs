@@ -5,21 +5,22 @@ using System.Collections.Generic;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public Toggle fullScreenToggle; // Using Toggle for fullscreen option
+    public Toggle fullScreenToggle;
     public Slider sensitivitySlider;
     public TMP_Dropdown resolutionDropdown;
-    public RawImage[] rawImages; // Array to hold multiple RawImages
+    public RawImage backgroundImage; // Obraz tła
+    public RawImage[] scalableImages; // Tablica obrazów do skalowania
 
     private bool isFullScreen = true;
     private float sensitivity = 5.0f;
     private Resolution[] resolutions;
 
+    private const float baseWidth = 1920f; // Baza rozdzielczości dla skalowania
+    private const float baseHeight = 1080f;
+
     void Start()
     {
-        // Log all available resolutions
-        LogAvailableResolutions();
-
-        // Get available resolutions
+        // Pobranie dostępnych rozdzielczości
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -32,10 +33,10 @@ public class SettingsMenu : MonoBehaviour
 
         resolutionDropdown.AddOptions(options);
 
-        // Load saved settings
+        // Wczytanie ustawień
         LoadSettings();
-        
-        // Initialize Toggle and Slider values
+
+        // Ustawienie początkowych wartości UI
         fullScreenToggle.isOn = isFullScreen;
         sensitivitySlider.value = sensitivity;
     }
@@ -60,11 +61,11 @@ public class SettingsMenu : MonoBehaviour
             Resolution selectedResolution = resolutions[index];
             Screen.SetResolution(selectedResolution.width, selectedResolution.height, isFullScreen);
             Debug.Log("Resolution set to: " + selectedResolution.width + " x " + selectedResolution.height);
-            PlayerPrefs.SetInt("ResolutionIndex", index); // Save the selected index
-            PlayerPrefs.Save(); // Ensure it's saved
+            PlayerPrefs.SetInt("ResolutionIndex", index);
+            PlayerPrefs.Save();
 
-            // Adjust all RawImages scale based on resolution
-            AdjustRawImageScale(selectedResolution.width, selectedResolution.height);
+            // Dostosowanie obrazów do nowej rozdzielczości
+            AdjustImageScales(selectedResolution.width, selectedResolution.height);
         }
         else
         {
@@ -82,28 +83,24 @@ public class SettingsMenu : MonoBehaviour
 
     private void LoadSettings()
     {
-        // Load settings from PlayerPrefs or set to default if not set
         isFullScreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
         sensitivity = PlayerPrefs.GetFloat("Sensitivity", 5.0f);
         int resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", 0);
 
-        // Check if the loaded resolution index is valid
         if (resolutionIndex >= 0 && resolutionIndex < resolutions.Length)
         {
             Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, isFullScreen);
-            resolutionDropdown.value = resolutionIndex; // Set dropdown value to match saved index
+            resolutionDropdown.value = resolutionIndex;
 
-            // Adjust all RawImages scale based on loaded resolution
-            AdjustRawImageScale(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height);
+            AdjustImageScales(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height);
         }
         else
         {
             Debug.LogWarning("Loaded resolution index is out of range, setting to default.");
-            Screen.SetResolution(resolutions[0].width, resolutions[0].height, isFullScreen); // Set to the first resolution as fallback
-            resolutionDropdown.value = 0; // Reset dropdown to the first option
+            Screen.SetResolution(resolutions[0].width, resolutions[0].height, isFullScreen);
+            resolutionDropdown.value = 0;
 
-            // Adjust all RawImages scale based on default resolution
-            AdjustRawImageScale(resolutions[0].width, resolutions[0].height);
+            AdjustImageScales(resolutions[0].width, resolutions[0].height);
         }
 
         Debug.Log("Loaded Settings: Fullscreen - " + isFullScreen + ", Sensitivity - " + sensitivity + ", Resolution Index - " + resolutionIndex);
@@ -111,33 +108,33 @@ public class SettingsMenu : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        // Save settings when the application quits
         SaveSettings();
     }
 
-    private void LogAvailableResolutions()
+    // Skalowanie wszystkich obrazów
+    private void AdjustImageScales(int width, int height)
     {
-        Debug.Log("Available Resolutions:");
-        foreach (var resolution in Screen.resolutions)
-        {
-            Debug.Log(resolution.width + " x " + resolution.height);
-        }
-    }
+        float scaleX = width / baseWidth;
+        float scaleY = height / baseHeight;
 
-    // Adjusts the scale for all RawImages based on the selected resolution
-    private void AdjustRawImageScale(int width, int height)
-    {
-        if (rawImages != null && rawImages.Length > 0)
+        // Skalowanie wszystkich obrazów w tablicy
+        if (scalableImages != null && scalableImages.Length > 0)
         {
-            // Calculate scaling factor based on resolution
-            float scaleX = (float)width / 1920f; // Assuming 1920x1080 as base resolution
-            float scaleY = (float)height / 1080f;
-
-            foreach (var rawImage in rawImages)
+            foreach (var image in scalableImages)
             {
-                rawImage.rectTransform.localScale = new Vector3(scaleX, scaleY, 1);
+                if (image != null)
+                {
+                    image.rectTransform.localScale = new Vector3(scaleX, scaleY, 1);
+                }
             }
-            Debug.Log("All RawImages scale adjusted: X = " + scaleX + ", Y = " + scaleY);
+            Debug.Log("All images scaled: X = " + scaleX + ", Y = " + scaleY);
+        }
+
+        // Skalowanie tła
+        if (backgroundImage != null)
+        {
+            backgroundImage.rectTransform.localScale = new Vector3(scaleX, scaleY, 1);
+            Debug.Log("Background scaled: X = " + scaleX + ", Y = " + scaleY);
         }
     }
 }
