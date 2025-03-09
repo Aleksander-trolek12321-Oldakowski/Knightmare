@@ -13,6 +13,8 @@ public class Coin : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if (player != null)
         {
+            AudioManager.Instance.PlaySound("Coin");
+
 
             CoinManager.Instance.AddCoins(1);
 
