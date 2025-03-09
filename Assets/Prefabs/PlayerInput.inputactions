@@ -306,6 +306,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Pause",
+                    "type": "PassThrough",
+                    "id": "d1e89f54-9d7f-4060-98d3-8e4ecf8797b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "ScrollWheel",
                     "type": "PassThrough",
                     "id": "9ad6ac56-0376-400d-9de9-a8fe92c80aed",
@@ -767,6 +776,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "412a75e6-0c50-47c9-927f-44e38210aae4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
