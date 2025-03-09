@@ -19,11 +19,14 @@ public class PauseMenu : MonoBehaviour
 
     void OnEnable()
     {
+
+
         playerInput.UI.Enable();
     }
 
     void OnDisable()
     {
+      
         playerInput.UI.Disable();
     }
 
@@ -48,6 +51,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        AudioManager.Instance.PlaySound("MusicGame");
+        AudioManager.Instance.StopSound("MusicPause");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -56,6 +61,8 @@ public class PauseMenu : MonoBehaviour
 
     void PauseGame()
     {
+        AudioManager.Instance.StopSound("MusicGame");
+        AudioManager.Instance.PlaySound("MusicPause");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -64,6 +71,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        AudioManager.Instance.StopSound("MusicPause");
         Time.timeScale = 1f; 
         SceneManager.LoadScene("MainMenu");
     }
