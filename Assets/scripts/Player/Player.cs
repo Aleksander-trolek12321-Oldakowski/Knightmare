@@ -29,10 +29,22 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 respawnPoint;
     private bool isDead = false;
 
+    [SerializeField] private int maxHearts = 3; 
+    private int healthPerHeart = 4; 
+    [SerializeField] private float currentHealth;
 
+    [SerializeField] private List<Image> heartImages;
+    [SerializeField] private Sprite fullHeart;
+    [SerializeField] private Sprite threeQuartersHeart;
+    [SerializeField] private Sprite halfHeart;
+    [SerializeField] private Sprite quarterHeart;
+    [SerializeField] private Sprite emptyHeart;
+    private bool isWalking = false;
     void Awake()
     {
-      
+        AudioManager.Instance.PlaySound("MusicGame");
+        AudioManager.Instance.StopSound("MusicMenu");
+
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -67,6 +79,11 @@ public class Player : MonoBehaviour
 
     public void MovePerformed(InputAction.CallbackContext context)
     {
+        if (!isWalking)
+        {
+            AudioManager.Instance.PlaySound("Walk");
+            isWalking = true;
+        }
         Vector2 input = context.ReadValue<Vector2>();
         movementVector.x = input.x;
         movementVector.y = input.y;
@@ -81,6 +98,10 @@ public class Player : MonoBehaviour
 
     private void OnMoveCanceled(InputAction.CallbackContext context)
     {
+        isWalking = false;
+
+        AudioManager.Instance.StopSound("Walk");
+
         movementVector = Vector2.zero;
         rb.velocity = movementVector;
 
@@ -96,6 +117,7 @@ public class Player : MonoBehaviour
     private void OnAttackStarted(InputAction.CallbackContext context)
     {
         isHoldingAttack = true;
+
         StartCoroutine(AttackWhileHolding());
     }
 
@@ -119,6 +141,8 @@ public class Player : MonoBehaviour
 
     private void PerformAttack()
     {
+        AudioManager.Instance.PlaySound("Sword");
+
         isAttacking = true;
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -202,6 +226,8 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        AudioManager.Instance.StopSound("MusicGame");
+        AudioManager.Instance.StopSound("Walk");
         if (isDead) return;
         isDead = true;
 
