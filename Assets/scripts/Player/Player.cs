@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Vector2 movementVector;
     Animator animator;
-    PlayerInput playerInputActions;
+    public PlayerInput playerInputActions;
     private bool isAttacking = false;
     private float attackSpeedUI;
 
