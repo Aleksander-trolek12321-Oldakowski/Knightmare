@@ -50454,22 +50454,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1155420370074544073, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3862186013639408048, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605903441376845476, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5376416116391251722, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11
-      objectReference: {fileID: 0}
     - target: {fileID: 6275655293114055959, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
       propertyPath: m_Name
       value: Shop
