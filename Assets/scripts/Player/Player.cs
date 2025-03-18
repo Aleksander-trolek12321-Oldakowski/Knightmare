@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
         attackSpeed = Mathf.Clamp(attackSpeed, 0.1f, 3f);
         range = Mathf.Clamp(range, 0.1f, 3f);
 
-        if (itemData.health > 0)
+        if (itemData.health != 0)
         {
             IncreaseMaxHealth(itemData.health); 
         }
@@ -265,17 +265,24 @@ public class Player : MonoBehaviour
     }
     public void IncreaseMaxHealth(float heartAmount)
     {
-        float healthToAdd = heartAmount * healthPerHeart;
+        float healthToAdd = heartAmount * healthPerHeart; 
 
-        currentHealth += healthToAdd;
-
-        int newMaxHearts = Mathf.FloorToInt((currentHealth + healthPerHeart - 1) / healthPerHeart);
-
-        maxHearts = Mathf.Max(maxHearts, newMaxHearts);
+        if (healthToAdd > 0)
+        {
+            currentHealth += healthToAdd;
+            int newMaxHearts = Mathf.FloorToInt((currentHealth + healthPerHeart - 1) / healthPerHeart);
+            maxHearts = Mathf.Max(maxHearts, newMaxHearts);
+        }
+        else
+        {
+            TakeDamage(-healthToAdd);
+        }
 
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
 
         UpdateHearts();
+
+
     }
 
     private void UpdateHearts()
