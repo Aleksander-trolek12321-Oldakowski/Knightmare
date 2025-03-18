@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
 
         if (itemData.health > 0)
         {
-            IncreaseMaxHealth(1); 
+            IncreaseMaxHealth(itemData.health); 
         }
 
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
@@ -263,12 +263,17 @@ public class Player : MonoBehaviour
 
         UpdateHearts(); 
     }
-    public void IncreaseMaxHealth(int heartAmount)
+    public void IncreaseMaxHealth(float heartAmount)
     {
-        maxHearts += heartAmount;
-        currentHealth = maxHearts * healthPerHeart; 
+        float healthToAdd = heartAmount * healthPerHeart;
 
-        UpdateHearts(); 
+        int newMaxHearts = Mathf.FloorToInt((currentHealth + healthPerHeart - 1) / healthPerHeart);
+
+        maxHearts = Mathf.Max(maxHearts, newMaxHearts);
+
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
+
+        UpdateHearts();
     }
 
     private void UpdateHearts()
