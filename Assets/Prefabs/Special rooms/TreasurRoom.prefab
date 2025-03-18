@@ -255,6 +255,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 061380b9737d7e34495c6d99c55f5ebd, type: 2}
   - {fileID: 11400000, guid: 6967ae76192e95a4dafcdf4b63444e44, type: 2}
   - {fileID: 11400000, guid: 186c36b4840592043a72b8bc65032b10, type: 2}
+  - {fileID: 11400000, guid: 4c19ca54ad15f5d44a1877dc77990b64, type: 2}
+  - {fileID: 11400000, guid: 8a5c2bd130b246d44bd46eb82fe36044, type: 2}
+  - {fileID: 11400000, guid: 4a6f35d4153d405419ec0fa1b3456576, type: 2}
+  - {fileID: 11400000, guid: f0b4d497924a0da48a5c2b8c81e970c3, type: 2}
+  - {fileID: 11400000, guid: 55884ba3622d4d74c9f12a0d80e30b2b, type: 2}
+  - {fileID: 11400000, guid: 6ed9b4ac27ac05b4da17e002568f7049, type: 2}
+  - {fileID: 11400000, guid: 749e8fa171b5c7b418c92fe47dae4791, type: 2}
+  - {fileID: 11400000, guid: 5d6647ad8b5ce6f4297e93f1f774fb1e, type: 2}
+  - {fileID: 11400000, guid: f41da295a6920604d8b05973714d6fcb, type: 2}
+  - {fileID: 11400000, guid: b1067fc9e90e38544881f3f1ec2e6921, type: 2}
+  - {fileID: 11400000, guid: 836a1e4208a979f4889d3f4744861c70, type: 2}
+  - {fileID: 11400000, guid: b0ef366b8ca27ee4c96582b5328e4da4, type: 2}
+  - {fileID: 11400000, guid: 5fc2f447777aaab458479619ea2ff663, type: 2}
+  - {fileID: 11400000, guid: 02cf8b82f98b4a4469e4216dda104f77, type: 2}
+  - {fileID: 11400000, guid: 35850b69b4f39be479640fbe18b8804c, type: 2}
+  - {fileID: 11400000, guid: 6f2515189e69fd949b5a444ac5d47103, type: 2}
+  - {fileID: 11400000, guid: 26d055c857453a64b8d75a8af9f30436, type: 2}
+  - {fileID: 11400000, guid: 8664f76479fe50845a2c29482236edd8, type: 2}
+  - {fileID: 11400000, guid: ff94d1fac137eef4cabf6d55f7e931a7, type: 2}
+  - {fileID: 11400000, guid: 4a2790d7072934d42b7ae246c04e2591, type: 2}
+  - {fileID: 11400000, guid: 5c4826bedf92daf46be44b8acf4dd32c, type: 2}
+  - {fileID: 11400000, guid: 344bd638c9aec0747b6a969b9dde3a4f, type: 2}
+  - {fileID: 11400000, guid: 6a94a106eff7f6647980be2aa0f2f0ee, type: 2}
+  - {fileID: 11400000, guid: 994b2845dee064141824ff00202b3734, type: 2}
+  - {fileID: 11400000, guid: cbb28b16f06c7e94eb59478f21cf865b, type: 2}
+  - {fileID: 11400000, guid: 88041a1b7532e2547823b04e63ca58b0, type: 2}
   isInShop: 0
   treasureRoom: {fileID: 7427144579268709120}
   itemPriceText: {fileID: 0}
@@ -409,6 +435,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 061380b9737d7e34495c6d99c55f5ebd, type: 2}
   - {fileID: 11400000, guid: 6967ae76192e95a4dafcdf4b63444e44, type: 2}
   - {fileID: 11400000, guid: 186c36b4840592043a72b8bc65032b10, type: 2}
+  - {fileID: 11400000, guid: 4c19ca54ad15f5d44a1877dc77990b64, type: 2}
+  - {fileID: 11400000, guid: 8a5c2bd130b246d44bd46eb82fe36044, type: 2}
+  - {fileID: 11400000, guid: 4a6f35d4153d405419ec0fa1b3456576, type: 2}
+  - {fileID: 11400000, guid: f0b4d497924a0da48a5c2b8c81e970c3, type: 2}
+  - {fileID: 11400000, guid: 55884ba3622d4d74c9f12a0d80e30b2b, type: 2}
+  - {fileID: 11400000, guid: 6ed9b4ac27ac05b4da17e002568f7049, type: 2}
+  - {fileID: 11400000, guid: 749e8fa171b5c7b418c92fe47dae4791, type: 2}
+  - {fileID: 11400000, guid: 5d6647ad8b5ce6f4297e93f1f774fb1e, type: 2}
+  - {fileID: 11400000, guid: f41da295a6920604d8b05973714d6fcb, type: 2}
+  - {fileID: 11400000, guid: b1067fc9e90e38544881f3f1ec2e6921, type: 2}
+  - {fileID: 11400000, guid: 836a1e4208a979f4889d3f4744861c70, type: 2}
+  - {fileID: 11400000, guid: b0ef366b8ca27ee4c96582b5328e4da4, type: 2}
+  - {fileID: 11400000, guid: 5fc2f447777aaab458479619ea2ff663, type: 2}
+  - {fileID: 11400000, guid: 02cf8b82f98b4a4469e4216dda104f77, type: 2}
+  - {fileID: 11400000, guid: 35850b69b4f39be479640fbe18b8804c, type: 2}
+  - {fileID: 11400000, guid: 6f2515189e69fd949b5a444ac5d47103, type: 2}
+  - {fileID: 11400000, guid: 26d055c857453a64b8d75a8af9f30436, type: 2}
+  - {fileID: 11400000, guid: 8664f76479fe50845a2c29482236edd8, type: 2}
+  - {fileID: 11400000, guid: ff94d1fac137eef4cabf6d55f7e931a7, type: 2}
+  - {fileID: 11400000, guid: 4a2790d7072934d42b7ae246c04e2591, type: 2}
+  - {fileID: 11400000, guid: 5c4826bedf92daf46be44b8acf4dd32c, type: 2}
+  - {fileID: 11400000, guid: 344bd638c9aec0747b6a969b9dde3a4f, type: 2}
+  - {fileID: 11400000, guid: 6a94a106eff7f6647980be2aa0f2f0ee, type: 2}
+  - {fileID: 11400000, guid: 994b2845dee064141824ff00202b3734, type: 2}
+  - {fileID: 11400000, guid: cbb28b16f06c7e94eb59478f21cf865b, type: 2}
+  - {fileID: 11400000, guid: 88041a1b7532e2547823b04e63ca58b0, type: 2}
   isInShop: 0
   treasureRoom: {fileID: 7427144579268709120}
   itemPriceText: {fileID: 0}

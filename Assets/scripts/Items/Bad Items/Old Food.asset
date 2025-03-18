@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8b10d4e85442a4cb5ff507d68552ff, type: 3}
+  m_Name: Old Food
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 888899070, guid: 00ba35f770f55e5409b0883a156a2528, type: 3}
+  health: -0.5
+  damage: 0
+  speed: 0
+  attackSpeed: 0
+  range: 0
+  canPoison: 0
+  canFire: 0
+  priceInShop: 0
