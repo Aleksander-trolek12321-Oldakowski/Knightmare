@@ -20,4 +20,4 @@ MonoBehaviour:
   range: 0
   canPoison: 0
   canFire: 0
-  priceInShop: 0
+  priceInShop: 3

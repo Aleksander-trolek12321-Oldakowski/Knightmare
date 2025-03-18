@@ -263,6 +263,8 @@ public class Player : MonoBehaviour
     {
         float healthToAdd = heartAmount * healthPerHeart;
 
+        currentHealth += healthToAdd;
+
         int newMaxHearts = Mathf.FloorToInt((currentHealth + healthPerHeart - 1) / healthPerHeart);
 
         maxHearts = Mathf.Max(maxHearts, newMaxHearts);
