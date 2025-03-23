@@ -7,5 +7,5 @@ public interface IDamageable
 
     void TakeDamage(float damageAmount);
     void ApplyDamageOverTime(DamageOverTime effect, float duration, float damage);
-
+    void ApplySlow(float amount, float duration);
 }
