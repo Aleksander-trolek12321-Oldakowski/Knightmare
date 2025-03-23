@@ -281,6 +281,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 994b2845dee064141824ff00202b3734, type: 2}
   - {fileID: 11400000, guid: cbb28b16f06c7e94eb59478f21cf865b, type: 2}
   - {fileID: 11400000, guid: 88041a1b7532e2547823b04e63ca58b0, type: 2}
+  - {fileID: 11400000, guid: 83205f7d4d3ab954dba80e3730a2f116, type: 2}
   isInShop: 0
   treasureRoom: {fileID: 7427144579268709120}
   itemPriceText: {fileID: 0}
@@ -461,6 +462,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 994b2845dee064141824ff00202b3734, type: 2}
   - {fileID: 11400000, guid: cbb28b16f06c7e94eb59478f21cf865b, type: 2}
   - {fileID: 11400000, guid: 88041a1b7532e2547823b04e63ca58b0, type: 2}
+  - {fileID: 11400000, guid: 83205f7d4d3ab954dba80e3730a2f116, type: 2}
   isInShop: 0
   treasureRoom: {fileID: 7427144579268709120}
   itemPriceText: {fileID: 0}

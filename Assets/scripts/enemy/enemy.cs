@@ -96,6 +96,22 @@ public class enemy : MonoBehaviour, IDamageable
             isPoisoned = false;
         }
 
+        public void ApplySlow(float amount, float duration)
+        {
+            StartCoroutine(SlowEffect(amount, duration));
+        }
+
+        private IEnumerator SlowEffect(float amount, float duration)
+        {
+            float originalSpeed = speed;
+            speed *= amount;
+
+            yield return new WaitForSeconds(duration);
+
+            speed = originalSpeed;
+        }
+
+
         protected virtual void  Die()
         {
             Destroy(gameObject);

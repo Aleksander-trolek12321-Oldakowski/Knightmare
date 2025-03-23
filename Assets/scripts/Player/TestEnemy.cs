@@ -76,4 +76,9 @@ public class TestEnemy : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
+
+    public void ApplySlow(float amount, float duration)
+    {
+        throw new System.NotImplementedException();
+    }
 }
