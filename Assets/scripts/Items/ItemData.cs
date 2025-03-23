@@ -13,6 +13,7 @@ public class ItemData : ScriptableObject
     public float range;
     public bool canPoison;
     public bool canFire;
+    public bool canSlow;
     public int priceInShop;
 
 

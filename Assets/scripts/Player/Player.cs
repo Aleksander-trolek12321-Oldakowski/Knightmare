@@ -1,3 +1,4 @@
+using enemy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,6 +41,11 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite quarterHeart;
     [SerializeField] private Sprite emptyHeart;
     private bool isWalking = false;
+
+    [SerializeField] private bool canSlow = false;
+    [SerializeField] private float slowDuration = 2f;
+    [SerializeField] private float slowAmount = 0.5f;
+
     void Awake()
     {
         AudioManager.Instance.PlaySound("MusicGame");
@@ -170,6 +176,11 @@ public class Player : MonoBehaviour
                 {
                     target.ApplyDamageOverTime(DamageOverTime.Poison, 5f, 1f); 
                 }
+
+                if (canSlow)
+                {
+                    target.ApplySlow(slowAmount, slowDuration);
+                }
             }
         }
 
@@ -200,6 +211,7 @@ public class Player : MonoBehaviour
         range += itemData.range;
         canFire = itemData.canFire;
         canPoison = itemData.canPoison;
+        canSlow = itemData.canSlow;
 
         damage = Mathf.Clamp(damage, 0.1f, 5f);
         speed = Mathf.Clamp(speed, 0.1f, 5f);
