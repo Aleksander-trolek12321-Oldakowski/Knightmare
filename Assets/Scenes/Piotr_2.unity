@@ -48144,6 +48144,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreasurRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 2487314824397913275, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: possibleItems.Array.size
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487314824397913275, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: 'possibleItems.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f10ea4c593fe59b4b98957170c3e409d, type: 2}
+    - target: {fileID: 2487314824397913275, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: 'possibleItems.Array.data[27]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 994b2845dee064141824ff00202b3734, type: 2}
+    - target: {fileID: 2487314824397913275, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: 'possibleItems.Array.data[28]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cbb28b16f06c7e94eb59478f21cf865b, type: 2}
+    - target: {fileID: 2487314824397913275, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: 'possibleItems.Array.data[29]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 88041a1b7532e2547823b04e63ca58b0, type: 2}
+    - target: {fileID: 2487314824397913275, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: 'possibleItems.Array.data[30]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 83205f7d4d3ab954dba80e3730a2f116, type: 2}
     - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.47
@@ -48732,9 +48756,12 @@ MonoBehaviour:
   halfHeart: {fileID: 533657380, guid: 4bddc8787d4e8484d907a2cd1c6a2883, type: 3}
   quarterHeart: {fileID: -299715618, guid: 4bddc8787d4e8484d907a2cd1c6a2883, type: 3}
   emptyHeart: {fileID: 2073644514, guid: 4bddc8787d4e8484d907a2cd1c6a2883, type: 3}
+  changeCameraSize: 0
+  newCameraSize: 4
   canSlow: 0
   slowDuration: 2
   slowAmount: 0.5
+  mainCamera: {fileID: 512517986}
 --- !u!212 &1351369869
 SpriteRenderer:
   m_ObjectHideFlags: 0
