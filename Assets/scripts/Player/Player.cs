@@ -41,9 +41,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite emptyHeart;
     private bool isWalking = false;
 
+    [SerializeField] private bool changeCameraSize = false;
+    [SerializeField] private int newCameraSize = 4;
+    
     [SerializeField] private bool canSlow = false;
     [SerializeField] private float slowDuration = 2f;
     [SerializeField] private float slowAmount = 0.5f;
+    [SerializeField] private Camera mainCamera;
 
     void Awake()
     {
@@ -65,6 +69,10 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
         attackSpeedUI =  attackSpeed;
 
         currentHealth = maxHearts * healthPerHeart; 
@@ -211,6 +219,10 @@ public class Player : MonoBehaviour
         canFire = itemData.canFire;
         canPoison = itemData.canPoison;
         canSlow = itemData.canSlow;
+        if (itemData.changeCameraSize)
+        {
+            mainCamera.orthographicSize = newCameraSize;
+        }
 
         damage = Mathf.Clamp(damage, 0.1f, 5f);
         speed = Mathf.Clamp(speed, 0.1f, 5f);
