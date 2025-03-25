@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     private bool isWalking = false;
 
     [SerializeField] private bool changeCameraSize = false;
-    [SerializeField] private int newCameraSize = 4;
+    [SerializeField] private float newCameraSize = 4;
     
     [SerializeField] private bool canSlow = false;
     [SerializeField] private float slowDuration = 2f;
@@ -70,10 +70,7 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
+
         attackSpeedUI =  attackSpeed;
 
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
