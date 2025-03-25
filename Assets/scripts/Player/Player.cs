@@ -213,9 +213,22 @@ public class Player : MonoBehaviour
         speed += itemData.speed;
         attackSpeed += itemData.attackSpeed;
         range += itemData.range;
-        canFire = itemData.canFire;
-        canPoison = itemData.canPoison;
-        canSlow = itemData.canSlow;
+
+        if (itemData.canFire)
+        {
+            canFire = itemData.canFire;
+        }
+
+        if (itemData.canPoison)
+        {
+            canPoison = itemData.canPoison;
+        }
+
+        if (itemData.canSlow)
+        {
+            canSlow = itemData.canSlow;
+        }
+
         if (itemData.changeCameraSize)
         {
             mainCamera.orthographicSize = newCameraSize;
