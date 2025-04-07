@@ -49,7 +49,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float slowDuration = 2f;
     [SerializeField] private float slowAmount = 0.5f;
     [SerializeField] private Camera mainCamera;
-
+    [SerializeField] private bool hasThorns = false;
+    [SerializeField] private float thornsDamage = 2f;
     void Awake()
     {
         AudioManager.Instance.PlaySound("MusicGame");
@@ -235,6 +236,11 @@ public class Player : MonoBehaviour
             mainCamera.orthographicSize = newCameraSize;
         }
 
+        if (itemData.hasThorns)
+        {
+            hasThorns = true;
+           
+        }
         damage = Mathf.Clamp(damage, 0.1f, 5f);
         speed = Mathf.Clamp(speed, 0.1f, 5f);
         attackSpeed = Mathf.Clamp(attackSpeed, 0.1f, 3f);
@@ -293,6 +299,17 @@ public class Player : MonoBehaviour
         isDead = false;
         playerInputActions.Player.Enable(); 
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!hasThorns || isDead) return;
+
+        IDamageable enemy = collision.gameObject.GetComponent<IDamageable>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(thornsDamage);
+        }
+    }
+
     public void IncreaseMaxHealth(float heartAmount)
     {
         float healthToAdd = heartAmount * healthPerHeart; 
