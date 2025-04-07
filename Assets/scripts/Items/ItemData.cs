@@ -15,6 +15,7 @@ public class ItemData : ScriptableObject
     public bool canFire;
     public bool canSlow;
     public bool changeCameraSize;
+    public bool hasThorns;
     public int priceInShop;
 
 
