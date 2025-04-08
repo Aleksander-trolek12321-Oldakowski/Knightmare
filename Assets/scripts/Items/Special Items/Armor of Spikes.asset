@@ -22,4 +22,5 @@ MonoBehaviour:
   canFire: 0
   canSlow: 0
   changeCameraSize: 0
+  hasThorns: 1
   priceInShop: 0
