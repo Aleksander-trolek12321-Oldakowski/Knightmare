@@ -51,6 +51,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private bool hasThorns = false;
     [SerializeField] private float thornsDamage = 2f;
+    [SerializeField] public float thornsCooldown =2f;
+    private float lastThornsTime =0;
+    private Dictionary<GameObject, float> thornsTimers = new Dictionary<GameObject, float>();
+
     void Awake()
     {
         AudioManager.Instance.PlaySound("MusicGame");
@@ -252,6 +256,23 @@ public class Player : MonoBehaviour
         }
 
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!hasThorns || isDead) return;
+
+        GameObject enemyObject = collision.gameObject;
+        IDamageable enemy = enemyObject.GetComponent<IDamageable>();
+        if (enemy == null) return;
+
+        float lastHitTime = thornsTimers.ContainsKey(enemyObject) ? thornsTimers[enemyObject] : -Mathf.Infinity;
+
+        if (Time.time - lastHitTime >= thornsCooldown)
+        {
+            enemy.TakeDamage(thornsDamage);
+            thornsTimers[enemyObject] = Time.time;
+        }
+    }
 
     }
 
@@ -298,16 +319,6 @@ public class Player : MonoBehaviour
         health = 10;
         isDead = false;
         playerInputActions.Player.Enable(); 
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (!hasThorns || isDead) return;
-
-        IDamageable enemy = collision.gameObject.GetComponent<IDamageable>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(thornsDamage);
-        }
     }
 
     public void IncreaseMaxHealth(float heartAmount)
