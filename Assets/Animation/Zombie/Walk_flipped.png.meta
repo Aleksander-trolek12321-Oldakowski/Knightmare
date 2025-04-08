@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9569fd042ecfb2446ad700230f336ef9
+guid: ef185e157ebb3c745a1449cc446beb60
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -162,12 +162,75 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dead_0
+      name: Walk_flipped_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 694
         y: 0
-        width: 65
+        width: 48
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24031e27157b5fb419505313e5d457fb
+      internalID: -1665795752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_flipped_1
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 0
+        width: 47
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e33fdec8f7e281c429a59d5d2aed33d8
+      internalID: -1787648631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_flipped_2
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 0
+        width: 45
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84b2ad73bab7a84dafb73bf5e2deec2
+      internalID: 1581439048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_flipped_3
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 0
+        width: 44
         height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -176,62 +239,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83fc28685f4f7ed4fab09f15916dfe91
-      internalID: 1515456823
+      spriteID: 4866c6312ab1baa4dbf24f5e454104cb
+      internalID: 1757972627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_1
-      rect:
-        serializedVersion: 2
-        x: 121
-        y: 0
-        width: 42
-        height: 58
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25da7823abd78184b9f62247356fada3
-      internalID: -734504036
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dead_2
-      rect:
-        serializedVersion: 2
-        x: 223
-        y: 0
-        width: 33
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 476091b4d0d8a4245befb251dc88766e
-      internalID: 1750569645
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dead_3
+      name: Walk_flipped_4
       rect:
         serializedVersion: 2
         x: 313
         y: 0
-        width: 66
-        height: 36
+        width: 43
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,20 +260,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5d820e1f9417aa409e47df3881db452
-      internalID: 2062221677
+      spriteID: d116f85c5ef63a1438364daf7d378582
+      internalID: 1797375860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dead_4
+      name: Walk_flipped_5
       rect:
         serializedVersion: 2
-        x: 410
+        x: 218
         y: 0
-        width: 70
-        height: 26
+        width: 38
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,8 +281,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39a293caf162c0547be21c81c30325d6
-      internalID: -997165873
+      spriteID: 8bff4a23f842e4046996a79cf47f1f39
+      internalID: -195348714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_flipped_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 36
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89ed4c0b1d993a948a07882d66b0c11a
+      internalID: -1918936897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_flipped_7
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 39
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c414fcd5f55d4e489404b2090acc790
+      internalID: -1937691969
       vertices: []
       indices: 
       edges: []
@@ -269,7 +332,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 24a887f1a9c8521468d884e3e168c32d
+    spriteID: 240b462d02a2dd14080b3ae64b22f093
     internalID: 0
     vertices: []
     indices: 
@@ -277,11 +340,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dead_0: 1515456823
-      Dead_1: -734504036
-      Dead_2: 1750569645
-      Dead_3: 2062221677
-      Dead_4: -997165873
+      Walk_flipped_0: -1665795752
+      Walk_flipped_1: -1787648631
+      Walk_flipped_2: 1581439048
+      Walk_flipped_3: 1757972627
+      Walk_flipped_4: 1797375860
+      Walk_flipped_5: -195348714
+      Walk_flipped_6: -1918936897
+      Walk_flipped_7: -1937691969
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

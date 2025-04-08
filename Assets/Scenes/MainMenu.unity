@@ -1656,8 +1656,8 @@ MonoBehaviour:
   fullScreenToggle: {fileID: 2014626514}
   sensitivitySlider: {fileID: 1361903483}
   resolutionDropdown: {fileID: 403868146}
-  rawImages:
-  - {fileID: 1133228459}
+  backgroundImage: {fileID: 1133228459}
+  scalableImages:
   - {fileID: 1044634637}
   - {fileID: 1536018857}
 --- !u!1 &1133228457

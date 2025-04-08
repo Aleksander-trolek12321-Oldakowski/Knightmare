@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace enemy
 {
@@ -76,22 +77,28 @@ namespace enemy
                 return Vector2.zero;
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++) // 10 prób znalezienia miejsca
             {
                 Vector2 randomPosition = (Vector2)transform.position + Random.insideUnitCircle * spawnRadius;
 
+                // Sprawdzenie minimalnej odległości od gracza
                 if (Vector2.Distance(randomPosition, player.transform.position) < minDistanceFromPlayer)
                     continue;
 
-                if (Physics2D.OverlapPoint(randomPosition) != null) // Sprawdzenie kolizji z terenem
-                    continue;
+                // Sprawdzenie kolizji z TilemapCollider2D
+                Collider2D collider = Physics2D.OverlapCircle(randomPosition, 0.5f);
+                if (collider != null && collider.GetComponent<TilemapCollider2D>() != null)
+                {
+                    continue; // Jeśli koliduje z Tilemapą, szukamy dalej
+                }
 
+                // Sprawdzenie, czy miejsce nie nachodzi na innego przeciwnika
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(randomPosition, minDistanceBetweenEnemies);
                 bool isPositionValid = true;
 
-                foreach (Collider2D collider in colliders)
+                foreach (Collider2D col in colliders)
                 {
-                    if (collider != null && collider.GetComponent<enemy>() != null) // Unikamy null
+                    if (col != null && col.GetComponent<enemy>() != null) // Unikamy null
                     {
                         isPositionValid = false;
                         break;
@@ -104,8 +111,9 @@ namespace enemy
                 }
             }
 
-            return Vector2.zero;
+            return Vector2.zero; // Jeśli nie znaleziono odpowiedniego miejsca
         }
+
 
         private void OnDrawGizmosSelected()
         {

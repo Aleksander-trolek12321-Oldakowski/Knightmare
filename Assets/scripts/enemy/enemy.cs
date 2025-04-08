@@ -5,8 +5,8 @@ using UnityEngine.Analytics;
 
 namespace enemy
 {
-public class enemy : MonoBehaviour
-{
+public class enemy : MonoBehaviour, IDamageable
+    {
     [SerializeField]
     int id;
     [SerializeField]
@@ -23,7 +23,11 @@ public class enemy : MonoBehaviour
     public float attackSpeed;
     [SerializeField]
     public float minimumDistance = 15f;
-    public virtual void Attack()
+    [SerializeField] 
+    private bool isOnFire = false;
+    [SerializeField]
+    private bool isPoisoned = false;
+        public virtual void Attack()
     {
 
     }

@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject attackSpherePrefab;
     private bool isHoldingAttack = false;
     float damageRadius = 0.75f;
-    [SerializeField] public float health = 10;
     [SerializeField] private float damage = 10;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float range = 1f;
@@ -78,8 +77,11 @@ public class Player : MonoBehaviour
 
         attackSpeedUI =  attackSpeed;
 
+        currentHealth = maxHearts * healthPerHeart; 
+
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
 
+        UpdateHearts(); 
     }
 
     void OnDestroy()
@@ -166,9 +168,6 @@ public class Player : MonoBehaviour
         Vector2 attackDirection = (mousePosition - transform.position).normalized;
         Vector3 spherePosition = transform.position + (Vector3)attackDirection * 1.3f ;
 
-        GameObject sphere = Instantiate(attackSpherePrefab, spherePosition, Quaternion.identity);       
-        sphere.transform.localScale = Vector3.one * 1.5f * range;
-        Destroy(sphere, 0.3f);
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(spherePosition, damageRadius * range);
         foreach (Collider2D collider in hitObjects)
         {
@@ -213,8 +212,8 @@ public class Player : MonoBehaviour
     public void ApplyItemStats(ItemData itemData)
     {
         if (itemData == null) return;
-        attackSpeedUI= attackSpeedUI + (itemData.attackSpeed* -1);
-        health += itemData.health;
+
+        attackSpeedUI += (itemData.attackSpeed * -1);
         damage += itemData.damage;
         speed += itemData.speed;
         attackSpeed += itemData.attackSpeed;
@@ -274,15 +273,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    }
 
     public void TakeDamage(float damageAmount)
     {
         if (isDead) return;
 
-        health -= damageAmount;
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
 
-        if (health <= 0)
+        UpdateHearts(); 
+
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -295,7 +296,7 @@ public class Player : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        rb.velocity = Vector2.zero; 
+        rb.velocity = Vector2.zero;
         playerInputActions.Player.Disable();
 
         animator.SetTrigger("Death");
@@ -307,7 +308,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
 
         transform.position = respawnPoint;
         animator.SetTrigger("Respawn");
@@ -316,9 +317,11 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Start");
         yield return new WaitForSeconds(0.5f);
 
-        health = 10;
+        currentHealth = maxHearts * healthPerHeart; 
         isDead = false;
-        playerInputActions.Player.Enable(); 
+        playerInputActions.Player.Enable();
+
+        UpdateHearts(); 
     }
 
     public void IncreaseMaxHealth(float heartAmount)

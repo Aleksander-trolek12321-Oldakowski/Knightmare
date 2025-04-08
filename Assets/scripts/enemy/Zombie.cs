@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
 namespace enemy
 {
     public enum ZombieState { Patrol, Chase, Attack }
