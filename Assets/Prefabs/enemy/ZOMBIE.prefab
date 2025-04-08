@@ -139,18 +139,19 @@ MonoBehaviour:
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
   player: {fileID: 0}
   moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
-  attackCooldown: 1.5
-  turnSpeed: 10
-  attackInaccuracy: 0.05
   animator: {fileID: 8372343444972926827}
+  patrolSpeed: 1
+  chaseSpeed: 2
+  sightRange: 10
+  loseSightRange: 15
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
+  attackCooldown: 1.5
+  pathUpdateInterval: 0.75
 --- !u!61 &8024524685503616884
 BoxCollider2D:
   m_ObjectHideFlags: 0
