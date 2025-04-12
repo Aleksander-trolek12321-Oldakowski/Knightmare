@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameData : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class GameData : MonoBehaviour
     public bool hasThorns;
 
     public List<Sprite> collectedItemIcons = new List<Sprite>();
+    public string previousSceneName;
+    public Vector3 returnPosition;
+
 
     private void Awake()
     {
@@ -44,6 +48,13 @@ public class GameData : MonoBehaviour
         canPoison = player.GetCanPoison();
         canSlow = player.GetCanSlow();
         hasThorns = player.GetHasThorns();
+
+
+    }
+    public void SaveSceneName(Player player)
+    {
+        previousSceneName = SceneManager.GetActiveScene().name;
+        returnPosition = player.transform.position;
     }
 
     public void LoadPlayerData(Player player)

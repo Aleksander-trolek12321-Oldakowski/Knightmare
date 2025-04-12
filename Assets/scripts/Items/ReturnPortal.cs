@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour
+public class ReturnPortal : MonoBehaviour
 {
-    [SerializeField] private string sceneToLoad;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player player = collision.GetComponent<Player>();
-        if (player != null)
+        if (player != null && !string.IsNullOrEmpty(GameData.Instance.previousSceneName))
         {
             GameData.Instance.SavePlayerData(player);
-            GameData.Instance.SaveSceneName(player);
-            Destroy(gameObject);
-            SceneManager.LoadScene(sceneToLoad);
+            SceneManager.LoadScene(GameData.Instance.previousSceneName);
         }
     }
 }

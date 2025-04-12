@@ -85,6 +85,10 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        if (GameData.Instance != null && SceneManager.GetActiveScene().name == GameData.Instance.previousSceneName)
+        {
+            transform.position = GameData.Instance.returnPosition;
+        }
         currentHealth = maxHearts * healthPerHeart;
 
         if (GameData.Instance != null && GameData.Instance.playerHealth>0)

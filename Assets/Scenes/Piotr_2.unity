@@ -1378,7 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795aba65d01f67c4f8c2f3e3fabf6c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Game
+  sceneToLoad: Blood room
 --- !u!1001 &487262374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48279,63 +48279,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &976197941
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1563160631364411671, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_Name
-      value: TreasurRoom
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
 --- !u!1001 &1015969370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50350,6 +50293,7 @@ MonoBehaviour:
   canSlow: 0
   hasThorns: 0
   collectedItemIcons: []
+  previousSceneName: 
 --- !u!4 &1864181582
 Transform:
   m_ObjectHideFlags: 0
@@ -51375,5 +51319,4 @@ SceneRoots:
   - {fileID: 2106954903}
   - {fileID: 1864181582}
   - {fileID: 460165967}
-  - {fileID: 976197941}
   - {fileID: 1682681059}
