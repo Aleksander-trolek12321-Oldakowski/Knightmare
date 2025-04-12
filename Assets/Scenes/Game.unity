@@ -99466,6 +99466,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1722180615}
+    - target: {fileID: 1620484335536865295, guid: 30aa7ee81d2128546865584337944c57, type: 3}
+      propertyPath: 'heartImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 178849703}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07

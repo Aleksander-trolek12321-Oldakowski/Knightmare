@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TreasureRoom : MonoBehaviour
-
-
-
 {
     [SerializeField] private ItemSpawner[] itemSpawners;
 
@@ -24,5 +21,6 @@ public class TreasureRoom : MonoBehaviour
             }
         }
     }
+
  
 }
