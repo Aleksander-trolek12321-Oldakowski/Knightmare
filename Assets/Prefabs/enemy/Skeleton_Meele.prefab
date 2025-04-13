@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6180504647281122939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.23, y: 2.5442, z: 173.83754}
+  m_LocalPosition: {x: 5.23, y: 2.5442, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,7 +155,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.74, y: 1.25}
+    oldSize: {x: 1.48, y: 2.5}
     newSize: {x: 3.280786, y: 4.88}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -180,23 +180,27 @@ MonoBehaviour:
   health: 15
   speed: 3
   damage: 2
-  attackRange: 2
+  attackRange: 5
   attackSpeed: 2
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
+  player: {fileID: 0}
+  moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
+  animator: {fileID: -1015012171900190167}
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  player: {fileID: 0}
-  moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
+  patrolSpeed: 1
+  chaseSpeed: 2
+  sightRange: 7
+  loseSightRange: 10
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
   attackCooldown: 2
-  turnSpeed: 8
-  attackInaccuracy: 0.02
-  animator: {fileID: -1015012171900190167}
+  pathUpdateInterval: 0.75
 --- !u!95 &-1015012171900190167
 Animator:
   serializedVersion: 7
