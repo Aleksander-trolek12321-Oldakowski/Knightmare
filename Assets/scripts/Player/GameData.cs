@@ -23,6 +23,10 @@ public class GameData : MonoBehaviour
     public string previousSceneName;
     public Vector3 returnPosition;
 
+    public List<string> destroyedPortals = new List<string>();
+
+    public int playerCoins ;
+
 
     private void Awake()
     {
@@ -37,6 +41,8 @@ public class GameData : MonoBehaviour
 
     public void SavePlayerData(Player player)
     {
+        playerCoins = CoinManager.Instance.totalCoins;
+
         playerDamage = player.GetDamage();
         playerSpeed = player.GetSpeed();
         playerAttackSpeed = player.GetAttackSpeed();
