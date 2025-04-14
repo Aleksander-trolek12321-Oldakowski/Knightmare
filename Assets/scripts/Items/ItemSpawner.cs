@@ -75,7 +75,9 @@ public class ItemSpawner : MonoBehaviour
                 if (selectedItem.itemSprite != null)
                 {
                     InventoryUI.Instance.AddItemToUI(selectedItem.itemSprite);
+                    GameData.Instance.collectedItemIcons.Add(selectedItem.itemSprite);
                 }
+
 
                 if (treasureRoom != null)
                 {
