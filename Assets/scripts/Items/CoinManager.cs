@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class CoinManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class CoinManager : MonoBehaviour
 
     private void Awake()
     {
+        if (GameData.Instance != null)
+        {
+            totalCoins = GameData.Instance.playerCoins;
+        }
         if (Instance == null)
         {
             Instance = this;
