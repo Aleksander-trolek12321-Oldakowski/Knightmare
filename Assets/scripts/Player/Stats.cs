@@ -34,6 +34,7 @@ public class Stats : MonoBehaviour
 
     public void UpdateStats(float damage, float speed, float attackSpeed)
     {
+      //  Debug.Log(attackSpeed);
         damageBar.value = damage;
         speedBar.value = speed;
         attackSpeedBar.value = attackSpeed;

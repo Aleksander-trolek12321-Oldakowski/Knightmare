@@ -53,6 +53,17 @@ public class Player : MonoBehaviour
     [SerializeField] public float thornsCooldown =2f;
     private float lastThornsTime =0;
     private Dictionary<GameObject, float> thornsTimers = new Dictionary<GameObject, float>();
+    public float GetDamage() => damage;
+    public float GetSpeed() => speed;
+    public float GetAttackSpeed() => attackSpeed;
+    public float GetRange() => range;
+    public float GetCurrentHealth() => currentHealth;
+    public int GetMaxHearts() => maxHearts;
+
+    public bool GetCanPoison() => canPoison;
+    public bool GetCanFire() => canFire;
+    public bool GetCanSlow() => canSlow;
+    public bool GetHasThorns() => hasThorns;
 
     void Awake()
     {
@@ -74,14 +85,32 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        if (GameData.Instance != null && SceneManager.GetActiveScene().name == GameData.Instance.previousSceneName)
+        {
+            transform.position = GameData.Instance.returnPosition;
+        }
+        currentHealth = maxHearts * healthPerHeart;
 
-        attackSpeedUI =  attackSpeed;
+        if (GameData.Instance != null && GameData.Instance.playerHealth>0)
+        {
+            GameData.Instance.LoadPlayerData(this);
 
-        currentHealth = maxHearts * healthPerHeart; 
+            foreach (Sprite icon in GameData.Instance.collectedItemIcons)
+            {
+                InventoryUI.Instance.AddItemToUI(icon);
+            }
+        }else
+        {
+            UpdateHearts();
+            attackSpeedUI = attackSpeed;
 
-        Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
 
-        UpdateHearts(); 
+            Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
+
+        }
+
+      
+
     }
 
     void OnDestroy()
@@ -354,7 +383,6 @@ public class Player : MonoBehaviour
             newHeart.transform.SetSiblingIndex(heartImages.Count);
             heartImages.Add(newHeart.GetComponent<Image>());
         }
-
         for (int i = 0; i < heartImages.Count; i++)
         {
             float heartHealth = currentHealth - (i * healthPerHeart);
@@ -375,6 +403,25 @@ public class Player : MonoBehaviour
     }
 
 
+    public void ApplyLoadedStats(float dmg, float spd, float atkSpd, float rng, float health, int hearts,
+       bool poison, bool fire, bool slow, bool thorns)
+    {
+        damage = dmg;
+        speed = spd;
+        attackSpeed = atkSpd;
+        range = rng;
+        currentHealth = health;
+        maxHearts = hearts;
+        canPoison = poison;
+        canFire = fire;
+        canSlow = slow;
+        hasThorns = thorns;
+
+        UpdateHearts();
+        attackSpeedUI = (attackSpeed - 1);
+        attackSpeedUI = (1 - attackSpeedUI);
+        Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
+    }
 
 
 }
