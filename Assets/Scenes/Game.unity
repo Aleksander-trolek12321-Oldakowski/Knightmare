@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -456,22 +460,27 @@ MonoBehaviour:
   health: 30
   speed: 5
   damage: 4
-  attackRange: 3
+  attackRange: 5
   attackSpeed: 3
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
+  player: {fileID: 0}
+  animator: {fileID: 35781333}
   arrowPrefab: {fileID: 4749176830416265082, guid: 4c6a4651e27b1904fadad432c40936dd, type: 3}
   shootPoint: {fileID: 1506618775}
-  tripleShotDelay: 0.3
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRadius: 5
-  rotationSpeed: 5
-  animator: {fileID: 35781333}
-  shootPointRadius: 2
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
   attackCooldown: 1.5
+  tripleShotDelay: 0.3
+  shootPointRadius: 2
+  rotationSpeed: 5
+  retreatDistance: 1.5
+  chaseSpeed: 3
+  sightRange: 7
+  patrolSpeed: 1
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
 --- !u!4 &35781338
 Transform:
   m_ObjectHideFlags: 0
@@ -481,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 35781332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: -16.28, z: 1.4315938}
+  m_LocalPosition: {x: 2.75, y: -16.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -95953,6 +95962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96317,6 +96330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96568,6 +96585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96624,6 +96645,10 @@ PrefabInstance:
     - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_Name
       value: Skeleton_Meele (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -96682,6 +96707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96738,6 +96767,10 @@ PrefabInstance:
     - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_Name
       value: Skeleton_Meele (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -97022,6 +97055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97146,6 +97183,10 @@ PrefabInstance:
     - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_Name
       value: Skeleton_Meele (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -97353,6 +97394,10 @@ PrefabInstance:
     - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_Name
       value: Skeleton_Meele (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -97656,6 +97701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97712,6 +97761,10 @@ PrefabInstance:
     - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_Name
       value: Skeleton_Meele (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -98173,6 +98226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -98386,6 +98443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -98413,11 +98474,11 @@ PrefabInstance:
       objectReference: {fileID: 178849703}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07
+      value: -6.4
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.31
+      value: -14.02
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -98677,6 +98738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -98928,6 +98993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton_Meele (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -98944,6 +99013,10 @@ PrefabInstance:
     - target: {fileID: 4187004520313135688, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
       propertyPath: m_Name
       value: ZOMBIE (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187004520313135688, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5634277985361065652, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
       propertyPath: sightRange
@@ -99183,6 +99256,10 @@ PrefabInstance:
     - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_Name
       value: Skeleton_Meele (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6802307203804627947, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
       propertyPath: m_BodyType
