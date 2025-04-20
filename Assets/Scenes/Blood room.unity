@@ -99335,6 +99335,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1118523515878065865, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
+      propertyPath: portalSpawnPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118523515878065865, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
       propertyPath: portalSpawnPosition.z
       value: -1
       objectReference: {fileID: 0}
