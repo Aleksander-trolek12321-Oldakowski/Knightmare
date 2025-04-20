@@ -17,6 +17,7 @@ public class ItemData : ScriptableObject
     public bool changeCameraSize;
     public bool hasThorns;
     public int priceInShop;
+    public int priceInBloodRoom;
 
 
 }
