@@ -24,3 +24,4 @@ MonoBehaviour:
   changeCameraSize: 0
   hasThorns: 1
   priceInShop: 0
+  priceInBloodRoom: 2
