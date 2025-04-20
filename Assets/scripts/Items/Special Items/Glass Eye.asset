@@ -22,4 +22,6 @@ MonoBehaviour:
   canFire: 0
   canSlow: 0
   changeCameraSize: 1
+  hasThorns: 0
   priceInShop: 0
+  priceInBloodRoom: 2
