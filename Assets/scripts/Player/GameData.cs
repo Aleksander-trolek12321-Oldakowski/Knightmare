@@ -26,6 +26,8 @@ public class GameData : MonoBehaviour
     public List<string> destroyedPortals = new List<string>();
 
     public int playerCoins ;
+    public List<string> killedEnemies = new List<string>();
+
 
 
     private void Awake()
