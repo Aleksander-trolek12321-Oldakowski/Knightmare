@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -7,6 +8,8 @@ namespace enemy
 {
 public class enemy : MonoBehaviour, IDamageable
     {
+    [SerializeField]
+    private string uniqueID;
     [SerializeField]
     int id;
     [SerializeField]
@@ -27,6 +30,30 @@ public class enemy : MonoBehaviour, IDamageable
     private bool isOnFire = false;
     [SerializeField]
     private bool isPoisoned = false;
+        private void Start()
+        {
+
+
+            GenerateUniqueID();
+
+            if (GameData.Instance.killedEnemies.Contains(uniqueID))
+            {
+                Destroy(gameObject);
+            }
+
+        }
+        private void GenerateUniqueID()
+        {
+            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            Vector3 position = transform.position;
+
+            int posX = Mathf.RoundToInt(position.x);
+            int posY = Mathf.RoundToInt(position.y);
+            int posZ = Mathf.RoundToInt(position.z);
+
+            uniqueID = $"{posX}_{posY}_{posZ}";
+        }
+
         public virtual void Attack()
     {
 
@@ -114,7 +141,12 @@ public class enemy : MonoBehaviour, IDamageable
 
         protected virtual void  Die()
         {
+            if (!GameData.Instance.killedEnemies.Contains(uniqueID))
+            {
+                GameData.Instance.killedEnemies.Add(uniqueID);
+            }
             Destroy(gameObject);
+
         }
     }
 }
