@@ -32,6 +32,8 @@ public class enemy : MonoBehaviour, IDamageable
     private bool isPoisoned = false;
         private void Start()
         {
+
+
             GenerateUniqueID();
 
             if (GameData.Instance.killedEnemies.Contains(uniqueID))
