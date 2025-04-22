@@ -14,8 +14,9 @@ namespace enemy
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private Player player;
         [SerializeField] private GameObject moneyPrefab;
+        [Header("Animacja i hit‑react")]
         [SerializeField] private Animator animator;
-        [SerializeField] private LayerMask playerLayer;
+        [SerializeField] private float hitReactCooldown = 0.23f;
 
         [Header("Ruch, Pościg i Patrol")]
         public float patrolSpeed = 1f;
@@ -27,7 +28,6 @@ namespace enemy
 
         [Header("Atak")]
         public float attackCooldown = 1.5f;
-        private Vector3 attackOrigin;
 
         private SkeletonState currentState = SkeletonState.Patrol;
         private Vector3 startPosition;
@@ -37,6 +37,7 @@ namespace enemy
         private Rigidbody2D rb;
         private bool isAttacking = false;
         private bool canAttack = true;
+        private Coroutine attackCoroutine;
 
         private List<Vector3> currentPath;
         private int pathIndex = 0;
@@ -46,13 +47,10 @@ namespace enemy
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-
             if (player == null)
                 player = FindObjectOfType<Player>();
-
             if (tilemapCollider == null)
                 tilemapCollider = FindObjectOfType<TilemapCollider2D>();
-
             if (tilemap == null && tilemapCollider != null)
                 tilemap = tilemapCollider.GetComponent<Tilemap>();
 
@@ -63,9 +61,7 @@ namespace enemy
         void Update()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            Debug.Log($"Zombie position: {transform.position}, Player position: {player.transform.position}");
-            Debug.Log($"Odległość do gracza: {distanceToPlayer}, aktualny stan: {currentState}");
-            
+
             if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
             {
                 ChangeState(SkeletonState.Attack);
@@ -80,12 +76,11 @@ namespace enemy
                 startPosition = transform.position;
                 ChangeState(SkeletonState.Patrol);
             }
-            
+
             HandleMovement();
-            
+
             if (health <= 0)
             {
-                // Jeśli chcesz, aby nazwa wyzwalacza była taka sama jak w Skeleton_Meele ("Death")
                 animator.SetTrigger("Death");
                 DropLoot();
                 Die();
@@ -94,10 +89,9 @@ namespace enemy
 
         void ChangeState(SkeletonState newState)
         {
-            if(currentState != newState)
+            if (currentState != newState)
             {
                 currentState = newState;
-                Debug.Log($"Zmiana stanu na: {newState}");
             }
         }
 
@@ -122,7 +116,6 @@ namespace enemy
         void FixedUpdate()
         {
             Vector3 movementDirection = Vector3.zero;
-
             if (currentPath != null && pathIndex < currentPath.Count && currentState != SkeletonState.Attack)
             {
                 Vector3 targetPos = currentPath[pathIndex];
@@ -130,13 +123,9 @@ namespace enemy
                 Vector3 newPos = Vector3.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
                 movementDirection = (newPos - transform.position).normalized;
                 rb.MovePosition(newPos);
-
                 if (Vector3.Distance(rb.position, targetPos) < 0.1f)
-                {
                     pathIndex++;
-                }
             }
-            
             if (movementDirection != Vector3.zero)
             {
                 animator.SetFloat("Xinput", movementDirection.x);
@@ -146,6 +135,33 @@ namespace enemy
             }
         }
 
+        public override void TakeDamage(float damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+            animator.SetTrigger("Hit");
+            InterruptAttack();
+        }
+
+        private void InterruptAttack()
+        {
+            if (isAttacking)
+            {
+                if (attackCoroutine != null)
+                    StopCoroutine(attackCoroutine);
+
+                isAttacking = false;
+                animator.SetBool("IsAttacking", false);
+                canAttack = false;
+                StartCoroutine(ResetAttackCooldown());
+            }
+        }
+
+        private IEnumerator ResetAttackCooldown()
+        {
+            yield return new WaitForSeconds(hitReactCooldown);
+            canAttack = true;
+        }
+
         public override void Attack()
         {
             if (isAttacking || !canAttack)
@@ -153,25 +169,19 @@ namespace enemy
 
             isAttacking = true;
             canAttack = false;
-            attackOrigin = transform.position;
-
-            Vector3 attackDir = (player.transform.position - transform.position).normalized;
-            animator.SetFloat("AttackXinput", attackDir.x);
-            animator.SetFloat("AttackYinput", attackDir.y);
-            animator.SetBool("IsAttacking", true);
-
-            StartCoroutine(PerformAttack());
+            attackCoroutine = StartCoroutine(PerformAttack());
         }
 
-        IEnumerator PerformAttack()
+        private IEnumerator PerformAttack()
         {
             yield return new WaitForSeconds(0.5f);
-            if (Vector3.Distance(attackOrigin, player.transform.position) <= attackRange)
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
             {
                 player.TakeDamage(damage);
             }
-            animator.SetBool("IsAttacking", false);
+            animator.SetBool("IsAttacking", true);
             yield return new WaitForSeconds(attackCooldown);
+            animator.SetBool("IsAttacking", false);
             isAttacking = false;
             canAttack = true;
             currentState = PlayerInSight() ? SkeletonState.Chase : SkeletonState.Patrol;
@@ -183,11 +193,7 @@ namespace enemy
             Vector2 targetPos = player.transform.position;
             Vector2 dir = (targetPos - startPos).normalized;
             float distance = Vector2.Distance(startPos, targetPos);
-            int layerMask = LayerMask.GetMask("Player"); 
-            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, layerMask);
-
-            Debug.DrawRay(startPos, dir * distance, Color.red, 0.5f);
-
+            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, LayerMask.GetMask("Player"));
             return hit.collider != null;
         }
 
@@ -199,17 +205,13 @@ namespace enemy
         private void DropLoot()
         {
             if (Random.value <= 0.2f)
-            {
                 Instantiate(moneyPrefab, transform.position, Quaternion.identity);
-            }
         }
 
         private void UpdatePath(Vector3 targetPosition)
         {
             if (!isPathUpdating)
-            {
                 StartCoroutine(PathfindingRoutine(targetPosition));
-            }
         }
 
         IEnumerator PathfindingRoutine(Vector3 targetPosition)
@@ -230,27 +232,18 @@ namespace enemy
             Vector3Int startCell = tilemap.WorldToCell(startWorld);
             Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
             List<Vector3> path = new List<Vector3>();
-
             Vector3Int current = startCell;
             while (current != targetCell)
             {
                 if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
-                {
                     return null;
-                }
-                
                 path.Add(tilemap.GetCellCenterWorld(current));
-
                 Vector3Int direction = new Vector3Int(
                     Mathf.Clamp(targetCell.x - current.x, -1, 1),
-                    Mathf.Clamp(targetCell.y - current.y, -1, 1),
-                    0);
-                
+                    Mathf.Clamp(targetCell.y - current.y, -1, 1), 0);
                 current += direction;
             }
-            
             return path;
         }
     }
 }
-

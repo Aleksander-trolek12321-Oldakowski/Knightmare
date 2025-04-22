@@ -16,6 +16,9 @@ namespace enemy
         [SerializeField] private TilemapCollider2D tilemapCollider;
         [SerializeField] private Tilemap tilemap;
 
+        [Header("Animacja i hit‑react")]
+        [SerializeField] private float hitReactCooldown = 0.23f;
+
         [Header("Ustawienia ataku")]
         [SerializeField] private float attackCooldown = 1.5f;
         [SerializeField] private float tripleShotDelay = 0.3f;
@@ -35,7 +38,7 @@ namespace enemy
         private BossState currentState;
         private bool isAttacking = false;
         private bool canAttack = true;
-
+        private Coroutine attackCoroutine;
         private Vector3 patrolTarget;
         private float patrolTimer = 0f;
 
@@ -43,13 +46,10 @@ namespace enemy
         {
             if (player == null)
                 player = FindObjectOfType<Player>();
-
             if (tilemapCollider == null)
                 tilemapCollider = FindObjectOfType<TilemapCollider2D>();
-
             if (tilemap == null && tilemapCollider != null)
                 tilemap = tilemapCollider.GetComponent<Tilemap>();
-
 
             currentState = BossState.Patrol;
             patrolTarget = transform.position;
@@ -65,39 +65,21 @@ namespace enemy
             }
 
             float distance = Vector2.Distance(transform.position, player.transform.position);
-
             if (distance < retreatDistance)
-            {
                 currentState = BossState.Retreat;
-            }
             else if (distance <= attackRange && PlayerInSight())
-            {
                 currentState = BossState.Attack;
-            }
             else if (distance <= sightRange && PlayerInSight())
-            {
                 currentState = BossState.Chase;
-            }
             else
-            {
                 currentState = BossState.Patrol;
-            }
 
             switch (currentState)
             {
-                case BossState.Chase:
-                    ChasePlayer();
-                    break;
-                case BossState.Attack:
-                    if (canAttack && !isAttacking)
-                        Attack();
-                    break;
-                case BossState.Retreat:
-                    RetreatFromPlayer();
-                    break;
-                case BossState.Patrol:
-                    Patrol();
-                    break;
+                case BossState.Chase: ChasePlayer(); break;
+                case BossState.Attack: if (canAttack && !isAttacking) Attack(); break;
+                case BossState.Retreat: RetreatFromPlayer(); break;
+                case BossState.Patrol: Patrol(); break;
             }
 
             RotateShootPoint();
@@ -105,44 +87,30 @@ namespace enemy
             UpdateMovementAnimation();
         }
 
-        private bool PlayerInSight()
+        public override void TakeDamage(float damageAmount)
         {
-            Vector2 startPos = transform.position;
-            Vector2 targetPos = player.transform.position;
-            RaycastHit2D hit = Physics2D.Linecast(startPos, targetPos);
-            
-            if (hit.collider == null)
-                return true;
-            if (hit.collider.gameObject == player.gameObject)
-                return true;
-            if (tilemapCollider != null && hit.collider.gameObject == tilemapCollider.gameObject)
-                return false;
-            
-            return true;
+            base.TakeDamage(damageAmount);
+            animator.SetTrigger("Hit");
+            InterruptAttack();
         }
 
-        private void ChasePlayer()
+        private void InterruptAttack()
         {
-            Vector2 direction = (player.transform.position - transform.position).normalized;
-            transform.position += (Vector3)(direction * chaseSpeed * Time.deltaTime);
-        }
-
-        private void RetreatFromPlayer()
-        {
-            Vector2 direction = (transform.position - player.transform.position).normalized;
-            transform.position += (Vector3)(direction * chaseSpeed * Time.deltaTime);
-        }
-
-        private void Patrol()
-        {
-            patrolTimer += Time.deltaTime;
-            if (patrolTimer >= changePatrolTargetInterval)
+            if (isAttacking)
             {
-                patrolTarget = transform.position + (Vector3)Random.insideUnitCircle * patrolRadius;
-                patrolTimer = 0f;
+                if (attackCoroutine != null)
+                    StopCoroutine(attackCoroutine);
+                isAttacking = false;
+                animator.SetBool("IsAttacking", false);
+                canAttack = false;
+                StartCoroutine(ResetAttackCooldown());
             }
-            Vector2 direction = (patrolTarget - transform.position).normalized;
-            transform.position += (Vector3)(direction * patrolSpeed * Time.deltaTime);
+        }
+
+        private IEnumerator ResetAttackCooldown()
+        {
+            yield return new WaitForSeconds(hitReactCooldown);
+            canAttack = true;
         }
 
         public override void Attack()
@@ -150,16 +118,13 @@ namespace enemy
             if (isAttacking || !canAttack)
                 return;
 
-            StartCoroutine(PerformAttack());
+            attackCoroutine = StartCoroutine(PerformAttack());
         }
 
         private IEnumerator PerformAttack()
         {
             isAttacking = true;
-
-            Vector2 attackDir = (player.transform.position - transform.position).normalized;
-            animator.SetFloat("AttackXinput", attackDir.x);
-            animator.SetFloat("AttackYinput", attackDir.y);
+            canAttack = false;
             animator.SetBool("IsAttacking", true);
 
             int attackType = Random.Range(0, 2);
@@ -167,7 +132,6 @@ namespace enemy
             {
                 yield return new WaitForSeconds(0.05f);
                 ShootArrow();
-                yield return null;
             }
             else
             {
@@ -179,9 +143,8 @@ namespace enemy
                 }
             }
 
-            animator.SetBool("IsAttacking", false);
             yield return new WaitForSeconds(attackCooldown);
-
+            animator.SetBool("IsAttacking", false);
             isAttacking = false;
             canAttack = true;
         }
@@ -193,43 +156,76 @@ namespace enemy
                 GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation);
                 Rigidbody2D rbArrow = arrow.GetComponent<Rigidbody2D>();
                 if (rbArrow != null)
-                {
                     rbArrow.velocity = shootPoint.right * speed;
-                }
             }
+        }
+
+        private bool PlayerInSight()
+        {
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
+            if (hit.collider == null || hit.collider.gameObject == player.gameObject)
+                return true;
+            if (tilemapCollider != null && hit.collider.gameObject == tilemapCollider.gameObject)
+                return false;
+            return true;
+        }
+
+        private void ChasePlayer()
+        {
+            Vector2 dir = (player.transform.position - transform.position).normalized;
+            transform.position += (Vector3)(dir * chaseSpeed * Time.deltaTime);
+        }
+
+        private void RetreatFromPlayer()
+        {
+            Vector2 dir = (transform.position - player.transform.position).normalized;
+            transform.position += (Vector3)(dir * chaseSpeed * Time.deltaTime);
+        }
+
+        private void Patrol()
+        {
+            patrolTimer += Time.deltaTime;
+            if (patrolTimer >= changePatrolTargetInterval)
+            {
+                Vector2 rand2D = Random.insideUnitCircle * patrolRadius;
+                patrolTarget = transform.position + new Vector3(rand2D.x, rand2D.y, 0);
+                patrolTimer = 0f;
+            }
+            Vector3 diff = patrolTarget - transform.position;
+            Vector3 dir = diff.normalized;
+            transform.position += dir * patrolSpeed * Time.deltaTime;
         }
 
         private void RotateShootPoint()
         {
-            if (player == null || shootPoint == null)
-                return;
-
-            Vector2 direction = (player.transform.position - shootPoint.position).normalized;
-            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            shootPoint.rotation = Quaternion.Lerp(shootPoint.rotation, Quaternion.Euler(0, 0, targetAngle), Time.deltaTime * rotationSpeed);
+            if (!player || !shootPoint) return;
+            Vector2 dir = (player.transform.position - shootPoint.position).normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            shootPoint.rotation = Quaternion.Lerp(shootPoint.rotation, Quaternion.Euler(0,0,angle), Time.deltaTime * rotationSpeed);
         }
 
         private void UpdateShootPointPosition()
         {
-            if (player == null || shootPoint == null)
-                return;
-
-            Vector2 direction = (player.transform.position - transform.position).normalized;
-            shootPoint.position = (Vector2)transform.position + direction * shootPointRadius;
+            if (!player || !shootPoint) return;
+            Vector2 dir = (player.transform.position - transform.position).normalized;
+            shootPoint.position = (Vector2)transform.position + dir * shootPointRadius;
         }
 
         private void UpdateMovementAnimation()
         {
             Vector2 movement = Vector2.zero;
-            if (currentState == BossState.Chase)
-                movement = (player.transform.position - transform.position).normalized;
-            else if (currentState == BossState.Retreat)
-                movement = (transform.position - player.transform.position).normalized;
-            else if (currentState == BossState.Patrol)
+            switch (currentState)
             {
-                movement = (patrolTarget - transform.position).normalized;
+                case BossState.Chase:
+                    movement = (player.transform.position - transform.position).normalized;
+                    break;
+                case BossState.Retreat:
+                    movement = (transform.position - player.transform.position).normalized;
+                    break;
+                case BossState.Patrol:
+                    movement = (patrolTarget - transform.position).normalized;
+                    break;
             }
-
             if (movement != Vector2.zero)
             {
                 animator.SetFloat("Xinput", movement.x);
@@ -243,16 +239,13 @@ namespace enemy
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, attackRange);
-
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, retreatDistance);
-
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, sightRange);
-
             Gizmos.color = Color.blue;
-            Vector3 shootDirection = (player != null) ? (player.transform.position - transform.position).normalized : Vector3.right;
-            Gizmos.DrawWireSphere(transform.position + shootPointRadius * shootDirection, 0.1f);
+            Vector3 dir = player ? (player.transform.position - transform.position).normalized : Vector3.right;
+            Gizmos.DrawWireSphere(transform.position + dir * shootPointRadius, 0.1f);
         }
     }
 }
