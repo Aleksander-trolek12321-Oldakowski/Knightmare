@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442e87f65f9c1184da0bb4435ce40d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueID: 
   id: 4
   name: Boss_Sekeleton
   health: 30
@@ -471,6 +472,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1506618775}
   tilemapCollider: {fileID: 0}
   tilemap: {fileID: 0}
+  hitReactCooldown: 0.5
   attackCooldown: 1.5
   tripleShotDelay: 0.3
   shootPointRadius: 2
@@ -98474,11 +98476,11 @@ PrefabInstance:
       objectReference: {fileID: 178849703}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.4
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.02
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -99016,7 +99018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4187004520313135688, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5634277985361065652, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
       propertyPath: sightRange
