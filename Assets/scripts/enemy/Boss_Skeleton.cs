@@ -1,4 +1,6 @@
+// Boss_Skeleton.cs
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,7 +18,7 @@ namespace enemy
         [SerializeField] private TilemapCollider2D tilemapCollider;
         [SerializeField] private Tilemap tilemap;
 
-        [Header("Animacja i hit‑react")]
+        [Header("Animacja i hit-react")]
         [SerializeField] private float hitReactCooldown = 0.23f;
 
         [Header("Ustawienia ataku")]
@@ -41,6 +43,12 @@ namespace enemy
         private Coroutine attackCoroutine;
         private Vector3 patrolTarget;
         private float patrolTimer = 0f;
+
+        // ** pola dla pathfindingu **
+        private List<Vector3> currentPath;
+        private int pathIndex = 0;
+        private bool isPathUpdating = false;
+        public float pathUpdateInterval = 0.75f;
 
         void Awake()
         {
@@ -74,17 +82,49 @@ namespace enemy
             else
                 currentState = BossState.Patrol;
 
+            // obsługa stanów
             switch (currentState)
             {
-                case BossState.Chase: ChasePlayer(); break;
-                case BossState.Attack: if (canAttack && !isAttacking) Attack(); break;
-                case BossState.Retreat: RetreatFromPlayer(); break;
-                case BossState.Patrol: Patrol(); break;
+                case BossState.Chase:
+                    UpdatePath(player.transform.position);
+                    break;
+                case BossState.Retreat:
+                    UpdatePath(transform.position + (transform.position - player.transform.position));
+                    break;
+                case BossState.Patrol:
+                    PatrolPath();
+                    break;
+                case BossState.Attack:
+                    if (canAttack && !isAttacking)
+                        Attack();
+                    break;
+            }
+
+            // ruch po ścieżce
+            if (currentPath != null && pathIndex < currentPath.Count && currentState != BossState.Attack)
+            {
+                Vector3 targetPos = currentPath[pathIndex];
+                float speed = (currentState == BossState.Chase || currentState == BossState.Retreat)
+                              ? chaseSpeed
+                              : patrolSpeed;
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+                    pathIndex++;
+
+                // animacja ruchu
+                Vector3 dir = (targetPos - transform.position).normalized;
+                if (dir != Vector3.zero)
+                {
+                    animator.SetFloat("Xinput", dir.x);
+                    animator.SetFloat("Yinput", dir.y);
+                    animator.SetFloat("LastXinput", dir.x);
+                    animator.SetFloat("LastYinput", dir.y);
+                }
             }
 
             RotateShootPoint();
             UpdateShootPointPosition();
-            UpdateMovementAnimation();
         }
 
         public override void TakeDamage(float damageAmount)
@@ -117,7 +157,6 @@ namespace enemy
         {
             if (isAttacking || !canAttack)
                 return;
-
             attackCoroutine = StartCoroutine(PerformAttack());
         }
 
@@ -135,6 +174,7 @@ namespace enemy
             }
             else
             {
+                // ** potrójny strzał – zostawione bez zmian **
                 for (int i = 0; i < 3; i++)
                 {
                     yield return new WaitForSeconds(0.05f);
@@ -170,30 +210,16 @@ namespace enemy
             return true;
         }
 
-        private void ChasePlayer()
-        {
-            Vector2 dir = (player.transform.position - transform.position).normalized;
-            transform.position += (Vector3)(dir * chaseSpeed * Time.deltaTime);
-        }
-
-        private void RetreatFromPlayer()
-        {
-            Vector2 dir = (transform.position - player.transform.position).normalized;
-            transform.position += (Vector3)(dir * chaseSpeed * Time.deltaTime);
-        }
-
-        private void Patrol()
+        private void PatrolPath()
         {
             patrolTimer += Time.deltaTime;
             if (patrolTimer >= changePatrolTargetInterval)
             {
-                Vector2 rand2D = Random.insideUnitCircle * patrolRadius;
-                patrolTarget = transform.position + new Vector3(rand2D.x, rand2D.y, 0);
+                Vector2 rand = Random.insideUnitCircle * patrolRadius;
+                patrolTarget = transform.position + new Vector3(rand.x, rand.y, 0f);
                 patrolTimer = 0f;
             }
-            Vector3 diff = patrolTarget - transform.position;
-            Vector3 dir = diff.normalized;
-            transform.position += dir * patrolSpeed * Time.deltaTime;
+            UpdatePath(patrolTarget);
         }
 
         private void RotateShootPoint()
@@ -201,7 +227,11 @@ namespace enemy
             if (!player || !shootPoint) return;
             Vector2 dir = (player.transform.position - shootPoint.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            shootPoint.rotation = Quaternion.Lerp(shootPoint.rotation, Quaternion.Euler(0,0,angle), Time.deltaTime * rotationSpeed);
+            shootPoint.rotation = Quaternion.Lerp(
+                shootPoint.rotation,
+                Quaternion.Euler(0, 0, angle),
+                Time.deltaTime * rotationSpeed
+            );
         }
 
         private void UpdateShootPointPosition()
@@ -211,41 +241,47 @@ namespace enemy
             shootPoint.position = (Vector2)transform.position + dir * shootPointRadius;
         }
 
-        private void UpdateMovementAnimation()
+        // ** pathfinding **
+        private void UpdatePath(Vector3 targetPosition)
         {
-            Vector2 movement = Vector2.zero;
-            switch (currentState)
-            {
-                case BossState.Chase:
-                    movement = (player.transform.position - transform.position).normalized;
-                    break;
-                case BossState.Retreat:
-                    movement = (transform.position - player.transform.position).normalized;
-                    break;
-                case BossState.Patrol:
-                    movement = (patrolTarget - transform.position).normalized;
-                    break;
-            }
-            if (movement != Vector2.zero)
-            {
-                animator.SetFloat("Xinput", movement.x);
-                animator.SetFloat("Yinput", movement.y);
-                animator.SetFloat("LastXinput", movement.x);
-                animator.SetFloat("LastYinput", movement.y);
-            }
+            if (!isPathUpdating)
+                StartCoroutine(PathfindingRoutine(targetPosition));
         }
 
-        private void OnDrawGizmosSelected()
+        private IEnumerator PathfindingRoutine(Vector3 targetPosition)
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, retreatDistance);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, sightRange);
-            Gizmos.color = Color.blue;
-            Vector3 dir = player ? (player.transform.position - transform.position).normalized : Vector3.right;
-            Gizmos.DrawWireSphere(transform.position + dir * shootPointRadius, 0.1f);
+            isPathUpdating = true;
+            List<Vector3> newPath = FindPath(transform.position, targetPosition);
+            if (newPath != null && newPath.Count > 0)
+            {
+                currentPath = newPath;
+                pathIndex = 0;
+            }
+            yield return new WaitForSeconds(pathUpdateInterval);
+            isPathUpdating = false;
+        }
+
+        private List<Vector3> FindPath(Vector3 startWorld, Vector3 targetWorld)
+        {
+            Vector3Int startCell = tilemap.WorldToCell(startWorld);
+            Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
+            List<Vector3> path = new List<Vector3>();
+            Vector3Int current = startCell;
+
+            while (current != targetCell)
+            {
+                if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
+                    return null;
+
+                path.Add(tilemap.GetCellCenterWorld(current));
+                Vector3Int dir = new Vector3Int(
+                    Mathf.Clamp(targetCell.x - current.x, -1, 1),
+                    Mathf.Clamp(targetCell.y - current.y, -1, 1),
+                    0
+                );
+                current += dir;
+            }
+            return path;
         }
     }
 }

@@ -1,3 +1,4 @@
+// Skeleton_Meele.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace enemy
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private Player player;
         [SerializeField] private GameObject moneyPrefab;
-        [Header("Animacja i hit‑react")]
+        [Header("Animacja i hit-react")]
         [SerializeField] private Animator animator;
         [SerializeField] private float hitReactCooldown = 0.23f;
 
@@ -34,11 +35,11 @@ namespace enemy
         private Vector3 patrolTarget;
         private float patrolTimer = 0f;
 
-        private Rigidbody2D rb;
         private bool isAttacking = false;
         private bool canAttack = true;
         private Coroutine attackCoroutine;
 
+        // ** nowe pola dla pathfindingu **
         private List<Vector3> currentPath;
         private int pathIndex = 0;
         private bool isPathUpdating = false;
@@ -46,7 +47,6 @@ namespace enemy
 
         void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
             if (player == null)
                 player = FindObjectOfType<Player>();
             if (tilemapCollider == null)
@@ -77,7 +77,7 @@ namespace enemy
                 ChangeState(SkeletonState.Patrol);
             }
 
-            HandleMovement();
+            HandleStateMovement();
 
             if (health <= 0)
             {
@@ -90,48 +90,50 @@ namespace enemy
         void ChangeState(SkeletonState newState)
         {
             if (currentState != newState)
-            {
                 currentState = newState;
-            }
         }
 
-        void HandleMovement()
+        private void HandleStateMovement()
         {
-            if (currentState == SkeletonState.Patrol)
+            switch (currentState)
             {
-                patrolTimer += Time.deltaTime;
-                if (patrolTimer >= changePatrolTargetInterval)
-                {
-                    SetNewPatrolTarget();
-                    patrolTimer = 0f;
-                }
-                UpdatePath(patrolTarget);
-            }
-            else if (currentState == SkeletonState.Chase)
-            {
-                UpdatePath(player.transform.position);
-            }
-        }
+                case SkeletonState.Patrol:
+                    patrolTimer += Time.deltaTime;
+                    if (patrolTimer >= changePatrolTargetInterval)
+                    {
+                        SetNewPatrolTarget();
+                        patrolTimer = 0f;
+                    }
+                    UpdatePath(patrolTarget);
+                    break;
 
-        void FixedUpdate()
-        {
-            Vector3 movementDirection = Vector3.zero;
+                case SkeletonState.Chase:
+                    UpdatePath(player.transform.position);
+                    break;
+
+                case SkeletonState.Attack:
+                    // atak — nie poruszamy się
+                    break;
+            }
+
+            // ruch wzdłuż ścieżki
             if (currentPath != null && pathIndex < currentPath.Count && currentState != SkeletonState.Attack)
             {
                 Vector3 targetPos = currentPath[pathIndex];
                 float moveSpeed = (currentState == SkeletonState.Chase) ? chaseSpeed : patrolSpeed;
-                Vector3 newPos = Vector3.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
-                movementDirection = (newPos - transform.position).normalized;
-                rb.MovePosition(newPos);
-                if (Vector3.Distance(rb.position, targetPos) < 0.1f)
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+                Vector3 dir = (targetPos - transform.position).normalized;
+                if (dir != Vector3.zero)
+                {
+                    animator.SetFloat("Xinput", dir.x);
+                    animator.SetFloat("Yinput", dir.y);
+                    animator.SetFloat("LastXinput", dir.x);
+                    animator.SetFloat("LastYinput", dir.y);
+                }
+
+                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
                     pathIndex++;
-            }
-            if (movementDirection != Vector3.zero)
-            {
-                animator.SetFloat("Xinput", movementDirection.x);
-                animator.SetFloat("Yinput", movementDirection.y);
-                animator.SetFloat("LastXinput", movementDirection.x);
-                animator.SetFloat("LastYinput", movementDirection.y);
             }
         }
 
@@ -176,12 +178,12 @@ namespace enemy
         {
             yield return new WaitForSeconds(0.5f);
             if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
-            {
                 player.TakeDamage(damage);
-            }
+
             animator.SetBool("IsAttacking", true);
             yield return new WaitForSeconds(attackCooldown);
             animator.SetBool("IsAttacking", false);
+
             isAttacking = false;
             canAttack = true;
             currentState = PlayerInSight() ? SkeletonState.Chase : SkeletonState.Patrol;
@@ -192,14 +194,36 @@ namespace enemy
             Vector2 startPos = transform.position;
             Vector2 targetPos = player.transform.position;
             Vector2 dir = (targetPos - startPos).normalized;
-            float distance = Vector2.Distance(startPos, targetPos);
-            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, LayerMask.GetMask("Player"));
+            float dist = Vector2.Distance(startPos, targetPos);
+            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, dist, LayerMask.GetMask("Player"));
             return hit.collider != null;
         }
 
         private void SetNewPatrolTarget()
         {
-            patrolTarget = startPosition + (Vector3)(Random.insideUnitCircle * patrolRadius);
+            // Losowanie nowego celu patrolu
+            Vector3 newPatrolTarget = startPosition + (Vector3)(Random.insideUnitCircle * patrolRadius);
+
+            // Sprawdzenie, czy w kierunku nowego celu nie ma przeszkody
+            if (IsObstacleInPath(newPatrolTarget))
+            {
+                // Jeśli jest przeszkoda, próbujemy ustawić nowy cel
+                SetNewPatrolTarget();
+            }
+            else
+            {
+                patrolTarget = newPatrolTarget;
+            }
+        }
+
+        private bool IsObstacleInPath(Vector3 targetPosition)
+        {
+            // Wykonaj raycast od obecnej pozycji do nowego celu patrolu
+            Vector2 direction = (targetPosition - transform.position).normalized;
+            float distance = Vector2.Distance(transform.position, targetPosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, LayerMask.GetMask("Obstacles"));
+            return hit.collider != null;  // Jeśli napotkano przeszkodę, zwróć true
         }
 
         private void DropLoot()
@@ -214,7 +238,7 @@ namespace enemy
                 StartCoroutine(PathfindingRoutine(targetPosition));
         }
 
-        IEnumerator PathfindingRoutine(Vector3 targetPosition)
+        private IEnumerator PathfindingRoutine(Vector3 targetPosition)
         {
             isPathUpdating = true;
             List<Vector3> newPath = FindPath(transform.position, targetPosition);
@@ -233,15 +257,19 @@ namespace enemy
             Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
             List<Vector3> path = new List<Vector3>();
             Vector3Int current = startCell;
+
             while (current != targetCell)
             {
+                // jeśli na komórce jest ściana – przerwij
                 if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
                     return null;
+
                 path.Add(tilemap.GetCellCenterWorld(current));
-                Vector3Int direction = new Vector3Int(
+                Vector3Int dir = new Vector3Int(
                     Mathf.Clamp(targetCell.x - current.x, -1, 1),
-                    Mathf.Clamp(targetCell.y - current.y, -1, 1), 0);
-                current += direction;
+                    Mathf.Clamp(targetCell.y - current.y, -1, 1),
+                    0);
+                current += dir;
             }
             return path;
         }
