@@ -28,6 +28,8 @@ public class GameData : MonoBehaviour
     public int playerCoins ;
     public List<string> killedEnemies = new List<string>();
 
+    public GameObject portalPrefab;
+
 
 
     private void Awake()
@@ -39,6 +41,12 @@ public class GameData : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        int portalChance = Random.Range(0, 5);
+        if(portalChance < 6)
+        {
+            portalPrefab.SetActive(true);
+        }
     }
 
     public void SavePlayerData(Player player)
