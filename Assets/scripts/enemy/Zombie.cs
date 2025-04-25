@@ -150,6 +150,7 @@ namespace enemy
         {
             if (isAttacking || !canAttack)
                 return;
+            AudioManager.Instance.PlaySound("ZombieAttack");
 
             isAttacking = true;
             canAttack = false;
@@ -161,6 +162,11 @@ namespace enemy
             animator.SetBool("IsAttacking", true);
 
             StartCoroutine(PerformAttack());
+        } 
+        public override void TakeDamage(float damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+            AudioManager.Instance.PlaySound("ZombieDamageTaken");
         }
 
         IEnumerator PerformAttack()

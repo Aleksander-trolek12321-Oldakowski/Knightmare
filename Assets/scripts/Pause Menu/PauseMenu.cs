@@ -52,7 +52,18 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        AudioManager.Instance.PlaySound("MusicGame");
+        string currentScene = SceneManager.GetActiveScene().name;
+
+
+        switch (currentScene)
+        {
+            case "Blood room":
+                AudioManager.Instance.PlaySound("MusicSpecialRoom");
+                break;
+            default:
+                AudioManager.Instance.PlaySound("MusicGame");
+                break;
+        }
         AudioManager.Instance.StopSound("MusicPause");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -63,6 +74,7 @@ public class PauseMenu : MonoBehaviour
     void PauseGame()
     {
         AudioManager.Instance.StopSound("MusicGame");
+        AudioManager.Instance.StopSound("MusicSpecialRoom");
         AudioManager.Instance.PlaySound("MusicPause");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;

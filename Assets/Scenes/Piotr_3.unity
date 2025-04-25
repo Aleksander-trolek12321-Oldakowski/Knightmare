@@ -462,17 +462,23 @@ MonoBehaviour:
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
+  player: {fileID: 0}
+  animator: {fileID: 35781333}
   arrowPrefab: {fileID: 4749176830416265082, guid: 4c6a4651e27b1904fadad432c40936dd, type: 3}
   shootPoint: {fileID: 1506618775}
-  tripleShotDelay: 0.3
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRadius: 5
-  rotationSpeed: 5
-  animator: {fileID: 35781333}
-  shootPointRadius: 2
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
+  hitReactCooldown: 0.23
   attackCooldown: 1.5
+  tripleShotDelay: 0.3
+  shootPointRadius: 2
+  rotationSpeed: 5
+  retreatDistance: 2
+  chaseSpeed: 2
+  sightRange: 10
+  patrolSpeed: 1
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
 --- !u!4 &35781338
 Transform:
   m_ObjectHideFlags: 0
@@ -98751,6 +98757,10 @@ PrefabInstance:
     - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Name
       value: Audio Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9164774543276499371, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Pivot.x
