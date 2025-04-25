@@ -483,6 +483,7 @@ MonoBehaviour:
   patrolSpeed: 1
   patrolRadius: 5
   changePatrolTargetInterval: 3
+  pathUpdateInterval: 0.75
 --- !u!4 &35781338
 Transform:
   m_ObjectHideFlags: 0
