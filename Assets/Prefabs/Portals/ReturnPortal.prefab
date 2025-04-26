@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8015646846191114796}
   - component: {fileID: 5485941148046998787}
   - component: {fileID: 671193748950910676}
+  - component: {fileID: -7130823274897647840}
   m_Layer: 0
   m_Name: ReturnPortal
   m_TagString: Untagged
@@ -146,3 +147,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1623f90d526d3b48961283b54d2f42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-7130823274897647840
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600569927022940727}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0c6c5a0271a9fd479bc684ba2393f6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
