@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4436394025734135898}
   - component: {fileID: 8759654167378450223}
   - component: {fileID: 5557269405658862685}
+  - component: {fileID: 58228523770170743}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -150,3 +151,25 @@ MonoBehaviour:
   - trap room
   - Blood room
   portalID: 1
+--- !u!95 &58228523770170743
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7259741153680267468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21624c6e72dda6b4a8b1dbc7e347011d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
