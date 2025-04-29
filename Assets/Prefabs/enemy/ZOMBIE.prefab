@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70aa85ed30b81784c805bf3a1c0d5155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueID: 
   id: 1
   name: ZOMBIE
   health: 10
@@ -155,6 +156,7 @@ MonoBehaviour:
   changePatrolTargetInterval: 3
   attackCooldown: 1.5
   pathUpdateInterval: 0.75
+  spriteRenderer: {fileID: 0}
 --- !u!61 &8024524685503616884
 BoxCollider2D:
   m_ObjectHideFlags: 0
