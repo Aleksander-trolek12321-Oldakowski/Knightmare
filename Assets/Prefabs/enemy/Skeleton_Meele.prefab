@@ -175,24 +175,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181ed5f34ca6204429d1850e2485c951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueID: 
   id: 2
   name: SKELETON_MEELE
   health: 15
   speed: 3
-  damage: 2
-  attackRange: 2
-  attackSpeed: 2
+  damage: 1
+  attackRange: 5
+  attackSpeed: 1
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
   player: {fileID: 0}
   moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
+  animator: {fileID: -1015012171900190167}
+  hitReactCooldown: 1
+  patrolSpeed: 1
+  chaseSpeed: 2
+  sightRange: 7
+  loseSightRange: 10
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
   attackCooldown: 2
   turnSpeed: 8
   attackInaccuracy: 0.02

@@ -17,7 +17,7 @@ namespace enemy
         [SerializeField] private GameObject moneyPrefab;
         [Header("Animacja i hit-react")]
         [SerializeField] private Animator animator;
-        [SerializeField] private float hitReactCooldown = 0.23f;
+        [SerializeField] private float hitReactCooldown = 1f;
 
         [Header("Ruch, Pościg i Patrol")]
         public float patrolSpeed = 1f;
@@ -38,6 +38,7 @@ namespace enemy
         private bool isAttacking = false;
         private bool canAttack = true;
         private Coroutine attackCoroutine;
+        private bool isReactingToHit = false;
 
         // ** nowe pola dla pathfindingu **
         private List<Vector3> currentPath;
@@ -62,7 +63,7 @@ namespace enemy
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-            if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
+            if (!isReactingToHit && distanceToPlayer <= attackRange && canAttack && !isAttacking)
             {
                 ChangeState(SkeletonState.Attack);
                 Attack();
@@ -112,7 +113,6 @@ namespace enemy
                     break;
 
                 case SkeletonState.Attack:
-                    // atak — nie poruszamy się
                     break;
             }
 
@@ -140,8 +140,17 @@ namespace enemy
         public override void TakeDamage(float damageAmount)
         {
             base.TakeDamage(damageAmount);
-            animator.SetTrigger("Hit");
+            if (!isReactingToHit)
+                StartCoroutine(HitReactRoutine());
             InterruptAttack();
+        }
+
+        private IEnumerator HitReactRoutine()
+        {
+            isReactingToHit = true;
+            animator.SetTrigger("Hit");
+            yield return new WaitForSeconds(hitReactCooldown);
+            isReactingToHit = false;
         }
 
         private void InterruptAttack()

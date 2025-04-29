@@ -43,7 +43,7 @@ public class GameData : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         int portalChance = Random.Range(0, 5);
-        if(portalChance < 6)
+        if(portalChance < 1)
         {
             portalPrefab.SetActive(true);
         }

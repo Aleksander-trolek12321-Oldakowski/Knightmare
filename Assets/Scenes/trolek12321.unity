@@ -633,7 +633,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -650,60 +650,6 @@ Sprite:
   m_Bones: []
   m_ScriptableObjects: []
   m_SpriteID: 
---- !u!1 &146263237
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 146263239}
-  - component: {fileID: 146263238}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &146263238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146263237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6205584a07843814bbf4d2c858991a38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 6180504647281122939, guid: 944872faf6d4b8a459a66f53111d7db4, type: 3}
-  - {fileID: 4187004520313135688, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
-  enemyID: 0000000001000000
-  spawnRadius: 10
-  minEnemies: 5
-  maxEnemies: 15
-  playerDetectionRadius: 10
-  minDistanceFromPlayer: 3
-  minDistanceBetweenEnemies: 2
---- !u!4 &146263239
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146263237}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.637753, y: 5.2426147, z: 1.3775733}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!213 &147612768
 Sprite:
   m_ObjectHideFlags: 0
@@ -898,7 +844,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -1425,7 +1371,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -1986,7 +1932,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -2988,7 +2934,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -3502,7 +3448,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -99188,7 +99134,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -100150,7 +100096,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -100334,6 +100280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442e87f65f9c1184da0bb4435ce40d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueID: 
   id: 4
   name: Boss_Sekeleton
   health: 30
@@ -100344,17 +100291,24 @@ MonoBehaviour:
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
+  player: {fileID: 0}
+  animator: {fileID: 1397890260}
   arrowPrefab: {fileID: 4749176830416265082, guid: 4c6a4651e27b1904fadad432c40936dd, type: 3}
   shootPoint: {fileID: 60812968}
-  tripleShotDelay: 0.3
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRadius: 5
-  rotationSpeed: 5
-  animator: {fileID: 1397890260}
-  shootPointRadius: 2
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
+  hitReactCooldown: 0.23
   attackCooldown: 1.5
+  tripleShotDelay: 0.3
+  shootPointRadius: 2
+  rotationSpeed: 5
+  retreatDistance: 2
+  chaseSpeed: 2
+  sightRange: 10
+  patrolSpeed: 1
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
+  pathUpdateInterval: 0.75
 --- !u!4 &1397890258
 Transform:
   m_ObjectHideFlags: 0
@@ -101713,7 +101667,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -102170,6 +102124,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9153f55fb54a164c95f539bb31762a5, type: 3}
+--- !u!1001 &1167144302475149335
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.637753
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.2426147
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.3775733
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576645801258827894, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
+      propertyPath: m_Name
+      value: EnemySpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
 --- !u!1001 &3459977846745330061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102600,4 +102611,4 @@ SceneRoots:
   - {fileID: 536847290}
   - {fileID: 531324502}
   - {fileID: 706697445}
-  - {fileID: 146263239}
+  - {fileID: 1167144302475149335}
