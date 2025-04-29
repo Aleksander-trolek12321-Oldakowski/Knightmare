@@ -100152,7 +100152,7 @@ PrefabInstance:
     - target: {fileID: 2467928166058941609, guid: 7673d58d6ddeca444b6111c90f25127d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1722180616}
     - target: {fileID: 7518728033240376209, guid: 7673d58d6ddeca444b6111c90f25127d, type: 3}
       propertyPath: m_Name
       value: Pause Menu
@@ -100786,6 +100786,17 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 8623270085546400194, guid: 30aa7ee81d2128546865584337944c57, type: 3}
   m_PrefabInstance: {fileID: 1722180614}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1722180616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1620484335536865295, guid: 30aa7ee81d2128546865584337944c57, type: 3}
+  m_PrefabInstance: {fileID: 1722180614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161eb0cbda9f4fc4d8caff79073aeec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748846535
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,8 +67,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        AudioManager.Instance.PlaySound("MusicGame");
-        AudioManager.Instance.StopSound("MusicMenu");
+  
 
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -85,6 +84,25 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        AudioManager.Instance.StopSound("MusicMenu");
+        AudioManager.Instance.StopSound("MusicGame");
+        AudioManager.Instance.StopSound("MusicSpecialRoom");
+
+
+        switch (currentScene)
+        {
+            case "Blood room":
+                AudioManager.Instance.PlaySound("MusicSpecialRoom");
+                break; 
+            case "trap room":
+                AudioManager.Instance.PlaySound("MusicSpecialRoom");
+                break;
+            default:
+                AudioManager.Instance.PlaySound("MusicGame");
+                break;
+        }
         if (GameData.Instance != null && SceneManager.GetActiveScene().name == GameData.Instance.previousSceneName)
         {
             transform.position = GameData.Instance.returnPosition;
@@ -201,8 +219,10 @@ public class Player : MonoBehaviour
         foreach (Collider2D collider in hitObjects)
         {
             IDamageable target = collider.GetComponent<IDamageable>();
+        
             if (target != null)
             {
+            
 
                 target.TakeDamage(damage);
                 if (canFire)
@@ -329,7 +349,7 @@ public class Player : MonoBehaviour
         playerInputActions.Player.Disable();
 
         animator.SetTrigger("Death");
-
+     
         SceneManager.LoadScene("MainMenu");
 
         StartCoroutine(Respawn());

@@ -12,7 +12,9 @@ public class ItemSpawner : MonoBehaviour
     private ItemData selectedItem;
     public bool isInShop = false;
     public TreasureRoom treasureRoom;
+    public SecretRoom secretRoom;
     [SerializeField] private TMP_Text itemPriceText;
+    [SerializeField] private GameObject questionMarkPrefab;
 
     void Start()
     {
@@ -79,10 +81,15 @@ public class ItemSpawner : MonoBehaviour
                 }
 
 
-                if (treasureRoom != null)
+                if (treasureRoom != null )
                 {
 
                     treasureRoom.DestroyItem(gameObject);
+                }
+                if ( secretRoom != null)
+                {
+
+                    secretRoom.DestroyItem(gameObject);
                 }
                 Destroy(gameObject);
             }
@@ -96,9 +103,18 @@ public class ItemSpawner : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (spriteRenderer != null && selectedItem != null)
+        if (spriteRenderer != null && selectedItem != null && secretRoom==null)
         {
             spriteRenderer.sprite = selectedItem.itemSprite;
+        }
+        else
+        {
+            GameObject questionMark = Instantiate(questionMarkPrefab, transform.position, Quaternion.identity, transform);
+            questionMark.transform.localPosition = Vector3.zero;
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = false;
+            }
         }
     }
 }

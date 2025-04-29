@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8b10d4e85442a4cb5ff507d68552ff, type: 3}
   m_Name: Ice Sword
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 1101149129, guid: 47452e4d4a43d13438656d626419815d, type: 3}
+  itemSprite: {fileID: 288455791, guid: a18597fcbe6f1ee438835cadaf3a704a, type: 3}
   health: 0
   damage: 0
   speed: 0

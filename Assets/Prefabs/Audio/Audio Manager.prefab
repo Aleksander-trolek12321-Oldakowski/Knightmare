@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7545221117318548743}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -73,3 +73,15 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 96e914056fd4d6340aac9feea7387187, type: 3}
     volume: 0.35
     loop: 1
+  - name: MusicSpecialRoom
+    clip: {fileID: 8300000, guid: 253836bc94cce874fb6fe6addd18eef0, type: 3}
+    volume: 0.35
+    loop: 1
+  - name: ZombieAttack
+    clip: {fileID: 8300000, guid: dba62690aa5488542b173a68d370e851, type: 3}
+    volume: 0.35
+    loop: 0
+  - name: ZombieDamageTaken
+    clip: {fileID: 8300000, guid: ea311cb2e0d5acd48a97c46fe5153b4f, type: 3}
+    volume: 0.35
+    loop: 0

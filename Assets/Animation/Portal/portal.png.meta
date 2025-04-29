@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 70259980db09b8149ab5e98c22599b1a
+guid: 91e73e3658fd68b44896f6dde9c5f601
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,72 +81,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -162,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skeleton_flipped_0
+      name: portal_1.1
       rect:
         serializedVersion: 2
-        x: 1527
-        y: 1829
-        width: 170
-        height: 219
+        x: 157
+        y: 300
+        width: 16
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cf601fcde2154844a06f2c3d3ad5772
-      internalID: 1104298548
+      spriteID: d66378f1a63e5fb4e843bf53c34e4467
+      internalID: 1732990665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_1
+      name: portal_1.2
       rect:
         serializedVersion: 2
-        x: 1314
-        y: 1830
-        width: 173
-        height: 212
+        x: 225
+        y: 293
+        width: 29
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40179dcd4deaeef4682261eddb4060c3
-      internalID: -1312917997
+      spriteID: 123576a74818c5b40adfbd4545fae0cb
+      internalID: 561065957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_2
+      name: portal_1.3
       rect:
         serializedVersion: 2
-        x: 1100
-        y: 1830
-        width: 188
-        height: 218
+        x: 300
+        y: 290
+        width: 41
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9351065b3135c34cb9ab3b9d7de7334
-      internalID: -493408216
+      spriteID: 0e87a7842d39ab64d9aeab0257c1cbea
+      internalID: -2098008994
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_3
+      name: portal_1.4
       rect:
         serializedVersion: 2
-        x: 762
-        y: 1823
-        width: 319
-        height: 224
+        x: 372
+        y: 290
+        width: 49
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aef88cdbec21b44db6bac8245e1ff2d
-      internalID: 56712771
+      spriteID: 95bdeed0097e38248b0cfb762dc75cf4
+      internalID: 1708327879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_4
+      name: portal_1.5
       rect:
         serializedVersion: 2
-        x: 462
-        y: 1814
-        width: 293
-        height: 234
+        x: 454
+        y: 286
+        width: 56
+        height: 37
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2f7533c2a534864da39544bc705ffa7
-      internalID: 1363761564
+      spriteID: 6ea2ca9eee7fe8a43af58a07f7062e2d
+      internalID: -780815496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_5
+      name: portal_1.6
       rect:
         serializedVersion: 2
-        x: 275
-        y: 1820
-        width: 180
-        height: 223
+        x: 549
+        y: 278
+        width: 78
+        height: 47
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e77bc3fcbc31aa440b64dab26547ee2c
-      internalID: -174547597
+      spriteID: b8c8fc43c39eb8542a37897d71226dee
+      internalID: 1743615014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_6
+      name: portal_1.7
       rect:
         serializedVersion: 2
-        x: 1535
-        y: 1421
-        width: 180
-        height: 216
+        x: 656
+        y: 278
+        width: 98
+        height: 51
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: becbfc4af8f4eea4f9b499b8ba96b4e1
-      internalID: 162725336
+      spriteID: ca556eeb35b3e7742a67ad7bb1bd8e60
+      internalID: -175075690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_7
+      name: portal_2.1
       rect:
         serializedVersion: 2
-        x: 1313
-        y: 1420
-        width: 179
-        height: 233
+        x: 8
+        y: 194
+        width: 111
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,20 +258,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52b1f0092bb6b4a4188dc423724005fd
-      internalID: -223957991
+      spriteID: e65b50bc33459b64eb3f948045dbae4e
+      internalID: 1444654343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_8
+      name: portal_2.2
       rect:
         serializedVersion: 2
-        x: 987
-        y: 1416
-        width: 287
-        height: 248
+        x: 140
+        y: 194
+        width: 119
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea1f9a207b1b724196d929e2fd36fb1
-      internalID: -1623370303
+      spriteID: 7c54c7661640f174b866044ff99b9458
+      internalID: -1937457158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_9
+      name: portal_2.3
       rect:
         serializedVersion: 2
-        x: 547
-        y: 1417
-        width: 429
-        height: 252
+        x: 270
+        y: 196
+        width: 119
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,20 +300,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b983cd6211deea04388f1f27136f6666
-      internalID: 1785467968
+      spriteID: bb09c89740f591346bed9e271e25ee02
+      internalID: -597244012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_10
+      name: portal_2.4
       rect:
         serializedVersion: 2
-        x: 353
-        y: 1409
-        width: 180
-        height: 228
+        x: 405
+        y: 196
+        width: 124
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -386,20 +321,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc2eb748aa536824c99abe896b2e9770
-      internalID: 1228146627
+      spriteID: 994f6abd1f13cd046bcf136d9b3f4a43
+      internalID: -524811565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_11
+      name: portal_2.5
       rect:
         serializedVersion: 2
-        x: 95
-        y: 1404
-        width: 204
-        height: 239
+        x: 543
+        y: 196
+        width: 115
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,20 +342,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f309aeb21b09164daccba3889f869d4
-      internalID: -270988497
+      spriteID: ae92971159f8a0241bab08f988a2c877
+      internalID: 1626286458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_12
+      name: portal_2.6
       rect:
         serializedVersion: 2
-        x: 1526
-        y: 992
-        width: 183
-        height: 236
+        x: 674
+        y: 198
+        width: 119
+        height: 62
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,20 +363,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43eea9671f1012e4ca9ee622747cc932
-      internalID: 1848568734
+      spriteID: 855739326d5e5334e9387e9e7f14470c
+      internalID: -698982305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_13
+      name: portal_2.7
       rect:
         serializedVersion: 2
-        x: 1272
-        y: 1014
-        width: 198
-        height: 222
+        x: 8
+        y: 115
+        width: 107
+        height: 60
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,20 +384,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21009c4f03d5f074cb689975287d6b00
-      internalID: 1285286996
+      spriteID: e4a80063c8c36d644859b8593d8b7f4a
+      internalID: 737204461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_14
+      name: portal_2.8
       rect:
         serializedVersion: 2
-        x: 1077
-        y: 1006
-        width: 192
-        height: 214
+        x: 145
+        y: 113
+        width: 107
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -470,20 +405,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19855b617df41914a803563153506639
-      internalID: -918090915
+      spriteID: aa443f0b64bd9c9479b8035c788f9d04
+      internalID: -1024098784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_15
+      name: portal_2.9
       rect:
         serializedVersion: 2
-        x: 746
-        y: 981
-        width: 316
-        height: 205
+        x: 278
+        y: 113
+        width: 111
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -491,20 +426,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d59289650963f84583ccba0b3c50e1b
-      internalID: -1830432648
+      spriteID: 81bec9f01547b8245aaea5e5c585d82c
+      internalID: -1047515668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_16
+      name: portal_3.1
       rect:
         serializedVersion: 2
-        x: 518
-        y: 976
-        width: 206
-        height: 158
+        x: 10
+        y: 20
+        width: 103
+        height: 55
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -512,20 +447,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5bd58a7396ed1341a90660277239ccf
-      internalID: -480756370
+      spriteID: ab2dad1fa20bac446bb5471b3541baa5
+      internalID: 2059286565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_17
+      name: portal_3.2
       rect:
         serializedVersion: 2
-        x: 184
-        y: 1000
-        width: 324
-        height: 109
+        x: 143
+        y: 24
+        width: 99
+        height: 51
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -533,134 +468,155 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5b85865d2479be489686d60407a0b46
-      internalID: -636256536
+      spriteID: 3be5de6e8bd00d84e8a91f5262143277
+      internalID: -400198609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_18
+      name: portal_3.3
       rect:
         serializedVersion: 2
-        x: 1561
-        y: 197
-        width: 127
-        height: 202
+        x: 282
+        y: 26
+        width: 79
+        height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f192d8ffb8a78b429ac37e3417ed8a3
-      internalID: 1615996166
+      spriteID: 28b70f2fc358f054d887d8e98dd3c1f6
+      internalID: -637224993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_19
+      name: portal_3.4
       rect:
         serializedVersion: 2
-        x: 1344
-        y: 197
-        width: 143
-        height: 194
+        x: 401
+        y: 32
+        width: 57
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab0eb14a42909eb4aa87d76c6f7c40e9
-      internalID: -545860718
+      spriteID: d59bdd7ea90854146b82e7d553b9a308
+      internalID: 1459333896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_20
+      name: portal_3.5
       rect:
         serializedVersion: 2
-        x: 1106
-        y: 195
-        width: 189
-        height: 202
+        x: 497
+        y: 30
+        width: 48
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c7e22011c00e9c4486134afd7df4eb5
-      internalID: -1831417504
+      spriteID: 945fbfa16faec484cb92eb0c5f147425
+      internalID: -1953020054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_21
+      name: portal_36
       rect:
         serializedVersion: 2
-        x: 918
-        y: 206
-        width: 147
-        height: 201
+        x: 587
+        y: 34
+        width: 40
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c58bd4fe3643c7941bcc6987fe333497
-      internalID: -242172699
+      spriteID: aaa5c766017cde8418f2eb8f1cc675a1
+      internalID: -2130533298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_22
+      name: portal_3.7
       rect:
         serializedVersion: 2
-        x: 699
-        y: 179
-        width: 170
-        height: 233
+        x: 661
+        y: 31
+        width: 27
+        height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 546161c627aa7924c8e0ab84a2315146
-      internalID: 1279937973
+      spriteID: 7544a5d7032868e4091445c764a2e881
+      internalID: -91286779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton_flipped_23
+      name: portal_3.8
       rect:
         serializedVersion: 2
-        x: 487
-        y: 182
-        width: 187
-        height: 223
+        x: 712
+        y: 38
+        width: 22
+        height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8ad371a700fdc7469f04656b13e6c86
-      internalID: -1891297808
+      spriteID: b61c1818cfc3a1f409853581e6cf837b
+      internalID: -1243166379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portal_3.9
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 40
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 845b76fde453a794ab12bab7b383bf6b
+      internalID: -183510209
       vertices: []
       indices: 
       edges: []
@@ -668,7 +624,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0452056685fcb7547ad964f9b96ff704
+    spriteID: 087668ae1b8befd42af63cdb60842bab
     internalID: 0
     vertices: []
     indices: 
@@ -676,30 +632,39 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      skeleton_flipped_0: 1104298548
-      skeleton_flipped_1: -1312917997
-      skeleton_flipped_10: 1228146627
-      skeleton_flipped_11: -270988497
-      skeleton_flipped_12: 1848568734
-      skeleton_flipped_13: 1285286996
-      skeleton_flipped_14: -918090915
-      skeleton_flipped_15: -1830432648
-      skeleton_flipped_16: -480756370
-      skeleton_flipped_17: -636256536
-      skeleton_flipped_18: 1615996166
-      skeleton_flipped_19: -545860718
-      skeleton_flipped_2: -493408216
-      skeleton_flipped_20: -1831417504
-      skeleton_flipped_21: -242172699
-      skeleton_flipped_22: 1279937973
-      skeleton_flipped_23: -1891297808
-      skeleton_flipped_3: 56712771
-      skeleton_flipped_4: 1363761564
-      skeleton_flipped_5: -174547597
-      skeleton_flipped_6: 162725336
-      skeleton_flipped_7: -223957991
-      skeleton_flipped_8: -1623370303
-      skeleton_flipped_9: 1785467968
+      portal_0: 1365054604
+      portal_1: 1986801293
+      portal_1.1: 1732990665
+      portal_1.2: 561065957
+      portal_1.3: -2098008994
+      portal_1.4: 1708327879
+      portal_1.5: -780815496
+      portal_1.6: 1743615014
+      portal_1.7: -175075690
+      portal_2.1: 1444654343
+      portal_2.2: -1937457158
+      portal_2.3: -597244012
+      portal_2.4: -524811565
+      portal_2.5: 1626286458
+      portal_2.6: -698982305
+      portal_2.7: 737204461
+      portal_2.8: -1024098784
+      portal_2.9: -1047515668
+      portal_24: -914199008
+      portal_26: -591842730
+      portal_28: 1991950351
+      portal_3.1: 2059286565
+      portal_3.2: -400198609
+      portal_3.3: -637224993
+      portal_3.4: 1459333896
+      portal_3.5: -1953020054
+      portal_3.7: -91286779
+      portal_3.8: -1243166379
+      portal_3.9: -183510209
+      portal_30: -185663477
+      portal_36: -2130533298
+      portal_4: -1843157266
+      portal_6: 402186822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
