@@ -97774,7 +97774,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.010873795, y: -0.75067854}
+  m_Offset: {x: 0.010873795, y: -0.3315699}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -97784,7 +97784,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.45223236, y: 1.4986429}
+  m_Size: {x: 0.45223236, y: 2.3368602}
   m_EdgeRadius: 0
 --- !u!95 &61868198
 Animator:
@@ -98222,7 +98222,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.013688087, y: -0.76874924}
+  m_Offset: {x: 0.013688087, y: -0.40744877}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -98232,7 +98232,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.71071434, y: 1.4625015}
+  m_Size: {x: 0.71071434, y: 2.1851025}
   m_EdgeRadius: 0
 --- !u!95 &320092626
 Animator:
@@ -100053,7 +100053,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.017467022, y: -0.76181936}
+  m_Offset: {x: -0.017467022, y: -0.3716147}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -100063,7 +100063,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6211157, y: 1.4763613}
+  m_Size: {x: 0.6211157, y: 2.2567706}
   m_EdgeRadius: 0
 --- !u!95 &1511709478
 Animator:
@@ -100547,7 +100547,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0071759224, y: -0.7516675}
+  m_Offset: {x: 0.0071759224, y: -0.36146283}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -100557,7 +100557,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5199251, y: 1.496665}
+  m_Size: {x: 0.5199251, y: 2.2770743}
   m_EdgeRadius: 0
 --- !u!95 &1676113353
 Animator:
