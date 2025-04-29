@@ -43,6 +43,13 @@ namespace enemy
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.75f;
 
+
+        [Header("Kolor po obrażeniach")] // ZMIANA
+        [SerializeField] private SpriteRenderer spriteRenderer; // ZMIANA
+        private Color originalColor; // ZMIANA
+        private Color damageColor = new Color(1f, 0.45f, 0.45f); // #FF7373 jako Color
+        private Coroutine damageCoroutine;
+
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -55,6 +62,11 @@ namespace enemy
 
             if (tilemap == null && tilemapCollider != null)
                 tilemap = tilemapCollider.GetComponent<Tilemap>();
+
+            if (spriteRenderer == null) // ZMIANA
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>(); // domyślnie dzieciak
+
+            originalColor = spriteRenderer.color; // ZMIANA
 
             startPosition = transform.position;
             SetNewPatrolTarget();
@@ -167,6 +179,34 @@ namespace enemy
         {
             base.TakeDamage(damageAmount);
             AudioManager.Instance.PlaySound("ZombieDamageTaken");
+
+            if (damageCoroutine != null)
+                StopCoroutine(damageCoroutine);
+
+            damageCoroutine = StartCoroutine(HandleDamageEffect());
+        }
+
+        private IEnumerator HandleDamageEffect()
+        {
+            // Zatrzymaj atak
+            StopCoroutine("PerformAttack");
+            animator.SetBool("IsAttacking", false);
+            isAttacking = false;
+            canAttack = false;
+
+            // Kolor na czerwony
+            spriteRenderer.color = damageColor;
+
+            yield return new WaitForSeconds(1f); // efekt trwa 1 sekundę
+
+            spriteRenderer.color = originalColor;
+            canAttack = true;
+
+            // Powrót do odpowiedniego stanu
+            if (Vector3.Distance(transform.position, player.transform.position) <= sightRange && PlayerInSight())
+                ChangeState(ZombieState.Chase);
+            else
+                ChangeState(ZombieState.Patrol);
         }
 
         IEnumerator PerformAttack()
