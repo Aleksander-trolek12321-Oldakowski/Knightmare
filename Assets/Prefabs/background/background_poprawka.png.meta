@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 1477f8137abb3cd478ed731fcee24708
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 120
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: background_poprawka_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 169c8f351620fa946b74fbef741b7c7c
+      internalID: -665259931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fe55deba4aa7fc4daef6a11990faf83
+      internalID: 1424088172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28179ed10f85ed742b2f7c9244cdb080
+      internalID: 56698580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_3
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 760234390c49dbd4d8a48c0745d3332b
+      internalID: -1624803874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_4
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: -60}
+        - {x: -3, y: -60}
+        - {x: -3, y: 4}
+        - {x: 60, y: 4}
+        - {x: 60, y: 60}
+        - {x: -60, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c03e5bed4dcdd44cae564ab67f83410
+      internalID: 1333713197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: 2}
+        - {x: 60, y: 3}
+        - {x: 60, y: 59}
+        - {x: -60, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a4781b5fe4774e48ae0e7c77b5ee25f
+      internalID: 980411996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_6
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: 4}
+        - {x: -37, y: 4}
+        - {x: -36, y: -35}
+        - {x: 5, y: -36}
+        - {x: 6, y: -60}
+        - {x: 60, y: -60}
+        - {x: 60, y: 60}
+        - {x: -60, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fc3e9eb9f8c0ea4582f45db7cb93429
+      internalID: 145123962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_7
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 1, y: -59}
+        - {x: 58, y: -59}
+        - {x: 58, y: -2}
+        - {x: 1, y: -2}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c688d6483e6911c4cbb365ddf55ec898
+      internalID: 1926770108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_8
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 240
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -59, y: -59}
+        - {x: 30, y: -59}
+        - {x: 30, y: -4}
+        - {x: -59, y: -4}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f64cf41119c2cbe4080936836365775e
+      internalID: 522821684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c810edada6eb5e4d93ac9547a0a6ac2
+      internalID: 1441541919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 078f0f088d47e1a42be9c7e3bdf59e8a
+      internalID: 1003609193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_11
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc460d557cae7c342b5fec6264f6bafe
+      internalID: 387642831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_12
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c411af950e1e543b924cd064eea897
+      internalID: -2112325613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_13
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: -60}
+        - {x: -1, y: -60}
+        - {x: -2, y: 60}
+        - {x: -60, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26cd9256f94c6ad4e82963b05ce73bf1
+      internalID: 674436902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_14
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4db0e9a2a2b63b24191773201c0d1852
+      internalID: 1023720858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_15
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: -60}
+        - {x: 60, y: -60}
+        - {x: 60, y: 60}
+        - {x: 4, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d34e7c2a540e3d0478cec1ab4e242fd6
+      internalID: -1488583989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_16
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -31, y: 4}
+        - {x: 60, y: 4}
+        - {x: 59, y: 60}
+        - {x: -31, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64c26a8752747d348a5c879da0d6499c
+      internalID: 881576785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_17
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 120
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: 3}
+        - {x: 9, y: 3}
+        - {x: 9, y: 59}
+        - {x: -60, y: 59}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dbda0b50b1177446806599119e60701
+      internalID: -376092802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_18
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b0d14da1c5c23e4ead79cfdedac3642
+      internalID: 1170159448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_19
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a210c7ade2bcd264bbe7763e09c25e2f
+      internalID: -194401813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_20
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f821efab482b07f44aa8844b91a48ad3
+      internalID: 476558122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_21
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: -60}
+        - {x: 60, y: -60}
+        - {x: 60, y: -4}
+        - {x: 31, y: -3}
+        - {x: 29, y: 30}
+        - {x: -3, y: 31}
+        - {x: -6, y: 60}
+        - {x: -60, y: 60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8b580b5f3a8864a84f8f10137e1851
+      internalID: 343385158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_22
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: -60}
+        - {x: 60, y: -60}
+        - {x: 60, y: -6}
+        - {x: -60, y: -5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 887e66d2d38fadf4f8434c39b48663fb
+      internalID: -80022771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: background_poprawka_23
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -60, y: -6}
+        - {x: -60, y: -60}
+        - {x: 60, y: -59}
+        - {x: 60, y: 60}
+        - {x: 6, y: 60}
+        - {x: 5, y: -7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6582db3a352bf674f8670e990031d93e
+      internalID: -2029687442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 689dc7a8780c759479197ae81090453a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      background_poprawka_0: -665259931
+      background_poprawka_1: 1424088172
+      background_poprawka_10: 1003609193
+      background_poprawka_11: 387642831
+      background_poprawka_12: -2112325613
+      background_poprawka_13: 674436902
+      background_poprawka_14: 1023720858
+      background_poprawka_15: -1488583989
+      background_poprawka_16: 881576785
+      background_poprawka_17: -376092802
+      background_poprawka_18: 1170159448
+      background_poprawka_19: -194401813
+      background_poprawka_2: 56698580
+      background_poprawka_20: 476558122
+      background_poprawka_21: 343385158
+      background_poprawka_22: -80022771
+      background_poprawka_23: -2029687442
+      background_poprawka_3: -1624803874
+      background_poprawka_4: 1333713197
+      background_poprawka_5: 980411996
+      background_poprawka_6: 145123962
+      background_poprawka_7: 1926770108
+      background_poprawka_8: 522821684
+      background_poprawka_9: 1441541919
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -155,7 +155,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.48, y: 2.5}
+    oldSize: {x: 0.74, y: 1.25}
     newSize: {x: 3.280786, y: 4.88}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,13 +175,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181ed5f34ca6204429d1850e2485c951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueID: 
   id: 2
   name: SKELETON_MEELE
   health: 15
   speed: 3
-  damage: 2
+  damage: 1
   attackRange: 5
-  attackSpeed: 2
+  attackSpeed: 1
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
@@ -190,9 +191,7 @@ MonoBehaviour:
   player: {fileID: 0}
   moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
   animator: {fileID: -1015012171900190167}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  hitReactCooldown: 1
   patrolSpeed: 1
   chaseSpeed: 2
   sightRange: 7
