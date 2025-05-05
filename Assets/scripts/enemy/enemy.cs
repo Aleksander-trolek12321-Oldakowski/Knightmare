@@ -8,8 +8,7 @@ namespace enemy
 {
 public class enemy : MonoBehaviour, IDamageable
     {
-    [SerializeField]
-    private string uniqueID;
+    public string uniqueID;
     [SerializeField]
     int id;
     [SerializeField]
@@ -30,7 +29,7 @@ public class enemy : MonoBehaviour, IDamageable
     private bool isOnFire = false;
     [SerializeField]
     private bool isPoisoned = false;
-        private void Start()
+        public virtual void Start()
         {
             GenerateUniqueID();
 
@@ -137,7 +136,7 @@ public class enemy : MonoBehaviour, IDamageable
         }
 
 
-        protected virtual void  Die()
+        public virtual void  Die()
         {
             if (!GameData.Instance.killedEnemies.Contains(uniqueID))
             {

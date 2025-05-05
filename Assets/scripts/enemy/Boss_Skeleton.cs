@@ -1,6 +1,7 @@
 // Boss_Skeleton.cs
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -49,7 +50,14 @@ namespace enemy
         private int pathIndex = 0;
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.75f;
+        [SerializeField] private GameObject portalToNextLevel;
 
+        public override void Start()
+        {
+            base.Start();
+            if (portalToNextLevel != null && GameData.Instance.killedEnemies.Contains(uniqueID) == false)
+                portalToNextLevel.SetActive(false);
+        }
         void Awake()
         {
             if (player == null)
@@ -61,7 +69,11 @@ namespace enemy
 
             currentState = BossState.Patrol;
             patrolTarget = transform.position;
+
+         
+
         }
+
 
         void Update()
         {
@@ -282,6 +294,17 @@ namespace enemy
                 current += dir;
             }
             return path;
+        }
+        public override void Die()
+        {
+            if(portalToNextLevel!=null)
+            portalToNextLevel.SetActive(true);
+
+         
+
+            base.Die();
+
+
         }
     }
 }
