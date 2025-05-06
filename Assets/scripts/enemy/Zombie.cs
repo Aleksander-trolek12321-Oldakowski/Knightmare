@@ -15,17 +15,19 @@ namespace enemy
         [SerializeField] private Player player;
         [SerializeField] private GameObject moneyPrefab;
         [SerializeField] private Animator animator;
+        [SerializeField] private LayerMask playerLayer;
 
         [Header("Ruch, Pościg i Patrol")]
         public float patrolSpeed = 1f;
         public float chaseSpeed = 2f;
-        public float sightRange = 10f;
-        public float loseSightRange = 12f;  // Gdy gracz się oddali, zombie wróci do patrolu
+        public float sightRange = 5f;
+        public float loseSightRange = 10f;  // Gdy gracz się oddali, zombie wróci do patrolu
         public float patrolRadius = 5f;
         public float changePatrolTargetInterval = 3f;
 
         [Header("Atak")]
         public float attackCooldown = 1.5f;
+        private Vector3 attackOrigin;
 
         private ZombieState currentState = ZombieState.Patrol;
         private Vector3 startPosition;
@@ -73,21 +75,46 @@ namespace enemy
         void Update()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
+            Debug.Log($"Zombie position: {transform.position}, Player position: {player.transform.position}");
+            Debug.Log($"Odległość do gracza: {distanceToPlayer}, aktualny stan: {currentState}");
+            
             if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
             {
-                currentState = ZombieState.Attack;
+                ChangeState(ZombieState.Attack);
                 Attack();
             }
             else if (distanceToPlayer <= sightRange && PlayerInSight())
             {
-                currentState = ZombieState.Chase;
+                ChangeState(ZombieState.Chase);
             }
             else if (distanceToPlayer > loseSightRange)
             {
-                currentState = ZombieState.Patrol;
+                startPosition = transform.position;
+                ChangeState(ZombieState.Patrol);
             }
+            
+            HandleMovement();
+            
+            if (health <= 0)
+            {
+                // Jeśli chcesz, aby nazwa wyzwalacza była taka sama jak w Skeleton_Meele ("Death")
+                animator.SetTrigger("Death");
+                DropLoot();
+                Die();
+            }
+        }
 
+        void ChangeState(ZombieState newState)
+        {
+            if(currentState != newState)
+            {
+                currentState = newState;
+                Debug.Log($"Zmiana stanu na: {newState}");
+            }
+        }
+
+        void HandleMovement()
+        {
             if (currentState == ZombieState.Patrol)
             {
                 patrolTimer += Time.deltaTime;
@@ -102,22 +129,18 @@ namespace enemy
             {
                 UpdatePath(player.transform.position);
             }
-
-            if (health <= 0)
-            {
-                animator.SetTrigger("Death_Zombie");
-                DropLoot();
-                Die();
-            }
         }
 
         void FixedUpdate()
         {
+            Vector3 movementDirection = Vector3.zero;
+
             if (currentPath != null && pathIndex < currentPath.Count && currentState != ZombieState.Attack)
             {
                 Vector3 targetPos = currentPath[pathIndex];
                 float moveSpeed = (currentState == ZombieState.Chase) ? chaseSpeed : patrolSpeed;
                 Vector3 newPos = Vector3.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+                movementDirection = (newPos - transform.position).normalized;
                 rb.MovePosition(newPos);
 
                 if (Vector3.Distance(rb.position, targetPos) < 0.1f)
@@ -125,16 +148,31 @@ namespace enemy
                     pathIndex++;
                 }
             }
+            
+            if (movementDirection != Vector3.zero)
+            {
+                animator.SetFloat("Xinput", movementDirection.x);
+                animator.SetFloat("Yinput", movementDirection.y);
+                animator.SetFloat("LastXinput", movementDirection.x);
+                animator.SetFloat("LastYinput", movementDirection.y);
+            }
         }
 
         public override void Attack()
         {
             if (isAttacking || !canAttack)
                 return;
+            AudioManager.Instance.PlaySound("ZombieAttack");
 
             isAttacking = true;
             canAttack = false;
+            attackOrigin = transform.position;
+
+            Vector3 attackDir = (player.transform.position - transform.position).normalized;
+            animator.SetFloat("AttackXinput", attackDir.x);
+            animator.SetFloat("AttackYinput", attackDir.y);
             animator.SetBool("IsAttacking", true);
+
             StartCoroutine(PerformAttack());
         } 
         public override void TakeDamage(float damageAmount)
@@ -173,8 +211,8 @@ namespace enemy
 
         IEnumerator PerformAttack()
         {
-            yield return new WaitForSeconds(0.3f);
-            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+            yield return new WaitForSeconds(3f);
+            if (Vector3.Distance(attackOrigin, player.transform.position) <= attackRange)
             {
                 player.TakeDamage(damage);
             }
@@ -191,13 +229,12 @@ namespace enemy
             Vector2 targetPos = player.transform.position;
             Vector2 dir = (targetPos - startPos).normalized;
             float distance = Vector2.Distance(startPos, targetPos);
-            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance);
+            int layerMask = LayerMask.GetMask("Player"); 
+            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, layerMask);
 
-            if (hit.collider != null)
-            {
-                return hit.collider.GetComponent<Player>() != null;
-            }
-            return false;
+            Debug.DrawRay(startPos, dir * distance, Color.red, 0.5f);
+
+            return hit.collider != null;
         }
 
         private void SetNewPatrolTarget()
@@ -243,16 +280,13 @@ namespace enemy
             Vector3Int current = startCell;
             while (current != targetCell)
             {
-                // Check for collision on the current cell
                 if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
                 {
                     return null;
                 }
                 
-                // Add the current cell to the path
                 path.Add(tilemap.GetCellCenterWorld(current));
 
-                // Compute direction by clamping the difference between target and current cells
                 Vector3Int direction = new Vector3Int(
                     Mathf.Clamp(targetCell.x - current.x, -1, 1),
                     Mathf.Clamp(targetCell.y - current.y, -1, 1),

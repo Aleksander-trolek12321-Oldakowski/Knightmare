@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4187004520313135688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4108, y: 2.5442, z: 173.83754}
+  m_LocalPosition: {x: 1.4108, y: 2.5442, z: 0}
   m_LocalScale: {x: 2.1322, y: 1.9592, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -135,7 +135,7 @@ MonoBehaviour:
   health: 10
   speed: 3
   damage: 1
-  attackRange: 2
+  attackRange: 10
   attackSpeed: 3
   minimumDistance: 5
   isOnFire: 0
@@ -145,11 +145,14 @@ MonoBehaviour:
   player: {fileID: 0}
   moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
   animator: {fileID: 8372343444972926827}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
   patrolSpeed: 1
   chaseSpeed: 2
-  sightRange: 10
-  loseSightRange: 15
-  patrolRadius: 5
+  sightRange: 7
+  loseSightRange: 10
+  patrolRadius: 10
   changePatrolTargetInterval: 3
   attackCooldown: 1.5
   pathUpdateInterval: 0.75

@@ -462,17 +462,26 @@ MonoBehaviour:
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
+  player: {fileID: 0}
+  animator: {fileID: 35781333}
   arrowPrefab: {fileID: 4749176830416265082, guid: 4c6a4651e27b1904fadad432c40936dd, type: 3}
   shootPoint: {fileID: 1506618775}
-  tripleShotDelay: 0.3
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectionRadius: 5
-  rotationSpeed: 5
-  animator: {fileID: 35781333}
-  shootPointRadius: 2
+  tilemapCollider: {fileID: 0}
+  tilemap: {fileID: 0}
+  hitReactCooldown: 0.23
   attackCooldown: 1.5
+  tripleShotDelay: 0.3
+  shootPointRadius: 2
+  rotationSpeed: 5
+  retreatDistance: 2
+  chaseSpeed: 2
+  sightRange: 10
+  patrolSpeed: 1
+  patrolRadius: 5
+  changePatrolTargetInterval: 3
+  pathUpdateInterval: 0.75
+  portal: {fileID: 7259741153680267468, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+  sceneToLoadOnDeath: 
 --- !u!4 &35781338
 Transform:
   m_ObjectHideFlags: 0
@@ -95902,6 +95911,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &269365523
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.3517714
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.6150746
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.30999947
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327030304746043167, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557269405658862685, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: possibleScenesToLoad.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259741153680267468, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_Name
+      value: Portal
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
 --- !u!1001 &299125113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98752,6 +98822,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9164774543276499371, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -99545,3 +99619,4 @@ SceneRoots:
   - {fileID: 1722180614}
   - {fileID: 1938786996}
   - {fileID: 1330691051}
+  - {fileID: 269365523}

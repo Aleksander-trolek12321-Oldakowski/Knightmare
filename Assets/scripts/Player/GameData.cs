@@ -81,4 +81,27 @@ public class GameData : MonoBehaviour
             canPoison, canFire, canSlow, hasThorns
         );
     }
+    public void ResetData()
+    {
+        playerDamage = 0;
+        playerSpeed = 0;
+        playerAttackSpeed = 0;
+        playerRange = 0;
+        playerHealth = 0;
+        playerMaxHearts = 0;
+
+        canPoison = false;
+        canFire = false;
+        canSlow = false;
+        hasThorns = false;
+
+        collectedItemIcons.Clear();
+        previousSceneName = "";
+        returnPosition = Vector3.zero;
+        destroyedPortals.Clear();
+
+        playerCoins = 0;
+        killedEnemies.Clear();
+    }
+
 }

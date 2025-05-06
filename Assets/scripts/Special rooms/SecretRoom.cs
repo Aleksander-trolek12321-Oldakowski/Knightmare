@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreasureRoom : MonoBehaviour
+public class SecretRoom : MonoBehaviour
 {
     [SerializeField] private ItemSpawner[] itemSpawners;
 
@@ -19,10 +19,15 @@ public class TreasureRoom : MonoBehaviour
             if (itemSpawner != null && itemSpawner.gameObject != collectedItem)
             {
                 Destroy(itemSpawner.gameObject);
-                CreateReturnPortal();
             }
         }
-    }
- 
 
+        CreateReturnPortal();
+
+    }
+
+    void CreateReturnPortal()
+    {
+        Instantiate(returnPortalPrefab, portalSpawnPosition, Quaternion.identity);
+    }
 }

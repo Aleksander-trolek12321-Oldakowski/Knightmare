@@ -11,6 +11,10 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayButton()
     {
+        if (GameData.Instance != null)
+        {
+            GameData.Instance.ResetData();
+        }
         SceneManager.LoadScene("Game");
     }
     public void QuitButton()
