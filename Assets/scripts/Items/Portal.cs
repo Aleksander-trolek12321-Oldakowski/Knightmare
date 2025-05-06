@@ -33,5 +33,12 @@ public class Portal : MonoBehaviour
             string randomScene = possibleScenesToLoad[Random.Range(0, possibleScenesToLoad.Length)];
             SceneManager.LoadScene(randomScene);
         }
+
+        
+    }
+    public void SpawnPortalToNextLevel(string[] scenes)
+    {
+        possibleScenesToLoad = scenes;
+        portalID = scenes[0];
     }
 }
