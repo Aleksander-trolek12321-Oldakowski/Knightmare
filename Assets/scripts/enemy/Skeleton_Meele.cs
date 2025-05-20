@@ -210,13 +210,10 @@ namespace enemy
 
         private void SetNewPatrolTarget()
         {
-            // Losowanie nowego celu patrolu
             Vector3 newPatrolTarget = startPosition + (Vector3)(Random.insideUnitCircle * patrolRadius);
 
-            // Sprawdzenie, czy w kierunku nowego celu nie ma przeszkody
             if (IsObstacleInPath(newPatrolTarget))
             {
-                // Jeśli jest przeszkoda, próbujemy ustawić nowy cel
                 SetNewPatrolTarget();
             }
             else
@@ -227,12 +224,11 @@ namespace enemy
 
         private bool IsObstacleInPath(Vector3 targetPosition)
         {
-            // Wykonaj raycast od obecnej pozycji do nowego celu patrolu
             Vector2 direction = (targetPosition - transform.position).normalized;
             float distance = Vector2.Distance(transform.position, targetPosition);
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, LayerMask.GetMask("Obstacles"));
-            return hit.collider != null;  // Jeśli napotkano przeszkodę, zwróć true
+            return hit.collider != null;
         }
 
         private void DropLoot()
@@ -269,7 +265,6 @@ namespace enemy
 
             while (current != targetCell)
             {
-                // jeśli na komórce jest ściana – przerwij
                 if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
                     return null;
 
