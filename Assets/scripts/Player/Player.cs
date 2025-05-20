@@ -2,6 +2,7 @@ using enemy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float thornsDamage = 2f;
     [SerializeField] public float thornsCooldown =2f;
     private float lastThornsTime =0;
+    private ItemData currentEquippedItem;
+
     private Dictionary<GameObject, float> thornsTimers = new Dictionary<GameObject, float>();
     public float GetDamage() => damage;
     public float GetSpeed() => speed;
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour
     public bool GetCanFire() => canFire;
     public bool GetCanSlow() => canSlow;
     public bool GetHasThorns() => hasThorns;
+    public ItemData GetItem() => currentEquippedItem;
 
     void Awake()
     {
@@ -261,6 +265,8 @@ public class Player : MonoBehaviour
     public void ApplyItemStats(ItemData itemData)
     {
         if (itemData == null) return;
+        currentEquippedItem = itemData;
+
 
         attackSpeedUI += (itemData.attackSpeed * -1);
         damage += itemData.damage;
@@ -424,7 +430,7 @@ public class Player : MonoBehaviour
 
 
     public void ApplyLoadedStats(float dmg, float spd, float atkSpd, float rng, float health, int hearts,
-       bool poison, bool fire, bool slow, bool thorns)
+       bool poison, bool fire, bool slow, bool thorns, ItemData item)
     {
         damage = dmg;
         speed = spd;
@@ -436,11 +442,37 @@ public class Player : MonoBehaviour
         canFire = fire;
         canSlow = slow;
         hasThorns = thorns;
-
+        currentEquippedItem = item;
         UpdateHearts();
         attackSpeedUI = (attackSpeed - 1);
         attackSpeedUI = (1 - attackSpeedUI);
         Stats.Instance.UpdateStats(damage, speed, attackSpeedUI);
+    }
+
+    public void ReplaceItem(ItemData newItem)
+    {
+        if (currentEquippedItem != null)
+        {
+            attackSpeedUI -= (currentEquippedItem.attackSpeed * -1);
+            damage -= currentEquippedItem.damage;
+            speed -= currentEquippedItem.speed;
+            attackSpeed -= currentEquippedItem.attackSpeed;
+            range -= currentEquippedItem.range;
+
+            if (currentEquippedItem.canFire) canFire = false;
+            if (currentEquippedItem.canPoison) canPoison = false;
+            if (currentEquippedItem.canSlow) canSlow = false;
+            if (currentEquippedItem.hasThorns) hasThorns = false;
+
+            if (currentEquippedItem.health > 0)
+            {
+                maxHearts -= Mathf.RoundToInt(currentEquippedItem.health);
+                currentHealth = Mathf.Min(currentHealth, maxHearts * 4);
+            }
+            UpdateHearts();
+
+        }
+
     }
 
 
