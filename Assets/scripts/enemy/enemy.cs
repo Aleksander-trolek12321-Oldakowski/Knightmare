@@ -10,6 +10,8 @@ public class enemy : MonoBehaviour, IDamageable
     {
     public string uniqueID;
     [SerializeField]
+    private string uniqueID;
+    [SerializeField]
     int id;
     [SerializeField]
     string name;
