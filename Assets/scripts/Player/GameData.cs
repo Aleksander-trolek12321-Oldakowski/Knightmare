@@ -18,6 +18,7 @@ public class GameData : MonoBehaviour
     public bool canFire;
     public bool canSlow;
     public bool hasThorns;
+    public ItemData currentEquippedItem;
 
     public List<Sprite> collectedItemIcons = new List<Sprite>();
     public string previousSceneName;
@@ -65,6 +66,8 @@ public class GameData : MonoBehaviour
         canSlow = player.GetCanSlow();
         hasThorns = player.GetHasThorns();
 
+        hasThorns = player.GetHasThorns();
+        currentEquippedItem = player.GetItem();
 
     }
     public void SaveSceneName(Player player)
@@ -78,7 +81,7 @@ public class GameData : MonoBehaviour
         player.ApplyLoadedStats(
             playerDamage, playerSpeed, playerAttackSpeed,
             playerRange, playerHealth, playerMaxHearts,
-            canPoison, canFire, canSlow, hasThorns
+            canPoison, canFire, canSlow, hasThorns, currentEquippedItem
         );
     }
     public void ResetData()
@@ -99,7 +102,7 @@ public class GameData : MonoBehaviour
         previousSceneName = "";
         returnPosition = Vector3.zero;
         destroyedPortals.Clear();
-
+        currentEquippedItem = null;
         playerCoins = 0;
         killedEnemies.Clear();
     }
