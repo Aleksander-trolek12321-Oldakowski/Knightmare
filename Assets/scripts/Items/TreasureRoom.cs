@@ -19,7 +19,7 @@ public class TreasureRoom : MonoBehaviour
             if (itemSpawner != null && itemSpawner.gameObject != collectedItem)
             {
                 Destroy(itemSpawner.gameObject);
-                CreateReturnPortal();
+                //CreateReturnPortal();
             }
         }
     }
