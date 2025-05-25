@@ -63,7 +63,7 @@ MonoBehaviour:
     loop: 1
   - name: MusicGame
     clip: {fileID: 8300000, guid: 4dafd1bebb6363044a483cf1c8dbe259, type: 3}
-    volume: 0.35
+    volume: 0.25
     loop: 1
   - name: MusicPause
     clip: {fileID: 8300000, guid: 76623565db05ae54089e285edc11ad15, type: 3}
@@ -83,5 +83,21 @@ MonoBehaviour:
     loop: 0
   - name: ZombieDamageTaken
     clip: {fileID: 8300000, guid: ea311cb2e0d5acd48a97c46fe5153b4f, type: 3}
+    volume: 0.35
+    loop: 0
+  - name: Candle
+    clip: {fileID: 8300000, guid: 722b7c08cb7596a438387620193940df, type: 3}
+    volume: 0.75
+    loop: 1
+  - name: BossDeath
+    clip: {fileID: 8300000, guid: df56b81670ee6094aaec798ceaed2c0a, type: 3}
+    volume: 0.35
+    loop: 0
+  - name: BossMageAttack
+    clip: {fileID: 8300000, guid: 044abc548de97f74aa2f9f56147493eb, type: 3}
+    volume: 0.35
+    loop: 0
+  - name: BossMusicAfterKill
+    clip: {fileID: 8300000, guid: b7e8891a488ef7d4fb21a7d2606184d5, type: 3}
     volume: 0.35
     loop: 0

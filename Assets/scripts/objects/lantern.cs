@@ -9,10 +9,20 @@ public class lantern : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+     
         if (((1 << other.gameObject.layer) & PlayerMask) != 0)
         {
+            AudioManager.Instance.PlaySound("Candle");
             circle.SetActive(true);
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (((1 << other.gameObject.layer) & PlayerMask) != 0)
+        {
+            AudioManager.Instance.StopSound("Candle");
+        }
+      
     }
 }
