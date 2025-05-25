@@ -427,7 +427,14 @@ public class Player : MonoBehaviour
             heartImages[i].enabled = (i < maxHearts);
         }
     }
+    public void Heal(float healAmount)
+    {
+        if (isDead) return;
 
+        currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
+        UpdateHearts();
+    }
 
     public void ApplyLoadedStats(float dmg, float spd, float atkSpd, float rng, float health, int hearts,
        bool poison, bool fire, bool slow, bool thorns, ItemData item)
