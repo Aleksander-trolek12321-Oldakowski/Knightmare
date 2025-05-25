@@ -1,0 +1,620 @@
+fileFormatVersion: 2
+guid: 0f423bcbb1804d8499ac8a297896e0f7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boss #2 walking left_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 124
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0bac14bac6c5c149bb1a88fe4bbeb79
+      internalID: 668220691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_1
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eb0ea09d5ecf9548a1266d19cb5ba28
+      internalID: -295222351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_2
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df61f6602afb3e49884c0ddc64da6d9
+      internalID: 1101625636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_3
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 0
+        width: 124
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aad4c171bab07244c84816c1e0a6ba9a
+      internalID: 55511467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_4
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 577434d6b8d87b6429321f38c003aedb
+      internalID: -1539115860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_5
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 0
+        width: 124
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 014c1f2d490235c42a5ee0d33114c440
+      internalID: -256587059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_6
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1295b03e2b45c9c42b214f54942f6933
+      internalID: -627515036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_7
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 0
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6aefd0de4777d14f809e893bae3821a
+      internalID: 1036700732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_8
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 0
+        width: 124
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1077e801ba94ccf479ce51b1541fe8df
+      internalID: -119318560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_9
+      rect:
+        serializedVersion: 2
+        x: 1276
+        y: 0
+        width: 123
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b212bacdf07d8b46ad18260a969ac6f
+      internalID: 2022379393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_10
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 0
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbdd8ad071b926045bace5fcc30aad43
+      internalID: 62754971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_11
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 0
+        width: 129
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48499217683ffb6409a15488467d1619
+      internalID: 56101174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_12
+      rect:
+        serializedVersion: 2
+        x: 1695
+        y: 0
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 071255dd32258934e8fc7cc14fed0a12
+      internalID: 264122705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_13
+      rect:
+        serializedVersion: 2
+        x: 1834
+        y: 0
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90cbd3e5617f735468156039b65a05cf
+      internalID: -245406106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_14
+      rect:
+        serializedVersion: 2
+        x: 1973
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dfa2a7cbcbc703428456890741fde04
+      internalID: 1296815447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_15
+      rect:
+        serializedVersion: 2
+        x: 2109
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5887704495e9dc044a08735430450fa5
+      internalID: -149463313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_16
+      rect:
+        serializedVersion: 2
+        x: 2248
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d7367902f62654d94d78a5038a6e96
+      internalID: 1981869329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_17
+      rect:
+        serializedVersion: 2
+        x: 2392
+        y: 0
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50a94c159fdddd149b591dc42d86e73a
+      internalID: 1023852991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_18
+      rect:
+        serializedVersion: 2
+        x: 2535
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef14abf46f4b2a74b985db31c0040f95
+      internalID: 1307768387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_19
+      rect:
+        serializedVersion: 2
+        x: 2670
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08231ba33c1acdd49b6722ee3377f0a5
+      internalID: 1932119285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_20
+      rect:
+        serializedVersion: 2
+        x: 2805
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cde8f8c5fdd1ca43a5369ac24e020e0
+      internalID: 1522682370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_21
+      rect:
+        serializedVersion: 2
+        x: 2937
+        y: 0
+        width: 125
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d4b3bae226fbfa4ea56b9058d5a3e46
+      internalID: -1530869726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss #2 walking left_22
+      rect:
+        serializedVersion: 2
+        x: 3068
+        y: 0
+        width: 132
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f10c75092f73374ba4ce7b8c481436d
+      internalID: 298747153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d31695e9709639f4cb05aeaa0a1f0f8c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      boss #2 walking left_0: 668220691
+      boss #2 walking left_1: -295222351
+      boss #2 walking left_10: 62754971
+      boss #2 walking left_11: 56101174
+      boss #2 walking left_12: 264122705
+      boss #2 walking left_13: -245406106
+      boss #2 walking left_14: 1296815447
+      boss #2 walking left_15: -149463313
+      boss #2 walking left_16: 1981869329
+      boss #2 walking left_17: 1023852991
+      boss #2 walking left_18: 1307768387
+      boss #2 walking left_19: 1932119285
+      boss #2 walking left_2: 1101625636
+      boss #2 walking left_20: 1522682370
+      boss #2 walking left_21: -1530869726
+      boss #2 walking left_22: 298747153
+      boss #2 walking left_3: 55511467
+      boss #2 walking left_4: -1539115860
+      boss #2 walking left_5: -256587059
+      boss #2 walking left_6: -627515036
+      boss #2 walking left_7: 1036700732
+      boss #2 walking left_8: -119318560
+      boss #2 walking left_9: 2022379393
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

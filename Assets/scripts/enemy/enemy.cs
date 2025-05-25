@@ -8,6 +8,7 @@ namespace enemy
 {
 public class enemy : MonoBehaviour, IDamageable
     {
+    [SerializeField]
     public string uniqueID;
     [SerializeField]
     int id;
