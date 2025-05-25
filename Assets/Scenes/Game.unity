@@ -167,6 +167,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4436394025734135898, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436394025734135898, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
+      objectReference: {fileID: 0}
     - target: {fileID: 7259741153680267468, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
       propertyPath: m_Name
       value: Portal
@@ -459,7 +467,7 @@ MonoBehaviour:
   uniqueID: 
   id: 4
   name: Boss_Sekeleton
-  health: 30
+  health: 5
   speed: 5
   damage: 4
   attackRange: 5
@@ -485,7 +493,7 @@ MonoBehaviour:
   patrolRadius: 5
   changePatrolTargetInterval: 3
   pathUpdateInterval: 0.75
-  portalToNextLevel: {fileID: 0}
+  portalToNextLevel: {fileID: 991393734}
 --- !u!4 &35781338
 Transform:
   m_ObjectHideFlags: 0
@@ -2707,6 +2715,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4436394025734135898, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436394025734135898, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
+      objectReference: {fileID: 0}
     - target: {fileID: 5557269405658862685, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
       propertyPath: portalID
       value: Level2
@@ -2717,7 +2733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5557269405658862685, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
       propertyPath: 'possibleScenesToLoad.Array.data[0]'
-      value: Level2
+      value: level 2
       objectReference: {fileID: 0}
     - target: {fileID: 7259741153680267468, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
       propertyPath: m_Name
@@ -2725,7 +2741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7259741153680267468, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3391,7 +3407,7 @@ PrefabInstance:
     - target: {fileID: 1608370228004776198, guid: a8bfd3fbdde68d5418ceb816922c0716, type: 3}
       propertyPath: targetObject
       value: 
-      objectReference: {fileID: 1428551638}
+      objectReference: {fileID: 0}
     - target: {fileID: 3996065593218001318, guid: a8bfd3fbdde68d5418ceb816922c0716, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.436
@@ -5080,6 +5096,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936547569}
   m_CullTransparentMesh: 1
+--- !u!1 &991393734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7259741153680267468, guid: 2f5f4486678838c4da21ea4889bb2f5d, type: 3}
+  m_PrefabInstance: {fileID: 484809052}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1082477865
 GameObject:
   m_ObjectHideFlags: 0
@@ -14455,6 +14476,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -11
       objectReference: {fileID: 0}
+    - target: {fileID: 1292155890684410195, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292155890684410195, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369868285601995219, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369868285601995219, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3862186013639408048, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
       propertyPath: m_LocalPosition.z
       value: -11
@@ -14462,6 +14499,14 @@ PrefabInstance:
     - target: {fileID: 4605903441376845476, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
       propertyPath: m_LocalPosition.z
       value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836599701784362217, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836599701784362217, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
       objectReference: {fileID: 0}
     - target: {fileID: 5376416116391251722, guid: 7161b80ba474c4f4d9ae32662cd4ae01, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15170,11 +15215,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1428551638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6369305086541721417, guid: 5453db83400bed04892484d4723573ec, type: 3}
-  m_PrefabInstance: {fileID: 1611424787}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1438975534
 GameObject:
   m_ObjectHideFlags: 0
@@ -152584,11 +152624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -154098,6 +154138,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreasurRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 1643062080561849825, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643062080561849825, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
+      objectReference: {fileID: 0}
     - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.47
@@ -154137,6 +154185,14 @@ PrefabInstance:
     - target: {fileID: 5043875915452178193, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367222648099075399, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367222648099075399, guid: 8537496b5c724ff4eb8855a10e9695f7, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
