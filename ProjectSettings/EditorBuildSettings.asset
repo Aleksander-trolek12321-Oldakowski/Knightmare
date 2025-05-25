@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Trap Room.unity
     guid: 004e48ac75f6f5845a3e4dfe0ac1db94
+  - enabled: 1
+    path: Assets/Scenes/level 2.unity
+    guid: d58229c4bb3beec428fc5f03b511083d
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
