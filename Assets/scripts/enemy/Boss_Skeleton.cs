@@ -297,7 +297,10 @@ namespace enemy
         }
         public override void Die()
         {
-            if(portalToNextLevel!=null)
+            AudioManager.Instance.PlaySound("BossDeath");
+            AudioManager.Instance.StopSound("MusicGame");
+            AudioManager.Instance.PlaySound("BossMusicAfterKill");
+            if (portalToNextLevel!=null)
             portalToNextLevel.SetActive(true);
 
          
