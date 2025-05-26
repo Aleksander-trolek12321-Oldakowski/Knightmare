@@ -61,7 +61,7 @@ public class PauseMenu : MonoBehaviour
                 AudioManager.Instance.PlaySound("MusicSpecialRoom");
                 break;
             default:
-                AudioManager.Instance.PlaySound("MusicGame");
+                AudioManager.Instance.StopPlaylist();
                 break;
         }
         AudioManager.Instance.StopSound("MusicPause");
@@ -73,7 +73,7 @@ public class PauseMenu : MonoBehaviour
 
     void PauseGame()
     {
-        AudioManager.Instance.StopSound("MusicGame");
+        AudioManager.Instance.StopPlaylist();
         AudioManager.Instance.StopSound("MusicSpecialRoom");
         AudioManager.Instance.PlaySound("MusicPause");
         pauseMenuUI.SetActive(true);
