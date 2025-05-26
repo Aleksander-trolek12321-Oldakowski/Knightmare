@@ -299,7 +299,6 @@ namespace enemy
         {
             AudioManager.Instance.PlaySound("BossDeath");
             AudioManager.Instance.StopPlaylist();
-            AudioManager.Instance.PlaySound("BossMusicAfterKill");
             if (portalToNextLevel!=null)
             portalToNextLevel.SetActive(true);
 

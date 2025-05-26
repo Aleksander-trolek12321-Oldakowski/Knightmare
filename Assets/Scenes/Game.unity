@@ -467,7 +467,7 @@ MonoBehaviour:
   uniqueID: 
   id: 4
   name: Boss_Sekeleton
-  health: 5
+  health: 20
   speed: 5
   damage: 4
   attackRange: 5
@@ -1677,7 +1677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: spawnRadius
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: playerDetectionRadius
@@ -1701,7 +1701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.87
+      value: 13.21
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14343,7 +14343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: spawnRadius
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: playerDetectionRadius
@@ -14367,7 +14367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18.02
+      value: -15.18
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14407,7 +14407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4576645801258827894, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -150840,7 +150840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: spawnRadius
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: playerDetectionRadius
@@ -150860,7 +150860,7 @@ PrefabInstance:
       objectReference: {fileID: 1923125888}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.23
+      value: -27.07
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -151928,7 +151928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: spawnRadius
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: playerDetectionRadius
@@ -151952,7 +151952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.05
+      value: 11.22
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -152320,7 +152320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4576645801258827894, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -152709,11 +152709,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.11
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.77
+      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -154708,7 +154708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: spawnRadius
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2293451400277412121, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: playerDetectionRadius
@@ -154728,11 +154728,11 @@ PrefabInstance:
       objectReference: {fileID: 1923125888}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.23
+      value: -27.93
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.86
+      value: -14.86
       objectReference: {fileID: 0}
     - target: {fileID: 3087821024988442152, guid: acdedf7e1875e3346b527891e6ffcfdb, type: 3}
       propertyPath: m_LocalPosition.z
