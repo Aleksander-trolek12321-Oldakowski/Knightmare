@@ -101,3 +101,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b7e8891a488ef7d4fb21a7d2606184d5, type: 3}
     volume: 0.35
     loop: 0
+  - name: BossWalkingSound
+    clip: {fileID: 8300000, guid: 558b44221cf94b44883a70153aa21191, type: 3}
+    volume: 0.1
+    loop: 0
