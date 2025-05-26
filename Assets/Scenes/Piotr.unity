@@ -97711,10 +97711,6 @@ PrefabInstance:
       propertyPath: portalToNextLevel
       value: 
       objectReference: {fileID: 378434548}
-    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
-      propertyPath: necroPrefabs.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.7045827
@@ -97754,14 +97750,6 @@ PrefabInstance:
     - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572215988503246261, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572215988503246261, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8334838656278052119, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
       propertyPath: m_Name
