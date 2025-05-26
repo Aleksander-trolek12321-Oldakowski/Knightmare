@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
@@ -16,6 +17,10 @@ public class AudioManager : MonoBehaviour
 
     public List<Sound> sounds;
     private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
+
+    // Coroutine handle for playlist
+    private Coroutine playlistCoroutine;
+    private string[] currentPlaylistNames;
 
     private void Awake()
     {
@@ -40,20 +45,82 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Play a single sound instantly.
+    /// </summary>
     public void PlaySound(string name)
     {
-        if (audioSources.ContainsKey(name))
+        if (audioSources.TryGetValue(name, out var src))
         {
-            audioSources[name].Play();
+            src.loop = false;
+            src.Play();
         }
-      
     }
 
+    /// <summary>
+    /// Stop a specific sound.
+    /// </summary>
     public void StopSound(string name)
     {
-        if (audioSources.ContainsKey(name))
+        if (audioSources.TryGetValue(name, out var src))
         {
-            audioSources[name].Stop();
+            src.Stop();
         }
+    }
+
+    /// <summary>
+    /// Play multiple tracks sequentially.
+    /// </summary>
+    /// <param name="names">Names of sounds in order.</param>
+    public void PlayPlaylist(params string[] names)
+    {
+        // Stop any existing playlist first
+        StopPlaylist();
+
+        currentPlaylistNames = names;
+        playlistCoroutine = StartCoroutine(PlaySequence(names));
+    }
+
+    /// <summary>
+    /// Stop the current playlist sequence and all its sounds.
+    /// </summary>
+    public void StopPlaylist()
+    {
+        if (playlistCoroutine != null)
+        {
+            StopCoroutine(playlistCoroutine);
+            playlistCoroutine = null;
+        }
+
+        if (currentPlaylistNames != null)
+        {
+            foreach (var name in currentPlaylistNames)
+            {
+                StopSound(name);
+            }
+            currentPlaylistNames = null;
+        }
+    }
+
+    private IEnumerator PlaySequence(string[] names)
+    {
+        foreach (var name in names)
+        {
+            if (audioSources.TryGetValue(name, out var src))
+            {
+                src.loop = false;
+                src.Play();
+                // wait for clip to finish
+                yield return new WaitForSeconds(src.clip.length);
+            }
+            else
+            {
+                Debug.LogWarning($"AudioManager: No sound named '{name}' found.");
+            }
+        }
+
+        // Playlist finished
+        playlistCoroutine = null;
+        currentPlaylistNames = null;
     }
 }

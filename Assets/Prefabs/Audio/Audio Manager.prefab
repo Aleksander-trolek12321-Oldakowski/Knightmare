@@ -61,10 +61,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7868e3eec4372c34a9f3921399d6c9d0, type: 3}
     volume: 0.5
     loop: 1
-  - name: MusicGame
+  - name: MusicGame1
     clip: {fileID: 8300000, guid: 4dafd1bebb6363044a483cf1c8dbe259, type: 3}
-    volume: 0.25
-    loop: 1
+    volume: 0.15
+    loop: 0
   - name: MusicPause
     clip: {fileID: 8300000, guid: 76623565db05ae54089e285edc11ad15, type: 3}
     volume: 0.35
@@ -105,3 +105,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 558b44221cf94b44883a70153aa21191, type: 3}
     volume: 0.1
     loop: 0
+  - name: MusicGame2
+    clip: {fileID: 8300000, guid: fe715eccb8ab0624c8139a618e181d8a, type: 3}
+    volume: 0.1
+    loop: 0
+  defaultTracks:
+  - MusicGame1
+  - MusicGame2

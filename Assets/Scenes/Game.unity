@@ -1135,6 +1135,91 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &182031041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: tilemapCollider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: hitReactCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: 'necroPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: 'necroPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593129449649133920, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 56b4dc83d2bcc7842954d0281bf234a8, type: 2}
+    - target: {fileID: 8334838656278052119, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_Name
+      value: BossMage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334838656278052119, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
 --- !u!1 &200737515
 GameObject:
   m_ObjectHideFlags: 0
@@ -153393,6 +153478,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: defaultTracks.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[3].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: MusicGame1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: fe715eccb8ab0624c8139a618e181d8a, type: 3}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[14].name
+      value: MusicGame2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 558b44221cf94b44883a70153aa21191, type: 3}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[15].name
+      value: BossWalkingSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: 'defaultTracks.Array.data[0]'
+      value: MusicGame1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: 'defaultTracks.Array.data[1]'
+      value: MusicGame2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[3].volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[14].volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[15].volume
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Name
       value: Audio Manager
@@ -155011,3 +155148,4 @@ SceneRoots:
   - {fileID: 569298017}
   - {fileID: 4061428334303276036}
   - {fileID: 1239683517}
+  - {fileID: 182031041}

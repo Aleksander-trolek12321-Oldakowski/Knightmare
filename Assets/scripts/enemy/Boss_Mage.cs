@@ -9,7 +9,7 @@ namespace enemy
     // Wykorzystujemy wspólne enum BossState z Boss_Skeleton
     public class Boss_Mage : enemy
     {
-        [Header("References")]
+        [Header("References")]  
         [SerializeField] private Player player;
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject fireballPrefab;
@@ -45,6 +45,13 @@ namespace enemy
         private BossState currentState;
         private bool isAttacking = false;
         private bool canAttack = true;
+        private bool isHit = false; // flag for hit reaction
+
+        private IEnumerator ResetHitState()
+        {
+            yield return new WaitForSeconds(hitReactCooldown);
+            isHit = false;
+        }
         private Coroutine attackCoroutine;
 
         private Vector3 patrolTarget;
@@ -75,6 +82,12 @@ namespace enemy
 
         void Update()
         {
+            if (isHit)
+            {
+                // podczas reakcji na hit nie wykonuj ruchu ani rotacji
+                return;
+            }
+
             if (health <= 0)
             {
                 Die();
@@ -107,16 +120,18 @@ namespace enemy
                     break;
             }
 
+            // movement and animation
             if (currentPath != null && pathIndex < currentPath.Count && currentState != BossState.Attack)
             {
                 Vector3 targetPos = currentPath[pathIndex];
-                float speed = (currentState == BossState.Chase || currentState == BossState.Retreat)
-                              ? chaseSpeed : patrolSpeed;
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+                float speed = (currentState == BossState.Chase || currentState == BossState.Retreat) ? chaseSpeed : patrolSpeed;
+                Vector3 prevPos = transform.position;
+                transform.position = Vector3.MoveTowards(prevPos, targetPos, speed * Time.deltaTime);
 
-                if (Vector3.Distance(transform.position, targetPos) < 0.1f) pathIndex++;
+                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+                    pathIndex++;
 
-                Vector3 dir = (targetPos - transform.position).normalized;
+                Vector3 dir = (targetPos - prevPos).normalized;
                 if (dir != Vector3.zero)
                 {
                     animator.SetFloat("Xinput", dir.x);
@@ -127,12 +142,40 @@ namespace enemy
             }
 
             RotateShootPoint();
+            // Jeśli nie ma dalszej ścieżki (patrol done) i nie atakujemy, wróć do Idle
+            if (currentState == BossState.Patrol && (currentPath == null || pathIndex >= (currentPath?.Count ?? 0)))
+            {
+                animator.SetFloat("Xinput", 0f);
+                animator.SetFloat("Yinput", 0f);
+                animator.SetBool("IsIdling", true);
+            }
+            else
+            {
+                animator.SetBool("IsIdling", false);
+            }
+
             UpdateShootPointPosition();
         }
 
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
+            // Ustawienie flagi hit oraz odpowiedniej animacji
+            isHit = true;
+            float lastX = animator.GetFloat("LastXinput");
+            if (lastX >= 0f)
+            {
+                animator.SetTrigger("HitRight");
+                Debug.Log("HitRight");
+            }
+            else
+            {
+                animator.SetTrigger("HitLeft");
+                Debug.Log("HitLeft");
+            }
+            animator.SetBool("IsFacingRight", lastX >= 0f);
+            // Po czasie hitReactCooldown usunięcie flagi isHit
+            StartCoroutine(ResetHitState());
             InterruptAttack();
         }
 
@@ -142,6 +185,7 @@ namespace enemy
             {
                 if (attackCoroutine != null) StopCoroutine(attackCoroutine);
                 isAttacking = false;
+                animator.SetBool("IsAttacking", false);
                 canAttack = false;
                 StartCoroutine(ResetAttackCooldown());
             }
@@ -163,6 +207,7 @@ namespace enemy
         {
             isAttacking = true;
             canAttack = false;
+            animator.SetBool("IsAttacking", true);
 
             float roll = Random.value;
             if (roll <= 0.8f)
@@ -181,6 +226,7 @@ namespace enemy
             }
 
             yield return new WaitForSeconds(attackCooldown);
+            animator.SetBool("IsAttacking", false);
             isAttacking = false;
             canAttack = true;
         }
@@ -278,7 +324,7 @@ namespace enemy
         {
             if (portalToNextLevel != null) portalToNextLevel.SetActive(true);
             AudioManager.Instance.PlaySound("BossDeath");
-            AudioManager.Instance.StopSound("MusicGame");
+            AudioManager.Instance.StopPlaylist();
             AudioManager.Instance.PlaySound("BossMusicAfterKill");
             base.Die();
         }
