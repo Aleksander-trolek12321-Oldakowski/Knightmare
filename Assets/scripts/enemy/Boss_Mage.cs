@@ -188,6 +188,7 @@ namespace enemy
         private void ShootFireball()
         {
             if (fireballPrefab == null || shootPoint == null) return;
+            AudioManager.Instance.PlaySound("BossMageAttack");
             GameObject ball = Instantiate(fireballPrefab, shootPoint.position, shootPoint.rotation);
             Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
             if (rb != null) rb.velocity = shootPoint.right * speed;
@@ -276,6 +277,9 @@ namespace enemy
         public override void Die()
         {
             if (portalToNextLevel != null) portalToNextLevel.SetActive(true);
+            AudioManager.Instance.PlaySound("BossDeath");
+            AudioManager.Instance.StopSound("MusicGame");
+            AudioManager.Instance.PlaySound("BossMusicAfterKill");
             base.Die();
         }
     }

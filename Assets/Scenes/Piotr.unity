@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &35781333
 Animator:
   serializedVersion: 7
@@ -97699,6 +97699,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936547569}
   m_CullTransparentMesh: 1
+--- !u!1001 &960704380
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9380853686802153, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: portalToNextLevel
+      value: 
+      objectReference: {fileID: 378434548}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7045827
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -15.556297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784002056486217182, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334838656278052119, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
+      propertyPath: m_Name
+      value: BossMage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37889a7c92f1df848ab8b857353204ab, type: 3}
 --- !u!1 &1082477865
 GameObject:
   m_ObjectHideFlags: 0
@@ -99373,12 +99434,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 558b44221cf94b44883a70153aa21191, type: 3}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[13].name
+      value: BossWalkingSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: sounds.Array.data[3].volume
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: sounds.Array.data[9].volume
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[13].volume
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Name
@@ -100348,3 +100425,4 @@ SceneRoots:
   - {fileID: 153706208647695652}
   - {fileID: 20236751}
   - {fileID: 340093321}
+  - {fileID: 960704380}
