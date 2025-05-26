@@ -5,17 +5,22 @@ using UnityEngine;
 public class BossWalkingSound : MonoBehaviour
 {
     public LayerMask PlayerMask;
-    public Rigidbody2D bossRigidbody;
-    public float movementThreshold = 0.1f;
 
     private bool isPlayerInside = false;
     private bool isSoundPlaying = false;
+
+    private Vector2 lastPosition;
+
+    private void Start()
+    {
+        lastPosition = transform.position;
+    }
 
     private void Update()
     {
         if (isPlayerInside)
         {
-            if (bossRigidbody != null && bossRigidbody.velocity.magnitude > movementThreshold)
+            if ((Vector2)transform.position != lastPosition)
             {
                 if (!isSoundPlaying)
                 {
@@ -31,6 +36,8 @@ public class BossWalkingSound : MonoBehaviour
                     isSoundPlaying = false;
                 }
             }
+
+            lastPosition = transform.position;
         }
     }
 
