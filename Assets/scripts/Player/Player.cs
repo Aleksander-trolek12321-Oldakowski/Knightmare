@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
+        AudioManager.Instance.StopSound("BossMusicAfterKill");
         AudioManager.Instance.StopSound("MusicMenu");
         AudioManager.Instance.StopSound("MusicGame");
         AudioManager.Instance.StopSound("MusicSpecialRoom");
