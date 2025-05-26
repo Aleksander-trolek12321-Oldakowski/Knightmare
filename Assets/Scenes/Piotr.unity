@@ -99433,30 +99433,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
-      propertyPath: sounds.Array.size
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
-      propertyPath: sounds.Array.data[13].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 558b44221cf94b44883a70153aa21191, type: 3}
-    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
-      propertyPath: sounds.Array.data[13].name
-      value: BossWalkingSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
-      propertyPath: sounds.Array.data[3].volume
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
-      propertyPath: sounds.Array.data[9].volume
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
-      propertyPath: sounds.Array.data[13].volume
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Name
       value: Audio Manager
