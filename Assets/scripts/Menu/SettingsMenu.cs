@@ -5,136 +5,104 @@ using System.Collections.Generic;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [Header("UI References")]
     public Toggle fullScreenToggle;
     public Slider sensitivitySlider;
     public TMP_Dropdown resolutionDropdown;
-    public RawImage backgroundImage; // Obraz tła
-    public RawImage[] scalableImages; // Tablica obrazów do skalowania
+
+    // dekoracyjne obrazy – wyłączamy im RaycastTarget, żeby nie blokowały kliknięć
+    public RawImage backgroundImage;
+    public RawImage[] scalableImages;
 
     private bool isFullScreen = true;
-    private float sensitivity = 5.0f;
-    private Resolution[] resolutions;
+    private float sensitivity = 5f;
+    private Resolution[] availableResolutions;
 
-    private const float baseWidth = 1920f; // Baza rozdzielczości dla skalowania
-    private const float baseHeight = 1080f;
+    private const string PREF_FULLSCREEN      = "Fullscreen";
+    private const string PREF_SENSITIVITY    = "Sensitivity";
+    private const string PREF_RESOLUTION_IDX = "ResolutionIndex";
 
     void Start()
     {
-        // Pobranie dostępnych rozdzielczości
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
+        // 1. Wyłącz raycast target na dekoracjach
+        if (backgroundImage != null) 
+            backgroundImage.raycastTarget = false;
+        if (scalableImages != null)
+            foreach (var img in scalableImages)
+                if (img != null) 
+                    img.raycastTarget = false;
 
-        for (int i = 0; i < resolutions.Length; i++)
+        // 2. Wczytaj dostępne rozdzielczości i wypełnij dropdown
+        availableResolutions = Screen.resolutions;
+        var options = new List<string>(availableResolutions.Length);
+        for (int i = 0; i < availableResolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            var r = availableResolutions[i];
+            options.Add($"{r.width} × {r.height}");
         }
-
+        resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
 
-        // Wczytanie ustawień
+        // 3. Wczytaj zapisane ustawienia i zastosuj je od razu
         LoadSettings();
 
-        // Ustawienie początkowych wartości UI
-        fullScreenToggle.isOn = isFullScreen;
-        sensitivitySlider.value = sensitivity;
+        // 4. Ustaw UI bez generowania callbacków przy starcie
+        fullScreenToggle.SetIsOnWithoutNotify(isFullScreen);
+        sensitivitySlider.SetValueWithoutNotify(sensitivity);
+        resolutionDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt(PREF_RESOLUTION_IDX, 0));
     }
 
-    public void ToggleFullScreen(bool isOn)
+    // Metody publiczne – przypniesz je w Inspectorze do OnValueChanged
+    public void OnFullScreenToggle(bool isOn)
     {
-        isFullScreen = isOn;
+        isFullScreen      = isOn;
         Screen.fullScreen = isFullScreen;
-        Debug.Log("Fullscreen: " + isFullScreen);
+        PlayerPrefs.SetInt(PREF_FULLSCREEN, isFullScreen ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
-    public void SetSensitivity(float value)
+    public void OnSensitivityChanged(float value)
     {
         sensitivity = value;
-        Debug.Log("Sensitivity: " + sensitivity);
-    }
-
-    public void SetResolution(int index)
-    {
-        if (index >= 0 && index < resolutions.Length)
-        {
-            Resolution selectedResolution = resolutions[index];
-            Screen.SetResolution(selectedResolution.width, selectedResolution.height, isFullScreen);
-            Debug.Log("Resolution set to: " + selectedResolution.width + " x " + selectedResolution.height);
-            PlayerPrefs.SetInt("ResolutionIndex", index);
-            PlayerPrefs.Save();
-
-            // Dostosowanie obrazów do nowej rozdzielczości
-            AdjustImageScales(selectedResolution.width, selectedResolution.height);
-        }
-        else
-        {
-            Debug.LogWarning("Selected resolution index is out of range.");
-        }
-    }
-
-    public void SaveSettings()
-    {
-        PlayerPrefs.SetInt("Fullscreen", isFullScreen ? 1 : 0);
-        PlayerPrefs.SetFloat("Sensitivity", sensitivity);
+        PlayerPrefs.SetFloat(PREF_SENSITIVITY, sensitivity);
         PlayerPrefs.Save();
-        Debug.Log("Settings Saved: Fullscreen - " + isFullScreen + ", Sensitivity - " + sensitivity);
+    }
+
+    public void OnResolutionChanged(int idx)
+    {
+        if (idx < 0 || idx >= availableResolutions.Length) return;
+
+        // Zastosuj nową rozdzielczość od razu
+        var r = availableResolutions[idx];
+        Screen.SetResolution(r.width, r.height, isFullScreen);
+
+        // Zapisz wybraną opcję
+        PlayerPrefs.SetInt(PREF_RESOLUTION_IDX, idx);
+        PlayerPrefs.Save();
     }
 
     private void LoadSettings()
     {
-        isFullScreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
-        sensitivity = PlayerPrefs.GetFloat("Sensitivity", 5.0f);
-        int resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", 0);
+        isFullScreen = PlayerPrefs.GetInt(PREF_FULLSCREEN, 1) == 1;
+        sensitivity  = PlayerPrefs.GetFloat(PREF_SENSITIVITY, 5f);
+        int idx      = PlayerPrefs.GetInt(PREF_RESOLUTION_IDX, 0);
 
-        if (resolutionIndex >= 0 && resolutionIndex < resolutions.Length)
+        // Wstępnie zastosuj ustawienia ekranu
+        Screen.fullScreen = isFullScreen;
+        if (availableResolutions.Length > 0)
         {
-            Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, isFullScreen);
-            resolutionDropdown.value = resolutionIndex;
-
-            AdjustImageScales(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height);
+            idx = Mathf.Clamp(idx, 0, availableResolutions.Length - 1);
+            var r = availableResolutions[idx];
+            Screen.SetResolution(r.width, r.height, isFullScreen);
         }
-        else
-        {
-            Debug.LogWarning("Loaded resolution index is out of range, setting to default.");
-            Screen.SetResolution(resolutions[0].width, resolutions[0].height, isFullScreen);
-            resolutionDropdown.value = 0;
-
-            AdjustImageScales(resolutions[0].width, resolutions[0].height);
-        }
-
-        Debug.Log("Loaded Settings: Fullscreen - " + isFullScreen + ", Sensitivity - " + sensitivity + ", Resolution Index - " + resolutionIndex);
     }
 
     private void OnApplicationQuit()
     {
-        SaveSettings();
-    }
-
-    // Skalowanie wszystkich obrazów
-    private void AdjustImageScales(int width, int height)
-    {
-        float scaleX = width / baseWidth;
-        float scaleY = height / baseHeight;
-
-        // Skalowanie wszystkich obrazów w tablicy
-        if (scalableImages != null && scalableImages.Length > 0)
-        {
-            foreach (var image in scalableImages)
-            {
-                if (image != null)
-                {
-                    image.rectTransform.localScale = new Vector3(scaleX, scaleY, 1);
-                }
-            }
-            Debug.Log("All images scaled: X = " + scaleX + ", Y = " + scaleY);
-        }
-
-        // Skalowanie tła
-        if (backgroundImage != null)
-        {
-            backgroundImage.rectTransform.localScale = new Vector3(scaleX, scaleY, 1);
-            Debug.Log("Background scaled: X = " + scaleX + ", Y = " + scaleY);
-        }
+        // Na wszelki wypadek – jeszcze raz zapisz zmiany
+        PlayerPrefs.SetInt(PREF_FULLSCREEN, isFullScreen ? 1 : 0);
+        PlayerPrefs.SetFloat(PREF_SENSITIVITY, sensitivity);
+        PlayerPrefs.SetInt(PREF_RESOLUTION_IDX, resolutionDropdown.value);
+        PlayerPrefs.Save();
     }
 }
