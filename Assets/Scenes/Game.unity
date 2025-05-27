@@ -152730,11 +152730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 7519926351646482771, guid: 30aa7ee81d2128546865584337944c57, type: 3}
       propertyPath: m_LocalPosition.z
@@ -155074,6 +155074,14 @@ PrefabInstance:
     - target: {fileID: 1686664716972154294, guid: b65c5df05e501de4ba4b0b2ea599aa03, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857856426173775953, guid: b65c5df05e501de4ba4b0b2ea599aa03, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857856426173775953, guid: b65c5df05e501de4ba4b0b2ea599aa03, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1727156165
       objectReference: {fileID: 0}
     - target: {fileID: 2108621765527240079, guid: b65c5df05e501de4ba4b0b2ea599aa03, type: 3}
       propertyPath: health
