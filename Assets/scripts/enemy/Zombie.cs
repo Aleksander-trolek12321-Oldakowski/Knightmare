@@ -50,8 +50,12 @@ namespace enemy
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.5f;
 
-        private void Awake()
+        public static int zombieKillCounter;
+
+
+        void Awake()
         {
+            zombieKillCounter = 0;
             rb = GetComponent<Rigidbody2D>();
 
             if (player == null)
@@ -100,6 +104,7 @@ namespace enemy
             {
                 animator.SetTrigger("Death");
                 DropLoot();
+                zombieKillCounter++;
                 Die();
             }
         }

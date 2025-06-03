@@ -48,12 +48,12 @@ namespace enemy
         private List<Vector3> currentPath;
         private int pathIndex = 0;
         private bool isPathUpdating = false;
-        public float pathUpdateInterval = 0.5f;
+        public float pathUpdateInterval = 0.75f;
+        public static int skeletonKillCounter;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-
+            skeletonKillCounter = 0;
             if (player == null)
                 player = FindObjectOfType<Player>();
 
@@ -100,6 +100,7 @@ namespace enemy
             {
                 animator.SetTrigger("Death");
                 DropLoot();
+                skeletonKillCounter++;
                 Die();
             }
         }
