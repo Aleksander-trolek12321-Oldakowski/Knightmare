@@ -66,8 +66,6 @@ namespace enemy
         public override void Start()
         {
             base.Start();
-            if (portalToNextLevel != null && !GameData.Instance.killedEnemies.Contains(uniqueID))
-                portalToNextLevel.SetActive(false);
         }
 
         void Awake()
