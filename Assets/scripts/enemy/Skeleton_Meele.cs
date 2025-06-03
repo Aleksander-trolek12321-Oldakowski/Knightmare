@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 namespace enemy
 {
     public enum SkeletonState { Patrol, Chase, Attack }
-    [RequireComponent(typeof(Rigidbody2D))]
+
     public class Skeleton_Meele : enemy
     {
         [Header("Referencje")]
@@ -15,14 +15,14 @@ namespace enemy
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private Player player;
         [SerializeField] private GameObject moneyPrefab;
+        [Header("Animacja i hit-react")]
         [SerializeField] private Animator animator;
-        [SerializeField] private LayerMask wallLayer;   // Warstwa ścian
-        [SerializeField] private LayerMask playerLayer; // Warstwa gracza
+        [SerializeField] private float hitReactCooldown = 1f;
 
         [Header("Ruch, Pościg i Patrol")]
         public float patrolSpeed = 1f;
         public float chaseSpeed = 2f;
-        public float sightRange = 5f;
+        public float sightRange = 7f;
         public float loseSightRange = 10f;
         public float patrolRadius = 5f;
         public float changePatrolTargetInterval = 3f;
@@ -31,9 +31,6 @@ namespace enemy
         public float attackCooldown = 1.5f;
 
         [Header("Kolor po obrażeniach")]
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        private Color originalColor;
-        private Color damageColor = new Color(1f, 0.45f, 0.45f);
         private Coroutine damageCoroutine;
 
         private ZombieState currentState = ZombieState.Patrol;
@@ -41,63 +38,52 @@ namespace enemy
         private Vector3 patrolTarget;
         private float patrolTimer = 0f;
 
-        private Rigidbody2D rb;
         private bool isAttacking = false;
         private bool canAttack = true;
+        private Coroutine attackCoroutine;
+        private bool isReactingToHit = false;
 
+        // ** nowe pola dla pathfindingu **
         private List<Vector3> currentPath;
         private int pathIndex = 0;
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.75f;
         public static int skeletonKillCounter;
 
-        private void Awake()
+        void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-
             skeletonKillCounter = 0;
             if (player == null)
                 player = FindObjectOfType<Player>();
-
             if (tilemapCollider == null)
                 tilemapCollider = FindObjectOfType<TilemapCollider2D>();
-
             if (tilemap == null && tilemapCollider != null)
                 tilemap = tilemapCollider.GetComponent<Tilemap>();
-
-            if (spriteRenderer == null)
-                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-            originalColor = spriteRenderer.color;
             startPosition = transform.position;
             SetNewPatrolTarget();
         }
 
-        private void Update()
+        void Update()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-            // Atak
-            if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
+            if (!isReactingToHit && distanceToPlayer <= attackRange && canAttack && !isAttacking)
             {
-                ChangeState(ZombieState.Attack);
+                ChangeState(SkeletonState.Attack);
                 Attack();
             }
-            // Pościg
             else if (distanceToPlayer <= sightRange && PlayerInSight())
             {
-                ChangeState(ZombieState.Chase);
+                ChangeState(SkeletonState.Chase);
             }
-            // Powrót do patrolu
             else if (distanceToPlayer > loseSightRange)
             {
                 startPosition = transform.position;
-                ChangeState(ZombieState.Patrol);
+                ChangeState(SkeletonState.Patrol);
             }
 
-            HandleMovement();
+            HandleStateMovement();
 
-            // Sprawdzenie śmierci
             if (health <= 0)
             {
                 animator.SetTrigger("Death");
@@ -107,78 +93,89 @@ namespace enemy
             }
         }
 
-        private void ChangeState(ZombieState newState)
+        void ChangeState(SkeletonState newState)
         {
             if (currentState != newState)
-            {
                 currentState = newState;
-                pathIndex = 0;
-                currentPath = null;
-                // Debug.Log($"Zmiana stanu na: {newState}");
-            }
         }
 
-        private void HandleMovement()
+        private void HandleStateMovement()
         {
-            if (currentState == ZombieState.Patrol)
+            switch (currentState)
             {
-                patrolTimer += Time.deltaTime;
-                if (patrolTimer >= changePatrolTargetInterval || currentPath == null || pathIndex >= (currentPath?.Count ?? 0))
-                {
-                    SetNewPatrolTarget();
-                    patrolTimer = 0f;
-                }
-                UpdatePath(patrolTarget);
-            }
-            else if (currentState == ZombieState.Chase)
-            {
-                UpdatePath(player.transform.position);
-            }
-            else if (currentState == ZombieState.Attack)
-            {
-                // Podczas ataku nie aktualizujemy ścieżki
-                rb.velocity = Vector2.zero;
-            }
-        }
+                case SkeletonState.Patrol:
+                    patrolTimer += Time.deltaTime;
+                    if (patrolTimer >= changePatrolTargetInterval)
+                    {
+                        SetNewPatrolTarget();
+                        patrolTimer = 0f;
+                    }
+                    UpdatePath(patrolTarget);
+                    break;
 
-        private void FixedUpdate()
-        {
-            if (currentState == ZombieState.Attack)
-                return;
+                case SkeletonState.Chase:
+                    UpdatePath(player.transform.position);
+                    break;
 
-            if (currentPath != null && pathIndex < currentPath.Count)
+                case SkeletonState.Attack:
+                    break;
+            }
+
+            // ruch wzdłuż ścieżki
+            if (currentPath != null && pathIndex < currentPath.Count && currentState != SkeletonState.Attack)
             {
                 Vector3 targetPos = currentPath[pathIndex];
-                float speed = (currentState == ZombieState.Chase) ? chaseSpeed : patrolSpeed;
+                float moveSpeed = (currentState == SkeletonState.Chase) ? chaseSpeed : patrolSpeed;
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 
-                Vector2 currentPos2D = rb.position;
-                Vector2 targetPos2D = new Vector2(targetPos.x, targetPos.y);
-                Vector2 dir = (targetPos2D - currentPos2D).normalized;
-
-                rb.velocity = dir * speed;
-
-                // Obrót animacji
-                animator.SetFloat("Xinput", dir.x);
-                animator.SetFloat("Yinput", dir.y);
-                if (dir != Vector2.zero)
+                Vector3 dir = (targetPos - transform.position).normalized;
+                if (dir != Vector3.zero)
                 {
+                    animator.SetFloat("Xinput", dir.x);
+                    animator.SetFloat("Yinput", dir.y);
                     animator.SetFloat("LastXinput", dir.x);
                     animator.SetFloat("LastYinput", dir.y);
                 }
 
-                // Jeżeli doszliśmy do węzła, przejdź do następnego
-                if (Vector2.Distance(currentPos2D, targetPos2D) < 0.1f)
-                {
+                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
                     pathIndex++;
-                }
             }
-            else
+        }
+
+        public override void TakeDamage(float damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+            if (!isReactingToHit)
+                StartCoroutine(HitReactRoutine());
+            InterruptAttack();
+        }
+
+        private IEnumerator HitReactRoutine()
+        {
+            isReactingToHit = true;
+            animator.SetTrigger("Hit");
+            yield return new WaitForSeconds(hitReactCooldown);
+            isReactingToHit = false;
+        }
+
+        private void InterruptAttack()
+        {
+            if (isAttacking)
             {
-                // Jeśli brak ścieżki, nie ruszaj się
-                rb.velocity = Vector2.zero;
-                animator.SetFloat("Xinput", 0f);
-                animator.SetFloat("Yinput", 0f);
+                if (attackCoroutine != null)
+                    StopCoroutine(attackCoroutine);
+
+                isAttacking = false;
+                animator.SetBool("IsAttacking", false);
+                canAttack = false;
+                StartCoroutine(ResetAttackCooldown());
             }
+        }
+
+        private IEnumerator ResetAttackCooldown()
+        {
+            yield return new WaitForSeconds(hitReactCooldown);
+            canAttack = true;
         }
 
         public override void Attack()
@@ -186,7 +183,6 @@ namespace enemy
             if (isAttacking || !canAttack)
                 return;
 
-            AudioManager.Instance.PlaySound("ZombieAttack");
             isAttacking = true;
             canAttack = false;
 
@@ -218,13 +214,8 @@ namespace enemy
             isAttacking = false;
             canAttack = false;
 
-            // Zmień kolor na czerwony
-            spriteRenderer.color = damageColor;
-
+            animator.SetTrigger("Hit");
             yield return new WaitForSeconds(1f);
-
-            spriteRenderer.color = originalColor;
-            canAttack = true;
 
             // Powrót do odpowiedniego stanu
             float dist = Vector3.Distance(transform.position, player.transform.position);
@@ -236,24 +227,17 @@ namespace enemy
 
         private IEnumerator PerformAttack()
         {
-            yield return new WaitForSeconds(0.5f); // animacja wind-up
-            // Jeżeli gracz dalej w zasięgu ataku:
+            yield return new WaitForSeconds(0.5f);
             if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
-            {
                 player.TakeDamage(damage);
-            }
+
+            animator.SetBool("IsAttacking", true);
+            yield return new WaitForSeconds(attackCooldown);
             animator.SetBool("IsAttacking", false);
 
-            yield return new WaitForSeconds(attackCooldown);
             isAttacking = false;
             canAttack = true;
-
-            // Po ataku znów wchodzimy w pościg lub patrol
-            float dist = Vector3.Distance(transform.position, player.transform.position);
-            if (dist <= sightRange && PlayerInSight())
-                ChangeState(ZombieState.Chase);
-            else
-                ChangeState(ZombieState.Patrol);
+            currentState = PlayerInSight() ? SkeletonState.Chase : SkeletonState.Patrol;
         }
 
         private bool PlayerInSight()
@@ -261,54 +245,50 @@ namespace enemy
             Vector2 startPos = transform.position;
             Vector2 targetPos = player.transform.position;
             Vector2 dir = (targetPos - startPos).normalized;
-            float distance = Vector2.Distance(startPos, targetPos);
-
-            // Raycast trafia najpierw w gracza lub w ścianę
-            int combinedMask = wallLayer | playerLayer;
-            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, combinedMask);
-            Debug.DrawRay(startPos, dir * distance, Color.red, 0.1f);
-
-            if (hit.collider == null)
-                return false;
-
-            // Jeśli to ściana → gracz ukryty
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer(LayerMask.LayerToName(wallLayer.value - 1)))
-                return false;
-
-            // Trafiliśmy w gracza
-            return (hit.collider.gameObject.layer == LayerMask.NameToLayer(LayerMask.LayerToName(playerLayer.value - 1)));
+            float dist = Vector2.Distance(startPos, targetPos);
+            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, dist, LayerMask.GetMask("Player"));
+            return hit.collider != null;
         }
 
         private void SetNewPatrolTarget()
         {
-            // Losuj punkt w obrębie patrolRadius
-            for (int i = 0; i < 10; i++) // próbuj maksymalnie 10 razy
+            Vector3 newPatrolTarget = startPosition + (Vector3)(Random.insideUnitCircle * patrolRadius);
+
+            if (IsObstacleInPath(newPatrolTarget))
             {
-                Vector3 raw = startPosition + (Vector3)(Random.insideUnitCircle * patrolRadius);
-                Vector3Int cell = tilemap.WorldToCell(raw);
-                Vector3 cellCenter = tilemap.GetCellCenterWorld(cell);
-
-                // Jeżeli ściana w tym kafelku, spróbuj ponownie
-                if (tilemapCollider.OverlapPoint(cellCenter))
-                    continue;
-
-                patrolTarget = cellCenter;
-                return;
+                SetNewPatrolTarget();
             }
-            // Jeżeli nie znaleziono wolnego punktu, patrolTarget = startPosition
-            patrolTarget = startPosition;
+            else
+            {
+                patrolTarget = newPatrolTarget;
+            }
         }
 
-        private void UpdatePath(Vector3 targetWorld)
+        private bool IsObstacleInPath(Vector3 targetPosition)
+        {
+            Vector2 direction = (targetPosition - transform.position).normalized;
+            float distance = Vector2.Distance(transform.position, targetPosition);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, LayerMask.GetMask("Obstacles"));
+            return hit.collider != null;
+        }
+
+        private void DropLoot()
+        {
+            if (Random.value <= 0.2f)
+                Instantiate(moneyPrefab, transform.position, Quaternion.identity);
+        }
+
+        private void UpdatePath(Vector3 targetPosition)
         {
             if (!isPathUpdating)
-                StartCoroutine(PathfindingRoutine(targetWorld));
+                StartCoroutine(PathfindingRoutine(targetPosition));
         }
 
-        private IEnumerator PathfindingRoutine(Vector3 targetWorld)
+        private IEnumerator PathfindingRoutine(Vector3 targetPosition)
         {
             isPathUpdating = true;
-            List<Vector3> newPath = FindPathAStar(transform.position, targetWorld);
+            List<Vector3> newPath = FindPath(transform.position, targetPosition);
             if (newPath != null && newPath.Count > 0)
             {
                 currentPath = newPath;
@@ -318,190 +298,26 @@ namespace enemy
             isPathUpdating = false;
         }
 
-        /// <summary>
-        /// Prosty algorytm A* na gridzie kafelkowym. Omija ściany (tilemapCollider).
-        /// </summary>
-        private List<Vector3> FindPathAStar(Vector3 startWorld, Vector3 targetWorld)
+        private List<Vector3> FindPath(Vector3 startWorld, Vector3 targetWorld)
         {
             Vector3Int startCell = tilemap.WorldToCell(startWorld);
             Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
+            List<Vector3> path = new List<Vector3>();
+            Vector3Int current = startCell;
 
-            // Jeżeli start lub cel w ścianie → zwróć null
-            if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(startCell)) ||
-                tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(targetCell)))
-                return null;
-
-            // Struktury dla A*
-            var openSet = new MinHeap();
-            var cameFrom = new Dictionary<Vector3Int, Vector3Int>();
-            var gScore = new Dictionary<Vector3Int, float>();
-            var fScore = new Dictionary<Vector3Int, float>();
-            var visited = new HashSet<Vector3Int>();
-
-            gScore[startCell] = 0f;
-            fScore[startCell] = Heuristic(startCell, targetCell);
-            openSet.Add(startCell, fScore[startCell]);
-
-            while (openSet.Count > 0)
+            while (current != targetCell)
             {
-                Vector3Int current = openSet.Pop();
-                if (current == targetCell)
-                    return ReconstructPath(cameFrom, current);
+                if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
+                    return null;
 
-                visited.Add(current);
-
-                foreach (Vector3Int neighbor in GetNeighbors(current))
-                {
-                    if (visited.Contains(neighbor))
-                        continue;
-
-                    // Jeżeli ściana → pomiń
-                    Vector3 worldCenter = tilemap.GetCellCenterWorld(neighbor);
-                    if (tilemapCollider.OverlapPoint(worldCenter))
-                        continue;
-
-                    float tentativeG = gScore[current] + Vector3Int.Distance(current, neighbor);
-                    if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
-                    {
-                        cameFrom[neighbor] = current;
-                        gScore[neighbor] = tentativeG;
-                        fScore[neighbor] = tentativeG + Heuristic(neighbor, targetCell);
-
-                        if (!openSet.Contains(neighbor))
-                            openSet.Add(neighbor, fScore[neighbor]);
-                        else
-                            openSet.UpdatePriority(neighbor, fScore[neighbor]);
-                    }
-                }
+                path.Add(tilemap.GetCellCenterWorld(current));
+                Vector3Int dir = new Vector3Int(
+                    Mathf.Clamp(targetCell.x - current.x, -1, 1),
+                    Mathf.Clamp(targetCell.y - current.y, -1, 1),
+                    0);
+                current += dir;
             }
-
-            // Nie znaleziono ścieżki
-            return null;
+            return path;
         }
-
-        private float Heuristic(Vector3Int a, Vector3Int b)
-        {
-            // Manhattan distance
-            return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
-        }
-
-        private IEnumerable<Vector3Int> GetNeighbors(Vector3Int cell)
-        {
-            yield return new Vector3Int(cell.x + 1, cell.y, 0);
-            yield return new Vector3Int(cell.x - 1, cell.y, 0);
-            yield return new Vector3Int(cell.x, cell.y + 1, 0);
-            yield return new Vector3Int(cell.x, cell.y - 1, 0);
-            // Dla 8-sąsiedztwa można dodać także przekątne:
-            // yield return new Vector3Int(cell.x + 1, cell.y + 1, 0);
-            // yield return new Vector3Int(cell.x + 1, cell.y - 1, 0);
-            // yield return new Vector3Int(cell.x - 1, cell.y + 1, 0);
-            // yield return new Vector3Int(cell.x - 1, cell.y - 1, 0);
-        }
-
-        private List<Vector3> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int current)
-        {
-            var totalPath = new List<Vector3Int> { current };
-            while (cameFrom.ContainsKey(current))
-            {
-                current = cameFrom[current];
-                totalPath.Add(current);
-            }
-            totalPath.Reverse();
-
-            var worldPath = new List<Vector3>();
-            foreach (Vector3Int cell in totalPath)
-            {
-                worldPath.Add(tilemap.GetCellCenterWorld(cell));
-            }
-            return worldPath;
-        }
-
-        private void DropLoot()
-        {
-            if (Random.value <= 0.2f)
-            {
-                Instantiate(moneyPrefab, transform.position, Quaternion.identity);
-            }
-        }
-
-        #region --- A* Helper: MinHeap dla pary (Vector3Int, float) ---
-        private class MinHeap
-        {
-            private List<(Vector3Int cell, float priority)> heap = new List<(Vector3Int, float)>();
-            private Dictionary<Vector3Int, int> indices = new Dictionary<Vector3Int, int>();
-
-            public int Count => heap.Count;
-
-            public void Add(Vector3Int cell, float priority)
-            {
-                heap.Add((cell, priority));
-                int i = heap.Count - 1;
-                indices[cell] = i;
-                BubbleUp(i);
-            }
-
-            public bool Contains(Vector3Int cell) => indices.ContainsKey(cell);
-
-            public void UpdatePriority(Vector3Int cell, float newPriority)
-            {
-                if (!indices.TryGetValue(cell, out int i)) return;
-                float oldPr = heap[i].priority;
-                heap[i] = (cell, newPriority);
-                if (newPriority < oldPr) BubbleUp(i);
-                else BubbleDown(i);
-            }
-
-            public Vector3Int Pop()
-            {
-                var root = heap[0].cell;
-                Swap(0, heap.Count - 1);
-                heap.RemoveAt(heap.Count - 1);
-                indices.Remove(root);
-                BubbleDown(0);
-                return root;
-            }
-
-            private void BubbleUp(int i)
-            {
-                while (i > 0)
-                {
-                    int parent = (i - 1) / 2;
-                    if (heap[i].priority < heap[parent].priority)
-                    {
-                        Swap(i, parent);
-                        i = parent;
-                    }
-                    else break;
-                }
-            }
-
-            private void BubbleDown(int i)
-            {
-                int left = 2 * i + 1;
-                int right = 2 * i + 2;
-                int smallest = i;
-
-                if (left < heap.Count && heap[left].priority < heap[smallest].priority)
-                    smallest = left;
-                if (right < heap.Count && heap[right].priority < heap[smallest].priority)
-                    smallest = right;
-
-                if (smallest != i)
-                {
-                    Swap(i, smallest);
-                    BubbleDown(smallest);
-                }
-            }
-
-            private void Swap(int i, int j)
-            {
-                var tmp = heap[i];
-                heap[i] = heap[j];
-                heap[j] = tmp;
-                indices[heap[i].cell] = i;
-                indices[heap[j].cell] = j;
-            }
-        }
-        #endregion
     }
 }
