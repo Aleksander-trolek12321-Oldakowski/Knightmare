@@ -345,7 +345,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject gameOverScreen; // Dodaj to pole na górze klasy
+    [SerializeField] private GameObject gameOverScreen; // Dodaj to pole na gï¿½rze klasy
+    [SerializeField] private GameObject UI;
 
 
     private void Die()
@@ -359,14 +360,15 @@ public class Player : MonoBehaviour
         playerInputActions.Player.Disable();
 
         animator.SetTrigger("Death");
-     
-    //    SceneManager.LoadScene("MainMenu");
 
-       // StartCoroutine(Respawn());
+        //    SceneManager.LoadScene("MainMenu");
+
+        // StartCoroutine(Respawn());
 
         if (gameOverScreen != null)
         {
             gameOverScreen.SetActive(true);
+            UI.SetActive(false);
 
         }
         Time.timeScale = 0f;
