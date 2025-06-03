@@ -345,6 +345,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject gameOverScreen; // Dodaj to pole na górze klasy
+
+
     private void Die()
     {
         AudioManager.Instance.StopSound("MusicGame");
@@ -357,9 +360,16 @@ public class Player : MonoBehaviour
 
         animator.SetTrigger("Death");
      
-        SceneManager.LoadScene("MainMenu");
+    //    SceneManager.LoadScene("MainMenu");
 
-        StartCoroutine(Respawn());
+       // StartCoroutine(Respawn());
+
+        if (gameOverScreen != null)
+        {
+            gameOverScreen.SetActive(true);
+
+        }
+        Time.timeScale = 0f;
     }
 
     private IEnumerator Respawn()

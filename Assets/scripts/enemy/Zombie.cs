@@ -50,8 +50,12 @@ namespace enemy
         private Color damageColor = new Color(1f, 0.45f, 0.45f); // #FF7373 jako Color
         private Coroutine damageCoroutine;
 
+        public static int zombieKillCounter;
+
+
         void Awake()
         {
+            zombieKillCounter = 0;
             rb = GetComponent<Rigidbody2D>();
 
             if (player == null)
@@ -100,6 +104,7 @@ namespace enemy
                 // Jeśli chcesz, aby nazwa wyzwalacza była taka sama jak w Skeleton_Meele ("Death")
                 animator.SetTrigger("Death");
                 DropLoot();
+                zombieKillCounter++;
                 Die();
             }
         }

@@ -45,9 +45,11 @@ namespace enemy
         private int pathIndex = 0;
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.75f;
+        public static int skeletonKillCounter;
 
         void Awake()
         {
+            skeletonKillCounter = 0;
             if (player == null)
                 player = FindObjectOfType<Player>();
             if (tilemapCollider == null)
@@ -84,6 +86,7 @@ namespace enemy
             {
                 animator.SetTrigger("Death");
                 DropLoot();
+                skeletonKillCounter++;
                 Die();
             }
         }
