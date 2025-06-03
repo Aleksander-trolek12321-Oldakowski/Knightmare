@@ -143,6 +143,8 @@ public class enemy : MonoBehaviour, IDamageable
             {
                 GameData.Instance.killedEnemies.Add(uniqueID);
             }
+
+
             Destroy(gameObject);
 
         }

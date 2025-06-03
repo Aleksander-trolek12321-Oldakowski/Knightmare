@@ -50,8 +50,19 @@ namespace enemy
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.5f;
 
-        private void Awake()
+
+        [Header("Kolor po obrażeniach")] // ZMIANA
+        [SerializeField] private SpriteRenderer spriteRenderer; // ZMIANA
+        private Color originalColor; // ZMIANA
+        private Color damageColor = new Color(1f, 0.45f, 0.45f); // #FF7373 jako Color
+        private Coroutine damageCoroutine;
+
+        public static int zombieKillCounter;
+
+
+        void Awake()
         {
+            zombieKillCounter = 0;
             rb = GetComponent<Rigidbody2D>();
 
             if (player == null)
@@ -100,6 +111,7 @@ namespace enemy
             {
                 animator.SetTrigger("Death");
                 DropLoot();
+                zombieKillCounter++;
                 Die();
             }
         }

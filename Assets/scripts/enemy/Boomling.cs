@@ -38,10 +38,13 @@ namespace enemy
         private bool hasExploded;
         private Animator animator;
         private Player player;
+        public static int boomlingKillCounter;
 
         void Awake()
         {
-            animator = GetComponent<Animator>();
+            boomlingKillCounter = 0;
+
+        animator = GetComponent<Animator>();
             player = FindObjectOfType<Player>();
             if (tilemapCollider == null)
                 tilemapCollider = FindObjectOfType<TilemapCollider2D>();
@@ -59,6 +62,7 @@ namespace enemy
             if (health <= 0 && !hasExploded)
             {
                 hasExploded = true;
+                boomlingKillCounter++;
                 Die();
                 return;
             }
