@@ -53,6 +53,8 @@ namespace enemy
 
         private void Awake()
         {
+            rb = GetComponent<Rigidbody2D>();
+
             skeletonKillCounter = 0;
             if (player == null)
                 player = FindObjectOfType<Player>();
