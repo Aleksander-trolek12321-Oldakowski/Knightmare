@@ -31,9 +31,6 @@ namespace enemy
         public float attackCooldown = 1.5f;
 
         [Header("Kolor po obrażeniach")]
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        private Color originalColor;
-        private Color damageColor = new Color(1f, 0.45f, 0.45f);
         private Coroutine damageCoroutine;
 
         private ZombieState currentState = ZombieState.Patrol;
@@ -64,11 +61,6 @@ namespace enemy
 
             if (tilemap == null && tilemapCollider != null)
                 tilemap = tilemapCollider.GetComponent<Tilemap>();
-
-            if (spriteRenderer == null)
-                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-            originalColor = spriteRenderer.color;
             startPosition = transform.position;
             SetNewPatrolTarget();
         }
@@ -218,13 +210,8 @@ namespace enemy
             isAttacking = false;
             canAttack = false;
 
-            // Zmień kolor na czerwony
-            spriteRenderer.color = damageColor;
-
+            animator.SetTrigger("Hit");
             yield return new WaitForSeconds(1f);
-
-            spriteRenderer.color = originalColor;
-            canAttack = true;
 
             // Powrót do odpowiedniego stanu
             float dist = Vector3.Distance(transform.position, player.transform.position);
