@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
 
         AudioManager.Instance.StopSound("BossMusicAfterKill");
         AudioManager.Instance.StopSound("MusicMenu");
-        AudioManager.Instance.StopSound("MusicGame");
+        AudioManager.Instance.StopPlaylist();
         AudioManager.Instance.StopSound("MusicSpecialRoom");
 
 
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
                 AudioManager.Instance.PlaySound("MusicSpecialRoom");
                 break;
             default:
-                AudioManager.Instance.PlaySound("MusicGame");
+                AudioManager.Instance.PlayPlaylist("MusicGame1", "MusicGame2");
                 break;
         }
         if (GameData.Instance != null && SceneManager.GetActiveScene().name == GameData.Instance.previousSceneName)

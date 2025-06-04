@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Audio/Audio Manager.prefab.meta
 guid: b6fad0d7b39151342b2d0ca41fbbd230
+========
+guid: c872366bddfa066449a96c5400af000d
+>>>>>>>> main:Assets/Prefabs/GameData/GameData.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
