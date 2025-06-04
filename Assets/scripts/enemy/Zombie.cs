@@ -48,7 +48,7 @@ namespace enemy
         private List<Vector3> currentPath;
         private int pathIndex = 0;
         private bool isPathUpdating = false;
-        public float pathUpdateInterval = 0.75f;
+        public float pathUpdateInterval = 0.5f;
 
         public static int zombieKillCounter;
 
