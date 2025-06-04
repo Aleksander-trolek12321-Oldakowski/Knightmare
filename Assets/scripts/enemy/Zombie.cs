@@ -16,8 +16,8 @@ namespace enemy
         [SerializeField] private Player player;
         [SerializeField] private GameObject moneyPrefab;
         [SerializeField] private Animator animator;
-        [SerializeField] private LayerMask wallLayer;   // Warstwa ścian
-        [SerializeField] private LayerMask playerLayer; // Warstwa gracza
+        [SerializeField] private LayerMask Wall;   // Warstwa ścian
+        [SerializeField] private LayerMask Player; // Warstwa gracza
 
         [Header("Ruch, Pościg i Patrol")]
         public float patrolSpeed = 1f;
@@ -260,25 +260,29 @@ namespace enemy
 
         private bool PlayerInSight()
         {
-            Vector2 startPos = transform.position;
+            Vector2 startPos  = transform.position;
             Vector2 targetPos = player.transform.position;
-            Vector2 dir = (targetPos - startPos).normalized;
-            float distance = Vector2.Distance(startPos, targetPos);
+            Vector2 dir       = (targetPos - startPos).normalized;
+            float distance    = Vector2.Distance(startPos, targetPos);
 
-            // Raycast trafia najpierw w gracza lub w ścianę
-            int combinedMask = wallLayer | playerLayer;
+            // Zakładamy, że wallLayer i playerLayer to pola typu LayerMask (np. ustawione przez Inspector)
+            int combinedMask = Wall | Player;
             RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, combinedMask);
             Debug.DrawRay(startPos, dir * distance, Color.red, 0.1f);
 
             if (hit.collider == null)
                 return false;
 
-            // Jeśli to ściana → gracz ukryty
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer(LayerMask.LayerToName(wallLayer.value - 1)))
+            int hitLayer = hit.collider.gameObject.layer;
+            // Jeśli to warstwa „Wall” → gracz jest za przeszkodą
+            if (((1 << hitLayer) & Wall.value) != 0)
                 return false;
 
-            // Trafiliśmy w gracza
-            return (hit.collider.gameObject.layer == LayerMask.NameToLayer(LayerMask.LayerToName(playerLayer.value - 1)));
+            // Jeśli to warstwa „Player” → widzimy gracza
+            if (((1 << hitLayer) & Player.value) != 0)
+                return true;
+
+            return false;
         }
 
         private void SetNewPatrolTarget()
@@ -320,25 +324,28 @@ namespace enemy
             isPathUpdating = false;
         }
 
-        /// <summary>
-        /// Prosty algorytm A* na gridzie kafelkowym. Omija ściany (tilemapCollider).
-        /// </summary>
+        private bool IsCellBlocked(Vector3Int cell)
+        {
+            // Jeśli kafelka nie ma, to możemy przejść
+            if (!tilemap.HasTile(cell))
+                return false;
+            // Jeśli jest kafelek (zakładamy, że to np. ściana), to blokujemy
+            return true;
+        }
+
         private List<Vector3> FindPathAStar(Vector3 startWorld, Vector3 targetWorld)
         {
-            Vector3Int startCell = tilemap.WorldToCell(startWorld);
+            Vector3Int startCell  = tilemap.WorldToCell(startWorld);
             Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
 
-            // Jeżeli start lub cel w ścianie → zwróć null
-            if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(startCell)) ||
-                tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(targetCell)))
+            if (IsCellBlocked(startCell) || IsCellBlocked(targetCell))
                 return null;
 
-            // Struktury dla A*
-            var openSet = new MinHeap();
+            var openSet  = new MinHeap();
             var cameFrom = new Dictionary<Vector3Int, Vector3Int>();
-            var gScore = new Dictionary<Vector3Int, float>();
-            var fScore = new Dictionary<Vector3Int, float>();
-            var visited = new HashSet<Vector3Int>();
+            var gScore   = new Dictionary<Vector3Int, float>();
+            var fScore   = new Dictionary<Vector3Int, float>();
+            var visited  = new HashSet<Vector3Int>();
 
             gScore[startCell] = 0f;
             fScore[startCell] = Heuristic(startCell, targetCell);
@@ -357,17 +364,15 @@ namespace enemy
                     if (visited.Contains(neighbor))
                         continue;
 
-                    // Jeżeli ściana → pomiń
-                    Vector3 worldCenter = tilemap.GetCellCenterWorld(neighbor);
-                    if (tilemapCollider.OverlapPoint(worldCenter))
+                    if (IsCellBlocked(neighbor))
                         continue;
 
                     float tentativeG = gScore[current] + Vector3Int.Distance(current, neighbor);
                     if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
                     {
                         cameFrom[neighbor] = current;
-                        gScore[neighbor] = tentativeG;
-                        fScore[neighbor] = tentativeG + Heuristic(neighbor, targetCell);
+                        gScore[neighbor]   = tentativeG;
+                        fScore[neighbor]   = tentativeG + Heuristic(neighbor, targetCell);
 
                         if (!openSet.Contains(neighbor))
                             openSet.Add(neighbor, fScore[neighbor]);
@@ -377,13 +382,11 @@ namespace enemy
                 }
             }
 
-            // Nie znaleziono ścieżki
             return null;
         }
 
         private float Heuristic(Vector3Int a, Vector3Int b)
         {
-            // Manhattan distance
             return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
         }
 
@@ -393,11 +396,6 @@ namespace enemy
             yield return new Vector3Int(cell.x - 1, cell.y, 0);
             yield return new Vector3Int(cell.x, cell.y + 1, 0);
             yield return new Vector3Int(cell.x, cell.y - 1, 0);
-            // Dla 8-sąsiedztwa można dodać także przekątne:
-            // yield return new Vector3Int(cell.x + 1, cell.y + 1, 0);
-            // yield return new Vector3Int(cell.x + 1, cell.y - 1, 0);
-            // yield return new Vector3Int(cell.x - 1, cell.y + 1, 0);
-            // yield return new Vector3Int(cell.x - 1, cell.y - 1, 0);
         }
 
         private List<Vector3> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int current)

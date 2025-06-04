@@ -18,8 +18,8 @@ namespace enemy
         [SerializeField] private Transform shootPoint;
         [SerializeField] private TilemapCollider2D tilemapCollider;
         [SerializeField] private Tilemap tilemap;
-        [SerializeField] private LayerMask wallLayer;   // Warstwa ścian
-        [SerializeField] private LayerMask playerLayer; // Warstwa gracza
+        [SerializeField] private LayerMask Wall;   // Warstwa ścian
+        [SerializeField] private LayerMask Player; // Warstwa gracza
 
         [Header("Animacja i hit-react")]
         [SerializeField] private float hitReactCooldown = 0.23f;
@@ -250,24 +250,29 @@ namespace enemy
 
         private bool PlayerInSight()
         {
-            Vector2 startPos = transform.position;
+            Vector2 startPos  = transform.position;
             Vector2 targetPos = player.transform.position;
-            Vector2 dir = (targetPos - startPos).normalized;
-            float distance = Vector2.Distance(startPos, targetPos);
+            Vector2 dir       = (targetPos - startPos).normalized;
+            float distance    = Vector2.Distance(startPos, targetPos);
 
-            int combinedMask = wallLayer | playerLayer;
+            // Zakładamy, że wallLayer i playerLayer to pola typu LayerMask (np. ustawione przez Inspector)
+            int combinedMask = Wall | Player;
             RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, combinedMask);
             Debug.DrawRay(startPos, dir * distance, Color.red, 0.1f);
 
             if (hit.collider == null)
                 return false;
 
-            // Jeśli trafił w ścianę → gracz ukryty
-            if (((1 << hit.collider.gameObject.layer) & wallLayer) != 0)
+            int hitLayer = hit.collider.gameObject.layer;
+            // Jeśli to warstwa „Wall” → gracz jest za przeszkodą
+            if (((1 << hitLayer) & Wall.value) != 0)
                 return false;
 
-            // Trafiliśmy w gracza
-            return ((1 << hit.collider.gameObject.layer) & playerLayer) != 0;
+            // Jeśli to warstwa „Player” → widzimy gracza
+            if (((1 << hitLayer) & Player.value) != 0)
+                return true;
+
+            return false;
         }
 
         private void PatrolPath()
@@ -341,21 +346,34 @@ namespace enemy
             isPathUpdating = false;
         }
 
+        /// <summary>
+        /// Zwraca true, jeśli w danej komórce tilemapy znajduje się jakikolwiek kafelek.
+        /// Czyli traktujemy każdą komórkę z kafelkiem jako „ściana”/zajętą.
+        /// </summary>
+        private bool IsCellBlocked(Vector3Int cell)
+        {
+            // Jeśli w tej komórce nie ma kafelka → false (pole wolne)
+            if (!tilemap.HasTile(cell))
+                return false;
+
+            // Jeśli kafelek jest (ściana) → true (pole zablokowane)
+            return true;
+        }
+
         private List<Vector3> FindPathAStar(Vector3 startWorld, Vector3 targetWorld)
         {
-            Vector3Int startCell = tilemap.WorldToCell(startWorld);
+            Vector3Int startCell  = tilemap.WorldToCell(startWorld);
             Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
 
-            // Jeśli start lub cel w ścianie → zwróć null
-            if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(startCell)) ||
-                tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(targetCell)))
+            // Jeśli start lub cel to ściana → od razu zwracamy null
+            if (IsCellBlocked(startCell) || IsCellBlocked(targetCell))
                 return null;
 
-            var openSet = new MinHeap();
+            var openSet  = new MinHeap();
             var cameFrom = new Dictionary<Vector3Int, Vector3Int>();
-            var gScore = new Dictionary<Vector3Int, float>();
-            var fScore = new Dictionary<Vector3Int, float>();
-            var visited = new HashSet<Vector3Int>();
+            var gScore   = new Dictionary<Vector3Int, float>();
+            var fScore   = new Dictionary<Vector3Int, float>();
+            var visited  = new HashSet<Vector3Int>();
 
             gScore[startCell] = 0f;
             fScore[startCell] = Heuristic(startCell, targetCell);
@@ -374,16 +392,16 @@ namespace enemy
                     if (visited.Contains(neighbor))
                         continue;
 
-                    Vector3 worldCenter = tilemap.GetCellCenterWorld(neighbor);
-                    if (tilemapCollider.OverlapPoint(worldCenter))
+                    // Jeśli w danej komórce jest kafelek (ściana) → pomiń
+                    if (IsCellBlocked(neighbor))
                         continue;
 
                     float tentativeG = gScore[current] + Vector3Int.Distance(current, neighbor);
                     if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
                     {
                         cameFrom[neighbor] = current;
-                        gScore[neighbor] = tentativeG;
-                        fScore[neighbor] = tentativeG + Heuristic(neighbor, targetCell);
+                        gScore[neighbor]   = tentativeG;
+                        fScore[neighbor]   = tentativeG + Heuristic(neighbor, targetCell);
 
                         if (!openSet.Contains(neighbor))
                             openSet.Add(neighbor, fScore[neighbor]);
@@ -393,11 +411,13 @@ namespace enemy
                 }
             }
 
+            // Nie znaleziono ścieżki
             return null;
         }
 
         private float Heuristic(Vector3Int a, Vector3Int b)
         {
+            // Manhattan distance
             return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
         }
 
