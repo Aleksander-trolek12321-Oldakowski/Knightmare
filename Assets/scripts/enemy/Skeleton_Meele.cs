@@ -221,36 +221,6 @@ namespace enemy
                 ChangeState(ZombieState.Patrol);
         }
 
-        public override void TakeDamage(float damageAmount)
-        {
-            base.TakeDamage(damageAmount);
-            AudioManager.Instance.PlaySound("ZombieDamageTaken");
-
-            if (damageCoroutine != null)
-                StopCoroutine(damageCoroutine);
-
-            damageCoroutine = StartCoroutine(HandleDamageEffect());
-        }
-
-        private IEnumerator HandleDamageEffect()
-        {
-            // Przerwij atak
-            StopCoroutine("PerformAttack");
-            animator.SetBool("IsAttacking", false);
-            isAttacking = false;
-            canAttack = false;
-
-            animator.SetTrigger("Hit");
-            yield return new WaitForSeconds(1f);
-
-            // Powrót do odpowiedniego stanu
-            float dist = Vector3.Distance(transform.position, player.transform.position);
-            if (dist <= sightRange && PlayerInSight())
-                ChangeState(ZombieState.Chase);
-            else
-                ChangeState(ZombieState.Patrol);
-        }
-
         private IEnumerator PerformAttack()
         {
             yield return new WaitForSeconds(0.5f); // animacja wind-up
