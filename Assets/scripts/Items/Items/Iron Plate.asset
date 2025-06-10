@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Iron Plate
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 8f16e87d6a5f78a4292a2267b3664217, type: 3}
-  health: 1
+  health: 2
   damage: 0
   speed: 0
   attackSpeed: 0

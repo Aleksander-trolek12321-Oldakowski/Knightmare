@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cross
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 1631194983, guid: 1d7cbfba81fda894f84f180a309d0d84, type: 3}
-  health: 1
+  health: 1.5
   damage: 0
   speed: 0
   attackSpeed: 0
