@@ -62,6 +62,9 @@ public class GambitRoom : MonoBehaviour
             {
                 InventoryUI.Instance.RemoveLastItemIcon();
 
+                if (GameData.Instance.collectedItemIcons.Count > 0)
+                    GameData.Instance.collectedItemIcons.RemoveAt(GameData.Instance.collectedItemIcons.Count - 1);
+
                 InventoryUI.Instance.AddItemToUI(currentItem.itemSprite, currentItem.name);
                 GameData.Instance.collectedItemIcons.Add(currentItem.itemSprite);
             }
