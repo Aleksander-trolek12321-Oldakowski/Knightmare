@@ -3,122 +3,181 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace enemy
+namespace enemySpace
 {
+    [RequireComponent(typeof(ScenePersistence))]
     public class Enemy_Spawner : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> enemyPrefabs;
-        [SerializeField] private int[] enemyID;
-        [SerializeField] private float spawnRadius = 10f;
-        [SerializeField] private int minEnemies = 5;
-        [SerializeField] private int maxEnemies = 15;
-        [SerializeField] private float playerDetectionRadius = 10f;
-        [SerializeField] private float minDistanceFromPlayer = 3f;
-        [SerializeField] private float minDistanceBetweenEnemies = 2f;
+        [Header("Spawner Settings")]
+        public string uniqueSpawnerID;
+        public List<GameObject> enemyPrefabs;
+        public int minEnemies = 5;
+        public int maxEnemies = 15;
+        public float spawnRadius = 10f;
+
+        [Header("Spawn Conditions")]
+        public float playerDetectionRadius = 10f;
+        public float minDistanceFromPlayer = 3f;
+        public float minDistanceBetweenEnemies = 2f;
 
         private Player player;
         private bool hasSpawned = false;
+        private ScenePersistence persistence;
 
-        private void Start()
+        void Awake()
         {
-            player = FindFirstObjectByType<Player>();
-            if (player == null)
-            {
-                Debug.LogError("Brak obiektu Player w scenie!");
-            }
+            persistence = GetComponent<ScenePersistence>();
+            persistence.uniqueID = uniqueSpawnerID;
+            persistence.isSpawner = true;
         }
 
-        private void Update()
+        void Start()
+        {
+            // Restore previously spawned enemies if any
+            if (GameData.Instance != null && GameData.Instance.enemyStates.Exists(s => s.uniqueID.StartsWith(uniqueSpawnerID + "_")))
+            {
+                foreach (var es in GameData.Instance.enemyStates)
+                {
+                    if (!es.uniqueID.StartsWith(uniqueSpawnerID + "_"))
+                        continue;
+
+                    // Use saved prefabIndex
+                    int idx = es.prefabIndex;
+                    if (idx < 0 || idx >= enemyPrefabs.Count)
+                        continue;
+
+                    // Instantiate at saved position
+                    GameObject go = Instantiate(enemyPrefabs[idx], es.position.ToVector3(), Quaternion.identity);
+                    var en = go.GetComponent<enemy>();
+                    if (en != null)
+                        en.uniqueID = es.uniqueID;
+                }
+                hasSpawned = true;
+                persistence.RegisterRemoval();
+                return;
+            }
+
+            // Normal flow
+            player = FindObjectOfType<Player>();
+            if (player == null)
+                Debug.LogError("Player not found in scene.");
+        }
+
+        void Update()
         {
             if (hasSpawned || player == null)
                 return;
 
-            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-
-            if (distanceToPlayer <= playerDetectionRadius)
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+            if (dist <= playerDetectionRadius)
             {
                 SpawnEnemies();
                 hasSpawned = true;
+                persistence.RegisterRemoval();
             }
         }
 
         private void SpawnEnemies()
         {
+            // Clear any previous states for this spawner to avoid duplicates
+            if (GameData.Instance != null)
+            {
+                GameData.Instance.enemyStates.RemoveAll(es => es.uniqueID.StartsWith(uniqueSpawnerID + "_"));
+            }
+
             if (enemyPrefabs == null || enemyPrefabs.Count == 0)
             {
-                Debug.LogError("Lista enemyPrefabs jest pusta! Dodaj przeciwników do listy.");
+                Debug.LogError("Enemy prefabs list is empty!");
                 return;
             }
 
-            int numberOfEnemies = Random.Range(minEnemies, maxEnemies);
-
-            for (int i = 0; i < numberOfEnemies; i++)
+            int count = Random.Range(minEnemies, maxEnemies + 1);
+            Debug.Log($"{uniqueSpawnerID} spawning {count} enemies.");
             {
-                int id = Random.Range(0, enemyPrefabs.Count);
-                Vector2 spawnPosition = FindValidSpawnPosition();
-
-                if (spawnPosition != Vector2.zero)
+                if (enemyPrefabs == null || enemyPrefabs.Count == 0)
                 {
-                    Instantiate(enemyPrefabs[id], spawnPosition, Quaternion.identity);
-                    gameObject.SetActive(false);
-                }
-                else
-                {
-                    Debug.LogWarning("Brak dostępnej pozycji do respienia przeciwnika.");
-                }
-            }
-        }
-
-        private Vector2 FindValidSpawnPosition()
-        {
-            if (player == null)
-            {
-                Debug.LogError("Nie znaleziono gracza. Przerywam wyszukiwanie pozycji.");
-                return Vector2.zero;
-            }
-
-            for (int i = 0; i < 10; i++) // 10 prób znalezienia miejsca
-            {
-                Vector2 randomPosition = (Vector2)transform.position + Random.insideUnitCircle * spawnRadius;
-
-                // Sprawdzenie minimalnej odległości od gracza
-                if (Vector2.Distance(randomPosition, player.transform.position) < minDistanceFromPlayer)
-                    continue;
-
-                // Sprawdzenie kolizji z TilemapCollider2D
-                Collider2D collider = Physics2D.OverlapCircle(randomPosition, 0.5f);
-                if (collider != null && collider.GetComponent<TilemapCollider2D>() != null)
-                {
-                    continue; // Jeśli koliduje z Tilemapą, szukamy dalej
+                    Debug.LogError("Enemy prefabs list is empty!");
+                    return;
                 }
 
-                // Sprawdzenie, czy miejsce nie nachodzi na innego przeciwnika
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(randomPosition, minDistanceBetweenEnemies);
-                bool isPositionValid = true;
+                Debug.Log($"{uniqueSpawnerID} spawning {count} enemies.");
 
-                foreach (Collider2D col in colliders)
+                for (int i = 0; i < count; i++)
                 {
-                    if (col != null && col.GetComponent<enemy>() != null) // Unikamy null
+                    Vector2 pos = GetValidSpawnPosition();
+                    if (pos == Vector2.zero)
                     {
-                        isPositionValid = false;
-                        break;
+                        Debug.LogWarning("No valid spawn position found.");
+                        continue;
+                    }
+
+                    int idx = Random.Range(0, enemyPrefabs.Count);
+                    GameObject go = Instantiate(enemyPrefabs[idx], pos, Quaternion.identity);
+                    var en = go.GetComponent<enemy>();
+                    if (en == null)
+                    {
+                        Debug.LogError("Spawned prefab missing 'enemy' component.");
+                        Destroy(go);
+                        continue;
+                    }
+
+                    // Assign uniqueID combining spawner and index
+                    en.uniqueID = $"{uniqueSpawnerID}_{i}";
+                    Debug.Log($"Registered {en.uniqueID} with prefab index {idx}");
+
+                    // Record state
+                    if (GameData.Instance != null)
+                    {
+                        GameData.Instance.enemyStates.Add(new EnemyState {
+                            uniqueID = en.uniqueID,
+                            position = new SerializableVector3(en.transform.position),
+                            prefabIndex = idx
+                        });
                     }
                 }
 
-                if (isPositionValid)
+                // Save all recorded enemy states
+                if (GameData.Instance != null)
                 {
-                    return randomPosition;
+                    Debug.Log($"Saving {GameData.Instance.enemyStates.Count} enemyStates");
+                    GameData.Instance.SaveToDisk();
                 }
             }
-
-            return Vector2.zero; // Jeśli nie znaleziono odpowiedniego miejsca
         }
 
+        private Vector2 GetValidSpawnPosition()
+        {
+            for (int attempt = 0; attempt < 10; attempt++)
+            {
+                Vector2 candidate = (Vector2)transform.position + Random.insideUnitCircle * spawnRadius;
+                if (Vector2.Distance(candidate, player.transform.position) < minDistanceFromPlayer)
+                    continue;
+                var hit = Physics2D.OverlapCircle(candidate, 0.5f);
+                if (hit != null && hit.GetComponent<TilemapCollider2D>() != null)
+                    continue;
+                var others = Physics2D.OverlapCircleAll(candidate, minDistanceBetweenEnemies);
+                bool ok = true;
+                foreach (var c in others)
+                {
+                    if (c.GetComponent<enemy>() != null)
+                    {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok) return candidate;
+            }
+            return Vector2.zero;
+        }
 
-        private void OnDrawGizmosSelected()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, spawnRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, playerDetectionRadius);
         }
     }
 }
+
+

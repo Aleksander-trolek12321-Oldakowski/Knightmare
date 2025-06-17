@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -7,63 +6,25 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public Player player;  // odwołanie do komponentu Player w scenie
+
     private bool isPaused = false;
-    public Player player;
-    private PlayerInput playerInput;
-
-    void Awake()
-    {
-        playerInput = new PlayerInput();
-        playerInput.UI.Pause.performed += ctx => TogglePause();
-
-    }
-
-    void OnEnable()
-    {
-
-
-        playerInput.UI.Enable();
-    }
-
-    void OnDisable()
-    {
-      
-        playerInput.UI.Disable();
-    }
-
-    private void TogglePause()
-    {
-        if (isPaused)
-            ResumeGame();
-        else
-            PauseGame();
-    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-                ResumeGame();
-            else
-                PauseGame();
-        }
+            TogglePause();
+    }
+
+    private void TogglePause()
+    {
+        if (isPaused) ResumeGame();
+        else PauseGame();
     }
 
     public void ResumeGame()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-
-
-        switch (currentScene)
-        {
-            case "Blood room":
-                AudioManager.Instance.PlaySound("MusicSpecialRoom");
-                break;
-            default:
-                AudioManager.Instance.StopPlaylist();
-                break;
-        }
+        // Odtwórz muzykę i UI
         AudioManager.Instance.StopSound("MusicPause");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -73,22 +34,30 @@ public class PauseMenu : MonoBehaviour
 
     void PauseGame()
     {
-        AudioManager.Instance.StopPlaylist();
-        AudioManager.Instance.StopSound("MusicSpecialRoom");
-        AudioManager.Instance.PlaySound("MusicPause");
-        pauseMenuUI.SetActive(true);
+        // Pauza
         Time.timeScale = 0f;
+        pauseMenuUI.SetActive(true);
         isPaused = true;
         player.playerInputActions.Player.Disable();
 
-        EventSystem.current.SetSelectedGameObject(null);
+        // Zapisz stan gry w pamięci i na dysku
+        GameData.Instance.SaveSceneData(player);
+        GameData.Instance.SavePlayerData(player);
+        GameData.Instance.SaveToDisk();
 
+        // Zresetuj zaznaczenie w UI
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void LoadMainMenu()
     {
+        // Przed wyjściem do menu upewnij się, że mamy zapisany stan
+        GameData.Instance.SaveSceneData(player);
+        GameData.Instance.SavePlayerData(player);
+        GameData.Instance.SaveToDisk();
+
         AudioManager.Instance.StopSound("MusicPause");
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 }

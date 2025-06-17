@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Analytics;
 
-namespace enemy
+namespace enemySpace
 {
 public class enemy : MonoBehaviour, IDamageable
     {
@@ -40,7 +40,7 @@ public class enemy : MonoBehaviour, IDamageable
             }
 
         }
-        private void GenerateUniqueID()
+        public void GenerateUniqueID()
         {
             string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
             Vector3 position = transform.position;
@@ -142,6 +142,7 @@ public class enemy : MonoBehaviour, IDamageable
             if (!GameData.Instance.killedEnemies.Contains(uniqueID))
             {
                 GameData.Instance.killedEnemies.Add(uniqueID);
+                GameData.Instance.SaveToDisk();
             }
 
 

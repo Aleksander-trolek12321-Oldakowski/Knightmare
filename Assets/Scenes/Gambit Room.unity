@@ -74669,6 +74669,7 @@ GameObject:
   - component: {fileID: 1318617639}
   - component: {fileID: 1318617638}
   - component: {fileID: 1318617641}
+  - component: {fileID: 1318617642}
   m_Layer: 0
   m_Name: ItemSpawner
   m_TagString: Untagged
@@ -74839,6 +74840,20 @@ MonoBehaviour:
   itemChangeInterval: 0.5
   returnPortalPrefab: {fileID: 5600569927022940727, guid: ea9507a8187e3954f881f3928ab91046, type: 3}
   portalSpawnPosition: {x: -9.05, y: -4, z: -1}
+--- !u!114 &1318617642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318617636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00757be09623efc41b3d0cfbaa372a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: GambitRoom
+  isSpawner: 0
 --- !u!1 &1490588508
 GameObject:
   m_ObjectHideFlags: 0

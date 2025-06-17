@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3087821024988442152}
   - component: {fileID: 2293451400277412121}
+  - component: {fileID: -5837061428539365852}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -54,3 +55,17 @@ MonoBehaviour:
   playerDetectionRadius: 10
   minDistanceFromPlayer: 3
   minDistanceBetweenEnemies: 2
+--- !u!114 &-5837061428539365852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576645801258827894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00757be09623efc41b3d0cfbaa372a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: 
+  isSpawner: 1
