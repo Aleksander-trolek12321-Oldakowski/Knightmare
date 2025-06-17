@@ -181,6 +181,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+
         rb.velocity = movementVector;
     }
 
@@ -292,6 +293,7 @@ public class Player : MonoBehaviour
 
         if (itemData.changeCameraSize)
         {
+            changeCameraSize = itemData.changeCameraSize;
             mainCamera.orthographicSize = newCameraSize;
         }
 
@@ -345,7 +347,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject gameOverScreen; // Dodaj to pole na g�rze klasy
+    [SerializeField] private GameObject gameOverScreen; 
     [SerializeField] private GameObject UI;
 
 
@@ -450,8 +452,14 @@ public class Player : MonoBehaviour
     }
 
     public void ApplyLoadedStats(float dmg, float spd, float atkSpd, float rng, float health, int hearts,
-       bool poison, bool fire, bool slow, bool thorns, ItemData item)
+       bool poison, bool fire, bool slow, bool thorns, ItemData item, bool changeCameraSize2)
     {
+        changeCameraSize = changeCameraSize2;
+        Debug.Log(changeCameraSize);
+        if (changeCameraSize)
+        {
+            mainCamera.orthographicSize = newCameraSize;
+        }
         damage = dmg;
         speed = spd;
         attackSpeed = atkSpd;
@@ -473,6 +481,11 @@ public class Player : MonoBehaviour
     {
         if (currentEquippedItem != null)
         {
+            if (currentEquippedItem.changeCameraSize)
+            {
+                changeCameraSize = false;
+                mainCamera.orthographicSize = 5;
+            }
             attackSpeedUI -= (currentEquippedItem.attackSpeed * -1);
             damage -= currentEquippedItem.damage;
             speed -= currentEquippedItem.speed;
