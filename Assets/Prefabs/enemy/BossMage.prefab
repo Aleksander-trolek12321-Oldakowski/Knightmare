@@ -134,7 +134,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.24, y: 1.74}
+    oldSize: {x: 1.3052632, y: 1.831579}
     newSize: {x: 1.29, y: 1.6202643}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -233,9 +233,9 @@ MonoBehaviour:
   uniqueID: 
   id: 5
   name: Boss_Mage
-  health: 1
-  speed: 4
-  damage: 3
+  health: 25
+  speed: 2
+  damage: 2
   attackRange: 5
   attackSpeed: 2
   minimumDistance: 15
@@ -254,15 +254,15 @@ MonoBehaviour:
   attackCooldown: 2
   shootPointRadius: 2
   rotationSpeed: 5
-  retreatDistance: 1.5
-  chaseSpeed: 3
+  retreatDistance: 3
+  chaseSpeed: 2
   sightRange: 7
   patrolSpeed: 2
   patrolRadius: 5
   changePatrolTargetInterval: 3
   minSpawn: 1
-  maxSpawn: 3
-  spawnDelay: 0.5
+  maxSpawn: 2
+  spawnDelay: 1
   spawnRadius: 1.5
   pathUpdateInterval: 0.75
   portalToNextLevel: {fileID: 0}
