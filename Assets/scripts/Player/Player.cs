@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     public bool GetCanFire() => canFire;
     public bool GetCanSlow() => canSlow;
     public bool GetHasThorns() => hasThorns;
+    public bool GetCamerSize() => changeCameraSize;
     public ItemData GetItem() => currentEquippedItem;
 
     void Awake()
