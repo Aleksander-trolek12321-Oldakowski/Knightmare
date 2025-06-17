@@ -153,4 +153,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 186c36b4840592043a72b8bc65032b10, type: 2}
   isInShop: 0
   treasureRoom: {fileID: 0}
+  secretRoom: {fileID: 0}
   itemPriceText: {fileID: 0}
+  questionMarkPrefab: {fileID: 0}

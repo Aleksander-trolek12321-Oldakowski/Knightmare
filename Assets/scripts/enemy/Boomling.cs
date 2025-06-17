@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace enemy
+namespace enemySpace
 {
     public enum BoomlingState { Patrol, Chase, Explode }
 

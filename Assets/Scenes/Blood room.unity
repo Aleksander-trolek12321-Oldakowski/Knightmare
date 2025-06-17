@@ -100315,6 +100315,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1129622939096494699, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1317762858}
+    - targetCorrespondingSourceObject: {fileID: 3248136089990014314, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1317762857}
     - targetCorrespondingSourceObject: {fileID: 8870907920092047102, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -100360,6 +100366,17 @@ RectTransform:
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1401530112
+--- !u!1 &1317762855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3248136089990014314, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
+  m_PrefabInstance: {fileID: 1317762854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1317762856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1129622939096494699, guid: bef9ff51a2219984fb75f7260647cb37, type: 3}
+  m_PrefabInstance: {fileID: 1317762854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1317762857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100452,12 +100469,28 @@ MonoBehaviour:
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1401530113
 CanvasRenderer:
+  m_GameObject: {fileID: 1317762855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00757be09623efc41b3d0cfbaa372a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: BloodRoom_2
+  isSpawner: 0
+--- !u!114 &1317762858
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401530110}
-  m_CullTransparentMesh: 1
+  m_GameObject: {fileID: 1317762856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00757be09623efc41b3d0cfbaa372a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: BloodRoom_1
+  isSpawner: 0
 --- !u!1 &1456958003
 GameObject:
   m_ObjectHideFlags: 0

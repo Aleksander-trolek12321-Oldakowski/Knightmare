@@ -16,17 +16,22 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private TMP_Text itemPriceText;
     [SerializeField] private GameObject questionMarkPrefab;
 
+    private ScenePersistence persist;
+
+    void Awake()
+    {
+        persist = GetComponent<ScenePersistence>();
+        persist.isSpawner = true;
+        spawnedItems.Clear();
+    }
+
     void Start()
     {
         GenerateRandomItem();
-        if(itemPriceText != null)
+        if (itemPriceText != null)
         {
-            itemPriceText.text=selectedItem.priceInShop +"";
+            itemPriceText.text = selectedItem.priceInShop + "";
         }
-    }
-    void Awake()
-    {
-        spawnedItems.Clear(); 
     }
 
     private void GenerateRandomItem()
@@ -48,7 +53,7 @@ public class ItemSpawner : MonoBehaviour
 
             ApplyItemData();
         }
-      
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,7 +61,7 @@ public class ItemSpawner : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if (player != null)
         {
-            if(selectedItem.priceInShop <= CoinManager.Instance.totalCoins && isInShop)
+            if (selectedItem.priceInShop <= CoinManager.Instance.totalCoins && isInShop)
             {
                 CoinManager.Instance.RemoveCoins(selectedItem.priceInShop);
 
@@ -67,10 +72,11 @@ public class ItemSpawner : MonoBehaviour
                     InventoryUI.Instance.AddItemToUI(selectedItem.itemSprite, selectedItem.name);
                 }
 
+                persist.RegisterRemoval();
                 Destroy(itemPriceText);
                 Destroy(gameObject);
             }
-            else if(isInShop ==false)
+            else if (isInShop == false)
             {
                 player.ApplyItemStats(selectedItem);
 
@@ -81,29 +87,30 @@ public class ItemSpawner : MonoBehaviour
                 }
 
 
-                if (treasureRoom != null )
+                if (treasureRoom != null)
                 {
-
+                    persist.RegisterRemoval();
                     treasureRoom.DestroyItem(gameObject);
                 }
-                if ( secretRoom != null)
+                if (secretRoom != null)
                 {
-
+                    persist.RegisterRemoval();
                     secretRoom.DestroyItem(gameObject);
                 }
+                persist.RegisterRemoval();
                 Destroy(gameObject);
             }
         }
-    
-   
-        
+
+
+
     }
 
     public void ApplyItemData()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (spriteRenderer != null && selectedItem != null && secretRoom==null)
+        if (spriteRenderer != null && selectedItem != null && secretRoom == null)
         {
             spriteRenderer.sprite = selectedItem.itemSprite;
         }
