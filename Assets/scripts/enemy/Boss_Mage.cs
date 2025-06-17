@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace enemy
+namespace enemySpace
 {
     // Wykorzystujemy wspólne enum BossState z Boss_Skeleton
     public class Boss_Mage : enemy

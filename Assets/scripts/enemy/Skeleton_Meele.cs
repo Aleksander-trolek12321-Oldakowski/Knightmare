@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace enemy
+namespace enemySpace
 {
     public enum SkeletonState { Patrol, Chase, Attack }
     [RequireComponent(typeof(Rigidbody2D))]

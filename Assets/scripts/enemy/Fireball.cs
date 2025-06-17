@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace enemy
+namespace enemySpace
 {
 public class Fireball : MonoBehaviour
 {

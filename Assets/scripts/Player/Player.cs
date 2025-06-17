@@ -1,4 +1,4 @@
-using enemy;
+using enemySpace;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class Player : MonoBehaviour
 {
@@ -367,6 +368,13 @@ public class Player : MonoBehaviour
         //    SceneManager.LoadScene("MainMenu");
 
         // StartCoroutine(Respawn());
+
+        GameData.Instance.ResetData();
+
+        // Usuń plik save, żeby przy powrocie do menu Continue był nieaktywny
+        string savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
+        if (File.Exists(savePath))
+            File.Delete(savePath);
 
         if (gameOverScreen != null)
         {
