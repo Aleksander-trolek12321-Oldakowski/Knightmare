@@ -18,6 +18,7 @@ public class GameData : MonoBehaviour
     public bool canFire;
     public bool canSlow;
     public bool hasThorns;
+    public bool changeCameraSize;
     public ItemData currentEquippedItem;
 
     public List<Sprite> collectedItemIcons = new List<Sprite>();
@@ -65,8 +66,10 @@ public class GameData : MonoBehaviour
         canPoison = player.GetCanPoison();
         canSlow = player.GetCanSlow();
         hasThorns = player.GetHasThorns();
-
         hasThorns = player.GetHasThorns();
+        changeCameraSize = player.GetCamerSize();
+        Debug.Log(changeCameraSize + " " + player.GetCamerSize());
+
         currentEquippedItem = player.GetItem();
 
     }
@@ -81,7 +84,7 @@ public class GameData : MonoBehaviour
         player.ApplyLoadedStats(
             playerDamage, playerSpeed, playerAttackSpeed,
             playerRange, playerHealth, playerMaxHearts,
-            canPoison, canFire, canSlow, hasThorns, currentEquippedItem
+            canPoison, canFire, canSlow, hasThorns, currentEquippedItem, changeCameraSize
         );
     }
     public void ResetData()
@@ -97,7 +100,7 @@ public class GameData : MonoBehaviour
         canFire = false;
         canSlow = false;
         hasThorns = false;
-
+        changeCameraSize = false;
         collectedItemIcons.Clear();
         previousSceneName = "";
         returnPosition = Vector3.zero;

@@ -65,7 +65,10 @@ public class PauseMenu : MonoBehaviour
                 break;
         }
         AudioManager.Instance.StopSound("MusicPause");
-        pauseMenuUI.SetActive(false);
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(false);
+        }
         Time.timeScale = 1f;
         isPaused = false;
         player.playerInputActions.Player.Enable();
@@ -76,7 +79,11 @@ public class PauseMenu : MonoBehaviour
         AudioManager.Instance.StopPlaylist();
         AudioManager.Instance.StopSound("MusicSpecialRoom");
         AudioManager.Instance.PlaySound("MusicPause");
-        pauseMenuUI.SetActive(true);
+        if(pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(true);
+
+        }
         Time.timeScale = 0f;
         isPaused = true;
         player.playerInputActions.Player.Disable();
