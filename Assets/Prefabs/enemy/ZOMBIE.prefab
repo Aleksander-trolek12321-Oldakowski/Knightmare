@@ -133,10 +133,10 @@ MonoBehaviour:
   id: 1
   name: ZOMBIE
   health: 10
-  speed: 3
+  speed: 2
   damage: 1
-  attackRange: 10
-  attackSpeed: 3
+  attackRange: 5
+  attackSpeed: 2
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
@@ -145,18 +145,21 @@ MonoBehaviour:
   player: {fileID: 0}
   moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
   animator: {fileID: 8372343444972926827}
-  playerLayer:
+  Wall:
+    serializedVersion: 2
+    m_Bits: 256
+  Player:
     serializedVersion: 2
     m_Bits: 8
-  patrolSpeed: 1
+  patrolSpeed: 2
   chaseSpeed: 2
   sightRange: 7
   loseSightRange: 10
   patrolRadius: 10
   changePatrolTargetInterval: 3
   attackCooldown: 1.5
-  pathUpdateInterval: 0.75
   spriteRenderer: {fileID: 0}
+  pathUpdateInterval: 0.75
 --- !u!61 &8024524685503616884
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -179,10 +179,10 @@ MonoBehaviour:
   id: 2
   name: SKELETON_MEELE
   health: 15
-  speed: 3
+  speed: 2
   damage: 1
   attackRange: 5
-  attackSpeed: 1
+  attackSpeed: 2
   minimumDistance: 5
   isOnFire: 0
   isPoisoned: 0
@@ -191,8 +191,13 @@ MonoBehaviour:
   player: {fileID: 0}
   moneyPrefab: {fileID: 5126281737547635460, guid: 6196412eacda940489316e8f58a06f16, type: 3}
   animator: {fileID: -1015012171900190167}
-  hitReactCooldown: 1
-  patrolSpeed: 1
+  Wall:
+    serializedVersion: 2
+    m_Bits: 0
+  Player:
+    serializedVersion: 2
+    m_Bits: 0
+  patrolSpeed: 2
   chaseSpeed: 2
   sightRange: 7
   loseSightRange: 10
