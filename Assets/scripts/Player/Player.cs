@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
 
             foreach (Sprite icon in GameData.Instance.collectedItemIcons)
             {
-                InventoryUI.Instance.AddItemToUI(icon, name);
+                InventoryUI.Instance.AddItemIconOnly(icon);
             }
         }else
         {
