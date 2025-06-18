@@ -12,14 +12,15 @@ public class TreasureRoom : MonoBehaviour
 
     public void DestroyItem(GameObject collectedItem)
     {
-
-
         foreach (ItemSpawner itemSpawner in itemSpawners)
         {
             if (itemSpawner != null && itemSpawner.gameObject != collectedItem)
             {
+                var spawnerPersist = itemSpawner.GetComponent<ScenePersistence>();
+                if (spawnerPersist != null)
+                    spawnerPersist.RegisterRemoval();
+
                 Destroy(itemSpawner.gameObject);
-                //CreateReturnPortal();
             }
         }
     }
