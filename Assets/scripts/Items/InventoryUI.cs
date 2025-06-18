@@ -22,13 +22,9 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
 
         if (itemNameCanvasGroup != null)
         {
@@ -38,18 +34,23 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void AddItemToUI(Sprite itemSprite, string itemName)
+    public void AddItemToUI(Sprite itemSprite, string itemName, bool showPopup = true)
     {
         GameObject newIcon = Instantiate(itemIconPrefab, inventoryPanel);
         ItemIcon iconComponent = newIcon.GetComponent<ItemIcon>();
         iconComponent.SetIcon(itemSprite);
         itemIcons.Add(newIcon);
 
-        if (itemNameText != null && itemNameCanvasGroup != null)
+        if (showPopup && itemNameText != null && itemNameCanvasGroup != null)
         {
-            StopAllCoroutines(); // optional: cancel previous popup
+            StopAllCoroutines();
             StartCoroutine(ShowItemNameCoroutine(itemName));
         }
+    }
+
+    public void AddItemIconOnly(Sprite itemSprite)
+    {
+        AddItemToUI(itemSprite, string.Empty, false);
     }
 
     public void RemoveLastItemIcon()
@@ -82,6 +83,5 @@ public class InventoryUI : MonoBehaviour
             yield return null;
         }
         cg.alpha = end;
-        yield break;
     }
 }

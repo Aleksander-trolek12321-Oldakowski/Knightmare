@@ -30,7 +30,7 @@ public class GameDataState
     public bool changeCameraSize;
 
     public string currentItemName;
-    public List<string> collectedItemNames;
+    public ItemData collectedItemNames;
 
     public string previousSceneName;
     public SerializableVector3 returnPosition;
@@ -186,8 +186,7 @@ public class GameData : MonoBehaviour
             canFire = canFire,
             canSlow = canSlow,
             hasThorns = hasThorns,
-            currentItemName = currentEquippedItem != null ? currentEquippedItem.name : string.Empty,
-            collectedItemNames = collectedItemIcons.ConvertAll(i => i.name),
+            collectedItemNames = currentEquippedItem,
             previousSceneName = previousSceneName,
             returnPosition = new SerializableVector3(returnPosition),
             destroyedPortals = destroyedPortals,
@@ -228,11 +227,7 @@ public class GameData : MonoBehaviour
             canSlow = state.canSlow;
             hasThorns = state.hasThorns;
 
-            currentEquippedItem = !string.IsNullOrEmpty(state.currentItemName)
-                ? Resources.Load<ItemData>($"Items/{state.currentItemName}")
-                : null;
-            collectedItemIcons = state.collectedItemNames?.ConvertAll(n =>
-                Resources.Load<Sprite>($"Icons/{n}")) ?? new List<Sprite>();
+            currentEquippedItem = state.collectedItemNames;
 
             previousSceneName = state.previousSceneName;
             returnPosition = state.returnPosition.ToVector3();
