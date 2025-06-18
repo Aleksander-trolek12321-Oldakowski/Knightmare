@@ -64,6 +64,7 @@ public class GameData : MonoBehaviour
     public int playerMaxHearts;
 
     // Abilities
+    public bool changeCameraSize;
     public bool canPoison;
     public bool canFire;
     public bool canSlow;
