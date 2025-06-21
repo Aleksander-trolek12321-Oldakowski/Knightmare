@@ -109,6 +109,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: fe715eccb8ab0624c8139a618e181d8a, type: 3}
     volume: 0.1
     loop: 0
-  defaultTracks:
-  - MusicGame1
-  - MusicGame2
+  - name: PlayerHitReaction
+    clip: {fileID: 8300000, guid: 7ce1e41079793e743887a45274f9a9b0, type: 3}
+    volume: 0.65
+    loop: 0
+  - name: Teleport
+    clip: {fileID: 8300000, guid: f79721fe4142b2541a23261db6f09173, type: 3}
+    volume: 0.35
+    loop: 0
