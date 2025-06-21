@@ -10,6 +10,8 @@ public class ReturnPortal : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if (player != null && !string.IsNullOrEmpty(GameData.Instance.previousSceneName))
         {
+            AudioManager.Instance.PlaySound("Teleport");
+
             GameData.Instance.SavePlayerData(player);
             SceneManager.LoadScene(GameData.Instance.previousSceneName);
         }

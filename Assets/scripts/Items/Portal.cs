@@ -36,6 +36,8 @@ public class Portal : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.PlaySound("Teleport");
+
                 GameData.Instance.SavePlayerData(player);
                 GameData.Instance.SaveSceneName(player);
 

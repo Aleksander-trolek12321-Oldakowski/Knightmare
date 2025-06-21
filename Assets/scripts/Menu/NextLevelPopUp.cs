@@ -17,6 +17,8 @@ public class NextLevelPopUp : MonoBehaviour
     }
     public void Yes()
     {
+        AudioManager.Instance.PlaySound("Teleport");
+
         SceneManager.LoadScene("level 2");
 
     }
