@@ -336,6 +336,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         if (isDead) return;
+        AudioManager.Instance.PlaySound("PlayerHitReaction");
 
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
