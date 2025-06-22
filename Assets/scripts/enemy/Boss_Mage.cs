@@ -1,4 +1,3 @@
-// Boss_Mage.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace enemySpace
         [Header("Animation & Hit React")]
         [SerializeField] private float hitReactCooldown = 0.23f;
 
-        [Header("Attack Settings")]
+        [Header("Attack Settings")] 
         [SerializeField] private float attackCooldown = 2f;
         [SerializeField] private float shootPointRadius = 2f;
         [SerializeField] private float rotationSpeed = 5f;
@@ -36,7 +35,7 @@ namespace enemySpace
         [SerializeField] private float patrolRadius = 5f;
         [SerializeField] private float changePatrolTargetInterval = 3f;
 
-        [Header("Necromancy")]
+        [Header("Necromancy")] 
         [SerializeField] private int minSpawn = 1;
         [SerializeField] private int maxSpawn = 3;
         [SerializeField] private float spawnDelay = 0.5f;
@@ -45,15 +44,11 @@ namespace enemySpace
         private BossState currentState;
         private bool isAttacking = false;
         private bool canAttack = true;
-        private bool isHit = false; // flag for hit reaction
-
-        private IEnumerator ResetHitState()
-        {
-            yield return new WaitForSeconds(hitReactCooldown);
-            isHit = false;
-        }
+        private bool isHit = false;
+        private IEnumerator ResetHitState() { yield return new WaitForSeconds(hitReactCooldown); isHit = false; }
         private Coroutine attackCoroutine;
 
+        private Vector3 patrolCenter;
         private Vector3 patrolTarget;
         private float patrolTimer = 0f;
 
@@ -63,6 +58,8 @@ namespace enemySpace
         [SerializeField] private float pathUpdateInterval = 0.75f;
         [SerializeField] private GameObject portalToNextLevel;
 
+        private Rigidbody2D rb;
+
         public override void Start()
         {
             base.Start();
@@ -70,34 +67,29 @@ namespace enemySpace
 
         void Awake()
         {
+            // references
             if (player == null) player = FindObjectOfType<Player>();
             if (tilemapCollider == null) tilemapCollider = FindObjectOfType<TilemapCollider2D>();
             if (tilemap == null && tilemapCollider != null) tilemap = tilemapCollider.GetComponent<Tilemap>();
+            rb = GetComponent<Rigidbody2D>(); // Kinematic Rigidbody2D required
 
+            // initial state
             currentState = BossState.Patrol;
-            patrolTarget = transform.position;
+            patrolCenter = transform.position;
+            patrolTarget = patrolCenter;
         }
 
         void Update()
         {
-            if (isHit)
-            {
-                // podczas reakcji na hit nie wykonuj ruchu ani rotacji
-                return;
-            }
+            if (isHit) return;
+            if (health <= 0) { Die(); return; }
 
-            if (health <= 0)
-            {
-                Die();
-                return;
-            }
-
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance < retreatDistance)
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+            if (dist < retreatDistance)
                 currentState = BossState.Retreat;
-            else if (distance <= attackRange && PlayerInSight())
+            else if (dist <= attackRange && PlayerInSight())
                 currentState = BossState.Attack;
-            else if (distance <= sightRange && PlayerInSight())
+            else if (dist <= sightRange && PlayerInSight())
                 currentState = BossState.Chase;
             else
                 currentState = BossState.Patrol;
@@ -118,19 +110,18 @@ namespace enemySpace
                     break;
             }
 
-            // movement and animation
+            // movement
             if (currentPath != null && pathIndex < currentPath.Count && currentState != BossState.Attack)
             {
                 Vector3 targetPos = currentPath[pathIndex];
                 float speed = (currentState == BossState.Chase || currentState == BossState.Retreat) ? chaseSpeed : patrolSpeed;
-                Vector3 prevPos = transform.position;
-                transform.position = Vector3.MoveTowards(prevPos, targetPos, speed * Time.deltaTime);
+                Vector2 next = Vector2.MoveTowards(rb.position, (Vector2)targetPos, speed * Time.deltaTime);
+                rb.MovePosition(next);
 
-                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
-                    pathIndex++;
+                if (Vector2.Distance(next, targetPos) < 0.1f) pathIndex++;
 
-                Vector3 dir = (targetPos - prevPos).normalized;
-                if (dir != Vector3.zero)
+                Vector2 dir = ((Vector2)targetPos - rb.position).normalized;
+                if (dir != Vector2.zero)
                 {
                     animator.SetFloat("Xinput", dir.x);
                     animator.SetFloat("Yinput", dir.y);
@@ -138,9 +129,18 @@ namespace enemySpace
                     animator.SetFloat("LastYinput", dir.y);
                 }
             }
+            else if (currentState == BossState.Retreat)
+            {
+                // fallback: direct retreat with physics
+                Vector2 fleeDir = ((Vector2)transform.position - (Vector2)player.transform.position).normalized;
+                Vector2 next = rb.position + fleeDir * chaseSpeed * Time.deltaTime;
+                rb.MovePosition(next);
+            }
 
             RotateShootPoint();
-            // Jeśli nie ma dalszej ścieżki (patrol done) i nie atakujemy, wróć do Idle
+            UpdateShootPointPosition();
+
+            // idle animation when patrol finished
             if (currentState == BossState.Patrol && (currentPath == null || pathIndex >= (currentPath?.Count ?? 0)))
             {
                 animator.SetFloat("Xinput", 0f);
@@ -148,31 +148,16 @@ namespace enemySpace
                 animator.SetBool("IsIdling", true);
             }
             else
-            {
                 animator.SetBool("IsIdling", false);
-            }
-
-            UpdateShootPointPosition();
         }
 
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
-            // Ustawienie flagi hit oraz odpowiedniej animacji
             isHit = true;
             float lastX = animator.GetFloat("LastXinput");
-            if (lastX >= 0f)
-            {
-                animator.SetTrigger("HitRight");
-                Debug.Log("HitRight");
-            }
-            else
-            {
-                animator.SetTrigger("HitLeft");
-                Debug.Log("HitLeft");
-            }
+            if (lastX >= 0f) animator.SetTrigger("HitRight"); else animator.SetTrigger("HitLeft");
             animator.SetBool("IsFacingRight", lastX >= 0f);
-            // Po czasie hitReactCooldown usunięcie flagi isHit
             StartCoroutine(ResetHitState());
             InterruptAttack();
         }
@@ -207,8 +192,7 @@ namespace enemySpace
             canAttack = false;
             animator.SetBool("IsAttacking", true);
 
-            float roll = Random.value;
-            if (roll <= 0.8f)
+            if (Random.value <= 0.8f)
             {
                 yield return new WaitForSeconds(0.05f);
                 ShootFireball();
@@ -234,8 +218,8 @@ namespace enemySpace
             if (fireballPrefab == null || shootPoint == null) return;
             AudioManager.Instance.PlaySound("BossMageAttack");
             GameObject ball = Instantiate(fireballPrefab, shootPoint.position, shootPoint.rotation);
-            Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
-            if (rb != null) rb.velocity = shootPoint.right * speed;
+            Rigidbody2D rbBall = ball.GetComponent<Rigidbody2D>();
+            if (rbBall != null) rbBall.velocity = shootPoint.right * speed;
         }
 
         private void SpawnMinion()
@@ -261,7 +245,7 @@ namespace enemySpace
             if (patrolTimer >= changePatrolTargetInterval)
             {
                 Vector2 rand = Random.insideUnitCircle * patrolRadius;
-                patrolTarget = transform.position + new Vector3(rand.x, rand.y, 0);
+                patrolTarget = patrolCenter + new Vector3(rand.x, rand.y, 0f);
                 patrolTimer = 0f;
             }
             UpdatePath(patrolTarget);
@@ -296,6 +280,10 @@ namespace enemySpace
                 currentPath = newPath;
                 pathIndex = 0;
             }
+            else
+            {
+                currentPath = null; // fallback to physics-based movement
+            }
             yield return new WaitForSeconds(pathUpdateInterval);
             isPathUpdating = false;
         }
@@ -310,10 +298,9 @@ namespace enemySpace
             {
                 if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(cur))) return null;
                 path.Add(tilemap.GetCellCenterWorld(cur));
-                Vector3Int dir = new Vector3Int(
+                cur += new Vector3Int(
                     Mathf.Clamp(t.x - cur.x, -1, 1),
                     Mathf.Clamp(t.y - cur.y, -1, 1), 0);
-                cur += dir;
             }
             return path;
         }
@@ -326,5 +313,17 @@ namespace enemySpace
             AudioManager.Instance.PlaySound("BossMusicAfterKill");
             base.Die();
         }
+
+        #if UNITY_EDITOR
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(patrolCenter, patrolRadius);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, sightRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, retreatDistance);
+        }
+        #endif
     }
 }
