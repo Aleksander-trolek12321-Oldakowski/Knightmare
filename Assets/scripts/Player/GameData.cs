@@ -1,4 +1,5 @@
-using System.Collections;
+using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,7 +30,7 @@ public class GameDataState
     public bool changeCameraSize;
 
     public string currentItemName;
-    public ItemData collectedItemNames;
+    public List<string> collectedItemNames;
 
     public string previousSceneName;
     public SerializableVector3 returnPosition;
@@ -54,6 +55,7 @@ public class GameData : MonoBehaviour
 {
     public static GameData Instance;
 
+    // Player stats
     public float playerDamage;
     public float playerSpeed;
     public float playerAttackSpeed;
@@ -61,24 +63,35 @@ public class GameData : MonoBehaviour
     public float playerHealth;
     public int playerMaxHearts;
 
+    // Abilities
     public bool canPoison;
     public bool canFire;
     public bool canSlow;
     public bool hasThorns;
+    public bool changeCameraSize;
+
+    // Equipped item
     public ItemData currentEquippedItem;
 
+    // Inventory icons
     public List<Sprite> collectedItemIcons = new List<Sprite>();
+
+    // Scene transition data
     public string previousSceneName;
     public Vector3 returnPosition;
 
+    // World state lists
     public List<string> destroyedPortals = new List<string>();
-
-    public int playerCoins ;
+    public List<string> destroyedSpawnerIDs = new List<string>();
     public List<string> killedEnemies = new List<string>();
 
+    // Dynamic enemy states
+    public List<EnemyState> enemyStates = new List<EnemyState>();
+
+    public int playerCoins;
     public GameObject portalPrefab;
 
-
+    private string savePath;
 
     private void Awake()
     {
@@ -90,16 +103,30 @@ public class GameData : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        int portalChance = Random.Range(0, 5);
-        if(portalChance < 1)
+        savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
+
+        if (File.Exists(savePath))
         {
-            portalPrefab.SetActive(true);
+            LoadFromDisk();
         }
+        else
+        {
+            int portalChance = UnityEngine.Random.Range(0, 5);
+            if (portalPrefab != null)
+                portalPrefab.SetActive(portalChance < 1);
+        }
+    }
+
+    // Backwards compatibility alias
+    public void SaveSceneName(Player player)
+    {
+        SaveSceneData(player);
     }
 
     public void SavePlayerData(Player player)
     {
-        playerCoins = CoinManager.Instance.totalCoins;
+        if (CoinManager.Instance != null)
+            playerCoins = CoinManager.Instance.totalCoins;
 
         playerDamage = player.GetDamage();
         playerSpeed = player.GetSpeed();
@@ -116,14 +143,114 @@ public class GameData : MonoBehaviour
         changeCameraSize = player.GetCamerSize();
         Debug.Log(changeCameraSize + " " + player.GetCamerSize());
 
-        hasThorns = player.GetHasThorns();
         currentEquippedItem = player.GetItem();
-
     }
-    public void SaveSceneName(Player player)
+
+    public void SaveSceneData(Player player)
     {
         previousSceneName = SceneManager.GetActiveScene().name;
-        returnPosition = player.transform.position;
+        if (player != null)
+            returnPosition = player.transform.position;
+    }
+
+    public void CollectDynamicEnemyStates()
+    {
+        enemyStates.Clear();
+        foreach (var en in FindObjectsOfType<enemy>())
+        {
+            string id = en.uniqueID;
+            if (!killedEnemies.Contains(id))
+            {
+                enemyStates.Add(new EnemyState
+                {
+                    uniqueID = id,
+                    position = new SerializableVector3(en.transform.position)
+                });
+            }
+        }
+    }
+
+    public void SaveToDisk()
+    {
+        //Debug.Log($"[GameData] Saving {enemyStates.Count} enemyStates.");
+        //CollectDynamicEnemyStates();
+
+        var state = new GameDataState
+        {
+            playerDamage = playerDamage,
+            playerSpeed = playerSpeed,
+            playerAttackSpeed = playerAttackSpeed,
+            playerRange = playerRange,
+            playerHealth = playerHealth,
+            playerMaxHearts = playerMaxHearts,
+            canPoison = canPoison,
+            canFire = canFire,
+            canSlow = canSlow,
+            hasThorns = hasThorns,
+            currentItemName = currentEquippedItem != null ? currentEquippedItem.name : string.Empty,
+            collectedItemNames = collectedItemIcons.ConvertAll(i => i.name),
+            previousSceneName = previousSceneName,
+            returnPosition = new SerializableVector3(returnPosition),
+            destroyedPortals = destroyedPortals,
+            destroyedSpawnerIDs = destroyedSpawnerIDs,
+            killedEnemies = killedEnemies,
+            enemyStates = enemyStates,
+            playerCoins = playerCoins
+        };
+
+        try
+        {
+            string json = JsonUtility.ToJson(state, true);
+            File.WriteAllText(savePath, json);
+            Debug.Log("Game saved to: " + savePath);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Save Failed: " + ex.Message);
+        }
+    }
+
+    public void LoadFromDisk()
+    {
+        try
+        {
+            string json = File.ReadAllText(savePath);
+            var state = JsonUtility.FromJson<GameDataState>(json);
+
+            playerDamage = state.playerDamage;
+            playerSpeed = state.playerSpeed;
+            playerAttackSpeed = state.playerAttackSpeed;
+            playerRange = state.playerRange;
+            playerHealth = state.playerHealth;
+            playerMaxHearts = state.playerMaxHearts;
+
+            canPoison = state.canPoison;
+            canFire = state.canFire;
+            canSlow = state.canSlow;
+            hasThorns = state.hasThorns;
+
+            currentEquippedItem = !string.IsNullOrEmpty(state.currentItemName)
+                ? Resources.Load<ItemData>($"Items/{state.currentItemName}")
+                : null;
+            collectedItemIcons = state.collectedItemNames?.ConvertAll(n =>
+                Resources.Load<Sprite>($"Icons/{n}")) ?? new List<Sprite>();
+
+            previousSceneName = state.previousSceneName;
+            returnPosition = state.returnPosition.ToVector3();
+
+            destroyedPortals = state.destroyedPortals ?? new List<string>();
+            destroyedSpawnerIDs = state.destroyedSpawnerIDs ?? new List<string>();
+            killedEnemies = state.killedEnemies ?? new List<string>();
+            enemyStates = state.enemyStates ?? new List<EnemyState>();
+            Debug.Log($"[GameData] Loaded {enemyStates.Count} enemyStates.");
+
+            playerCoins = state.playerCoins;
+            Debug.Log("Game loaded from: " + savePath);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error loading save: " + ex.Message);
+        }
     }
 
     public void LoadPlayerData(Player player)
@@ -136,13 +263,10 @@ public class GameData : MonoBehaviour
         if (CoinManager.Instance != null)
             CoinManager.Instance.totalCoins = playerCoins;
     }
+
     public void ResetData()
     {
-        playerDamage = 0;
-        playerSpeed = 0;
-        playerAttackSpeed = 0;
-        playerRange = 0;
-        playerHealth = 0;
+        playerDamage = playerSpeed = playerAttackSpeed = playerRange = playerHealth = 0f;
         playerMaxHearts = 0;
         canPoison = false;
         canFire = false;
@@ -151,12 +275,14 @@ public class GameData : MonoBehaviour
         changeCameraSize = false;
         currentEquippedItem = null;
         collectedItemIcons.Clear();
-        previousSceneName = "";
+        previousSceneName = string.Empty;
         returnPosition = Vector3.zero;
         destroyedPortals.Clear();
-        currentEquippedItem = null;
-        playerCoins = 0;
+        destroyedSpawnerIDs.Clear();
         killedEnemies.Clear();
+        enemyStates.Clear();
+        playerCoins = 0;
+        if (File.Exists(savePath))
+            File.Delete(savePath);
     }
-
 }
