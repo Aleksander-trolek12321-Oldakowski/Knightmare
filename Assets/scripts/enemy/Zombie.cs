@@ -105,6 +105,7 @@ namespace enemySpace
                 animator.SetTrigger("Death");
                 DropLoot();
                 zombieKillCounter++;
+                Debug.Log(zombieKillCounter);
                 Die();
             }
         }

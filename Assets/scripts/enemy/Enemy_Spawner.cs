@@ -82,7 +82,7 @@ namespace enemySpace
             // Clear any previous states for this spawner to avoid duplicates
             if (GameData.Instance != null)
             {
-                GameData.Instance.enemyStates.RemoveAll(es => es.uniqueID.StartsWith(uniqueSpawnerID + "_"));
+                //GameData.Instance.enemyStates.RemoveAll(es => es.uniqueID.StartsWith(uniqueSpawnerID + "_"));
             }
 
             if (enemyPrefabs == null || enemyPrefabs.Count == 0)
@@ -126,7 +126,7 @@ namespace enemySpace
                     Debug.Log($"Registered {en.uniqueID} with prefab index {idx}");
 
                     // Record state
-                    if (GameData.Instance != null)
+                    /*if (GameData.Instance != null)
                     {
                         GameData.Instance.enemyStates.Add(new EnemyState {
                             uniqueID = en.uniqueID,
@@ -141,7 +141,7 @@ namespace enemySpace
                 {
                     Debug.Log($"Saving {GameData.Instance.enemyStates.Count} enemyStates");
                     GameData.Instance.SaveToDisk();
-                }
+                }*/
             }
         }
 
