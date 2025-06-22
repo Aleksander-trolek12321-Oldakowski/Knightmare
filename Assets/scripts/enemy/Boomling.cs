@@ -38,11 +38,12 @@ namespace enemySpace
         private bool hasExploded;
         private Animator animator;
         private Player player;
-        public static int boomlingKillCounter;
+        public static int boomlingKillCounter = 0;
+
+        public GameObject moneyPrefab;
 
         void Awake()
         {
-            boomlingKillCounter = 0;
 
             animator = GetComponent<Animator>();
             player = FindObjectOfType<Player>();
@@ -64,6 +65,7 @@ namespace enemySpace
             {
                 hasExploded = true;
                 boomlingKillCounter++;
+                DropLoot();
                 Die();
                 return;
             }
@@ -238,6 +240,12 @@ namespace enemySpace
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, explosionRadius);
+        }
+
+        private void DropLoot()
+        {
+            if (Random.value <= 0.2f)
+                Instantiate(moneyPrefab, transform.position, Quaternion.identity);
         }
     }
 }
