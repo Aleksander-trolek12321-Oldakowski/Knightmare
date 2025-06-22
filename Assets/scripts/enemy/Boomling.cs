@@ -44,7 +44,7 @@ namespace enemySpace
         {
             boomlingKillCounter = 0;
 
-        animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
             player = FindObjectOfType<Player>();
             if (tilemapCollider == null)
                 tilemapCollider = FindObjectOfType<TilemapCollider2D>();
@@ -58,7 +58,8 @@ namespace enemySpace
 
         void Update()
         {
-            // Handle death by damage before any explosion logic
+            if (player == null) return;
+
             if (health <= 0 && !hasExploded)
             {
                 hasExploded = true;
@@ -68,7 +69,7 @@ namespace enemySpace
             }
 
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            // State Transitions
+
             if (!hasExploded && distanceToPlayer <= explosionRadius)
             {
                 ChangeState(BoomlingState.Explode);
@@ -82,7 +83,6 @@ namespace enemySpace
                 ChangeState(BoomlingState.Patrol);
             }
 
-            // State Actions
             switch (currentState)
             {
                 case BoomlingState.Patrol:
@@ -106,7 +106,6 @@ namespace enemySpace
             currentState = newState;
             if (newState == BoomlingState.Explode)
             {
-                // Stop any movement or path when exploding
                 currentPath = null;
             }
         }
@@ -125,8 +124,11 @@ namespace enemySpace
 
         private void HandleChase()
         {
-            UpdatePath(player.transform.position);
-            MoveAlongPath(chaseSpeed);
+            if (player != null)
+            {
+                UpdatePath(player.transform.position);
+                MoveAlongPath(chaseSpeed);
+            }
         }
 
         private void UpdatePath(Vector3 targetPosition)
@@ -169,6 +171,7 @@ namespace enemySpace
                     0);
                 current += dir;
             }
+            path.Add(tilemap.GetCellCenterWorld(targetCell));
             return path;
         }
 
@@ -209,7 +212,6 @@ namespace enemySpace
 
         public override void Attack()
         {
-            // Prevent default melee attack
         }
 
         private IEnumerator PerformExplosion()
