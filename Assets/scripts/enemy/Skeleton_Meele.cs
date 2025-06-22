@@ -95,6 +95,7 @@ namespace enemySpace
                 animator.SetTrigger("Death");
                 DropLoot();
                 skeletonKillCounter++;
+                Debug.Log(skeletonKillCounter);
                 Die();
             }
         }
@@ -148,6 +149,7 @@ namespace enemySpace
                 Vector2 dir = (targetPos2D - currentPos2D).normalized;
 
                 rb.velocity = dir * speed;
+                Debug.Log($"Dir={dir} | Velocity={rb.velocity}");
 
                 // Obrót animacji
                 animator.SetFloat("Xinput", dir.x);
