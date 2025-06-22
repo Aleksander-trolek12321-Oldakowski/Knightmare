@@ -13,12 +13,18 @@ public class AudioManager : MonoBehaviour
         public AudioClip clip;
         [Range(0f, 1f)] public float volume = 1f;
         public bool loop;
+        public bool isMusic;
     }
 
     public List<Sound> sounds;
     private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
 
-    // Coroutine handle for playlist
+    private float musicVolume = 1f;
+    private float sfxVolume   = 1f;
+
+    public const string PREF_MUSIC_VOL = "MusicVolume";
+    public const string PREF_SFX_VOL   = "SFXVolume";
+
     private Coroutine playlistCoroutine;
     private string[] currentPlaylistNames;
 
@@ -35,19 +41,47 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        foreach (var sound in sounds)
+        foreach (var snd in sounds)
         {
-            AudioSource source = gameObject.AddComponent<AudioSource>();
-            source.clip = sound.clip;
-            source.volume = sound.volume;
-            source.loop = sound.loop;
-            audioSources[sound.name] = source;
+            AudioSource src = gameObject.AddComponent<AudioSource>();
+            src.clip = snd.clip;
+            src.volume = snd.volume;
+            src.loop = snd.loop;
+            audioSources[snd.name] = src;
+        }
+
+        musicVolume = PlayerPrefs.GetFloat(PREF_MUSIC_VOL, 20f);
+        sfxVolume   = PlayerPrefs.GetFloat(PREF_SFX_VOL,   20f);
+        ApplyVolumesToAll();
+    }
+
+    private void ApplyVolumesToAll()
+    {
+        foreach (var snd in sounds)
+        {
+            var src = audioSources[snd.name];
+            src.volume = snd.isMusic
+                ? snd.volume * musicVolume
+                : snd.volume * sfxVolume;
         }
     }
 
-    /// <summary>
-    /// Play a single sound instantly.
-    /// </summary>
+    public void SetMusicVolume(float vol)
+    {
+        musicVolume = Mathf.Clamp01(vol);
+        PlayerPrefs.SetFloat(PREF_MUSIC_VOL, musicVolume);
+        PlayerPrefs.Save();
+        ApplyVolumesToAll();
+    }
+
+    public void SetSFXVolume(float vol)
+    {
+        sfxVolume = Mathf.Clamp01(vol);
+        PlayerPrefs.SetFloat(PREF_SFX_VOL, sfxVolume);
+        PlayerPrefs.Save();
+        ApplyVolumesToAll();
+    }
+
     public void PlaySound(string name)
     {
         if (audioSources.TryGetValue(name, out var src))
@@ -57,9 +91,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Stop a specific sound.
-    /// </summary>
     public void StopSound(string name)
     {
         if (audioSources.TryGetValue(name, out var src))
@@ -68,22 +99,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Play multiple tracks sequentially.
-    /// </summary>
-    /// <param name="names">Names of sounds in order.</param>
     public void PlayPlaylist(params string[] names)
     {
-        // Stop any existing playlist first
         StopPlaylist();
-
         currentPlaylistNames = names;
         playlistCoroutine = StartCoroutine(PlaySequence(names));
     }
 
-    /// <summary>
-    /// Stop the current playlist sequence and all its sounds.
-    /// </summary>
     public void StopPlaylist()
     {
         if (playlistCoroutine != null)
@@ -91,13 +113,10 @@ public class AudioManager : MonoBehaviour
             StopCoroutine(playlistCoroutine);
             playlistCoroutine = null;
         }
-
         if (currentPlaylistNames != null)
         {
-            foreach (var name in currentPlaylistNames)
-            {
-                StopSound(name);
-            }
+            foreach (var n in currentPlaylistNames)
+                StopSound(n);
             currentPlaylistNames = null;
         }
     }
@@ -110,7 +129,6 @@ public class AudioManager : MonoBehaviour
             {
                 src.loop = false;
                 src.Play();
-                // wait for clip to finish
                 yield return new WaitForSeconds(src.clip.length);
             }
             else
@@ -118,8 +136,6 @@ public class AudioManager : MonoBehaviour
                 Debug.LogWarning($"AudioManager: No sound named '{name}' found.");
             }
         }
-
-        // Playlist finished
         playlistCoroutine = null;
         currentPlaylistNames = null;
     }
