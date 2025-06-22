@@ -10,7 +10,10 @@ public class SettingsMenu : MonoBehaviour
     public Slider sensitivitySlider;
     public TMP_Dropdown resolutionDropdown;
 
-    // dekoracyjne obrazy – wyłączamy im RaycastTarget, żeby nie blokowały kliknięć
+    [Header("Audio References")]
+    public Slider musicVolumeSlider;   // ← nowy
+    public Slider sfxVolumeSlider;     // ← nowy
+
     public RawImage backgroundImage;
     public RawImage[] scalableImages;
 
@@ -24,15 +27,13 @@ public class SettingsMenu : MonoBehaviour
 
     void Start()
     {
-        // 1. Wyłącz raycast target na dekoracjach
-        if (backgroundImage != null) 
-            backgroundImage.raycastTarget = false;
+        // Wyłącz dekoracyjne raycasty
+        if (backgroundImage) backgroundImage.raycastTarget = false;
         if (scalableImages != null)
             foreach (var img in scalableImages)
-                if (img != null) 
-                    img.raycastTarget = false;
+                if (img) img.raycastTarget = false;
 
-        // 2. Wczytaj dostępne rozdzielczości i wypełnij dropdown
+        // Rozdzielczości
         availableResolutions = Screen.resolutions;
         var options = new List<string>(availableResolutions.Length);
         for (int i = 0; i < availableResolutions.Length; i++)
@@ -43,16 +44,24 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
 
-        // 3. Wczytaj zapisane ustawienia i zastosuj je od razu
         LoadSettings();
 
-        // 4. Ustaw UI bez generowania callbacków przy starcie
         fullScreenToggle.SetIsOnWithoutNotify(isFullScreen);
         sensitivitySlider.SetValueWithoutNotify(sensitivity);
         resolutionDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt(PREF_RESOLUTION_IDX, 0));
+
+        if (musicVolumeSlider != null)
+        {
+            float mv = PlayerPrefs.GetFloat(AudioManager.PREF_MUSIC_VOL, 1f);
+            musicVolumeSlider.SetValueWithoutNotify(mv);
+        }
+        if (sfxVolumeSlider != null)
+        {
+            float sv = PlayerPrefs.GetFloat(AudioManager.PREF_SFX_VOL, 1f);
+            sfxVolumeSlider.SetValueWithoutNotify(sv);
+        }
     }
 
-    // Metody publiczne – przypniesz je w Inspectorze do OnValueChanged
     public void OnFullScreenToggle(bool isOn)
     {
         isFullScreen      = isOn;
@@ -71,14 +80,20 @@ public class SettingsMenu : MonoBehaviour
     public void OnResolutionChanged(int idx)
     {
         if (idx < 0 || idx >= availableResolutions.Length) return;
-
-        // Zastosuj nową rozdzielczość od razu
         var r = availableResolutions[idx];
         Screen.SetResolution(r.width, r.height, isFullScreen);
-
-        // Zapisz wybraną opcję
         PlayerPrefs.SetInt(PREF_RESOLUTION_IDX, idx);
         PlayerPrefs.Save();
+    }
+
+    public void OnMusicVolumeChanged(float value)
+    {
+        AudioManager.Instance.SetMusicVolume(value);
+    }
+
+    public void OnSFXVolumeChanged(float value)
+    {
+        AudioManager.Instance.SetSFXVolume(value);
     }
 
     private void LoadSettings()
@@ -87,7 +102,6 @@ public class SettingsMenu : MonoBehaviour
         sensitivity  = PlayerPrefs.GetFloat(PREF_SENSITIVITY, 5f);
         int idx      = PlayerPrefs.GetInt(PREF_RESOLUTION_IDX, 0);
 
-        // Wstępnie zastosuj ustawienia ekranu
         Screen.fullScreen = isFullScreen;
         if (availableResolutions.Length > 0)
         {
@@ -99,7 +113,6 @@ public class SettingsMenu : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        // Na wszelki wypadek – jeszcze raz zapisz zmiany
         PlayerPrefs.SetInt(PREF_FULLSCREEN, isFullScreen ? 1 : 0);
         PlayerPrefs.SetFloat(PREF_SENSITIVITY, sensitivity);
         PlayerPrefs.SetInt(PREF_RESOLUTION_IDX, resolutionDropdown.value);
