@@ -51,11 +51,10 @@ namespace enemySpace
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.5f;
 
-        public static int zombieKillCounter;
+        public static int zombieKillCounter = 0;
 
         void Awake()
         {
-            zombieKillCounter = 0;
             rb = GetComponent<Rigidbody2D>();
 
             if (player == null)

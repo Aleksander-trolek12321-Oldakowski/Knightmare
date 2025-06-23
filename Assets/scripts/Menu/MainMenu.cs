@@ -63,6 +63,8 @@ public class MainMenu : MonoBehaviour
         if (GameData.Instance != null)
             GameData.Instance.ResetData();
 
+        Time.timeScale = 1f; 
+
         SceneManager.LoadScene("Game");
     }
 
@@ -74,6 +76,7 @@ public class MainMenu : MonoBehaviour
 
         // Load saved scene
         string scene = GameData.Instance.previousSceneName;
+        Time.timeScale = 1f; 
         SceneManager.LoadScene(scene);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

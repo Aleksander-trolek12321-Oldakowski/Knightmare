@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class NextLevelPopUp : MonoBehaviour
 {
     [SerializeField] private GameObject nextLevelPortal;
+    private Player player;
 
   
     public void OnEnable()

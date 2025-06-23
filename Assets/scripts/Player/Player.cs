@@ -368,13 +368,6 @@ public class Player : MonoBehaviour
 
         // StartCoroutine(Respawn());
 
-        GameData.Instance.ResetData();
-
-        // Usuń plik save, żeby przy powrocie do menu Continue był nieaktywny
-        string savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
-        if (File.Exists(savePath))
-            File.Delete(savePath);
-
         if (gameOverScreen != null)
         {
             gameOverScreen.SetActive(true);

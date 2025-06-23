@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using enemySpace;  // import namespace for enemy class
+using enemySpace;
 
 [Serializable]
 public class EnemyState
@@ -16,6 +16,7 @@ public class EnemyState
 [Serializable]
 public class GameDataState
 {
+    // Player stats
     public float playerDamage;
     public float playerSpeed;
     public float playerAttackSpeed;
@@ -23,23 +24,35 @@ public class GameDataState
     public float playerHealth;
     public int playerMaxHearts;
 
+    // Abilities
     public bool canPoison;
     public bool canFire;
     public bool canSlow;
     public bool hasThorns;
     public bool changeCameraSize;
 
+    // Equipped item
     public string currentItemName;
-    public List<string> collectedItemNames;
+    public List<string> collectedItemIDs;
 
+    // Scene transition data
     public string previousSceneName;
     public SerializableVector3 returnPosition;
 
+    // World state
     public List<string> destroyedPortals;
     public List<string> destroyedSpawnerIDs;
     public List<string> killedEnemies;
 
+    // Dynamic enemies
     public List<EnemyState> enemyStates;
+
+    // Kill counters
+    public int boomlingKills;
+    public int skeletonMeleeKills;
+    public int zombieKills;
+
+    // Player coins
     public int playerCoins;
 }
 
@@ -70,24 +83,29 @@ public class GameData : MonoBehaviour
     public bool hasThorns;
     public bool changeCameraSize;
 
-    // Equipped item
+    // Inventory items
     public ItemData currentEquippedItem;
-
-    // Inventory icons
+    public List<ItemData> collectedItems = new List<ItemData>();
     public List<Sprite> collectedItemIcons = new List<Sprite>();
 
     // Scene transition data
     public string previousSceneName;
     public Vector3 returnPosition;
 
-    // World state lists
+    // World state
     public List<string> destroyedPortals = new List<string>();
     public List<string> destroyedSpawnerIDs = new List<string>();
     public List<string> killedEnemies = new List<string>();
 
-    // Dynamic enemy states
+    // Dynamic enemies
     public List<EnemyState> enemyStates = new List<EnemyState>();
 
+    // Kill counters
+    public int boomlingKills;
+    public int skeletonMeleeKills;
+    public int zombieKills;
+
+    // Player coins
     public int playerCoins;
     public GameObject portalPrefab;
 
@@ -95,29 +113,25 @@ public class GameData : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
+        var portalComp = FindFirstObjectByType<Portal>();
+        if (portalComp != null)
+        portalPrefab = portalComp.gameObject;
 
-        if (File.Exists(savePath))
+        savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
+        if (File.Exists(savePath)) LoadFromDisk();
+
+        int portalChance = UnityEngine.Random.Range(0, 2);
+        if (portalChance < 1)
         {
-            LoadFromDisk();
-        }
-        else
-        {
-            int portalChance = UnityEngine.Random.Range(0, 5);
-            if (portalPrefab != null)
-                portalPrefab.SetActive(portalChance < 1);
+            portalPrefab.SetActive(true);
+            portalComp.gameObject.SetActive(true);  
         }
     }
 
-    // Backwards compatibility alias
     public void SaveSceneName(Player player)
     {
         SaveSceneData(player);
@@ -125,58 +139,41 @@ public class GameData : MonoBehaviour
 
     public void SavePlayerData(Player player)
     {
-        if (CoinManager.Instance != null)
-            playerCoins = CoinManager.Instance.totalCoins;
-
+        // Stats
+        playerCoins = CoinManager.Instance != null ? CoinManager.Instance.totalCoins : playerCoins;
         playerDamage = player.GetDamage();
         playerSpeed = player.GetSpeed();
         playerAttackSpeed = player.GetAttackSpeed();
         playerRange = player.GetRange();
         playerHealth = player.GetCurrentHealth();
         playerMaxHearts = player.GetMaxHearts();
-
         canFire = player.GetCanFire();
         canPoison = player.GetCanPoison();
         canSlow = player.GetCanSlow();
         hasThorns = player.GetHasThorns();
-        hasThorns = player.GetHasThorns();
         changeCameraSize = player.GetCamerSize();
-        Debug.Log(changeCameraSize + " " + player.GetCamerSize());
-
         currentEquippedItem = player.GetItem();
     }
 
     public void SaveSceneData(Player player)
     {
         previousSceneName = SceneManager.GetActiveScene().name;
-        if (player != null)
-            returnPosition = player.transform.position;
+        if (player!=null) returnPosition = player.transform.position;
     }
 
-    public void CollectDynamicEnemyStates()
+    public void SaveKillCounters()
     {
-        enemyStates.Clear();
-        foreach (var en in FindObjectsOfType<enemy>())
-        {
-            string id = en.uniqueID;
-            if (!killedEnemies.Contains(id))
-            {
-                enemyStates.Add(new EnemyState
-                {
-                    uniqueID = id,
-                    position = new SerializableVector3(en.transform.position)
-                });
-            }
-        }
+        boomlingKills = Boomling.boomlingKillCounter;
+        skeletonMeleeKills = Skeleton_Meele.skeletonKillCounter;
+        zombieKills = Zombie.zombieKillCounter;
     }
 
     public void SaveToDisk()
     {
-        //Debug.Log($"[GameData] Saving {enemyStates.Count} enemyStates.");
-        //CollectDynamicEnemyStates();
+        // Before saving
+        SaveKillCounters();
 
-        var state = new GameDataState
-        {
+        var state = new GameDataState {
             playerDamage = playerDamage,
             playerSpeed = playerSpeed,
             playerAttackSpeed = playerAttackSpeed,
@@ -187,70 +184,58 @@ public class GameData : MonoBehaviour
             canFire = canFire,
             canSlow = canSlow,
             hasThorns = hasThorns,
-            currentItemName = currentEquippedItem != null ? currentEquippedItem.name : string.Empty,
-            collectedItemNames = collectedItemIcons.ConvertAll(i => i.name),
+            currentItemName = currentEquippedItem!=null?currentEquippedItem.name:string.Empty,
+            collectedItemIDs = collectedItems.ConvertAll(i=>i.name),
             previousSceneName = previousSceneName,
             returnPosition = new SerializableVector3(returnPosition),
             destroyedPortals = destroyedPortals,
             destroyedSpawnerIDs = destroyedSpawnerIDs,
             killedEnemies = killedEnemies,
             enemyStates = enemyStates,
+            boomlingKills = boomlingKills,
+            skeletonMeleeKills = skeletonMeleeKills,
+            zombieKills = zombieKills,
             playerCoins = playerCoins
         };
-
-        try
-        {
-            string json = JsonUtility.ToJson(state, true);
-            File.WriteAllText(savePath, json);
-            Debug.Log("Game saved to: " + savePath);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Save Failed: " + ex.Message);
-        }
+        var json = JsonUtility.ToJson(state,true);
+        File.WriteAllText(savePath,json);
     }
 
     public void LoadFromDisk()
     {
-        try
-        {
-            string json = File.ReadAllText(savePath);
-            var state = JsonUtility.FromJson<GameDataState>(json);
+        var json = File.ReadAllText(savePath);
+        var state = JsonUtility.FromJson<GameDataState>(json);
+        // Stats
+        playerDamage = state.playerDamage;
+        playerSpeed = state.playerSpeed;
+        playerAttackSpeed = state.playerAttackSpeed;
+        playerRange = state.playerRange;
+        playerHealth = state.playerHealth;
+        playerMaxHearts = state.playerMaxHearts;
+        canPoison = state.canPoison;
+        canFire = state.canFire;
+        canSlow = state.canSlow;
+        hasThorns = state.hasThorns;
+        currentEquippedItem = !string.IsNullOrEmpty(state.currentItemName)?
+            Resources.Load<ItemData>($"Items/{state.currentItemName}"):null;
+        collectedItems = state.collectedItemIDs.ConvertAll(id=>
+            Resources.Load<ItemData>($"Items/{id}"));
+        collectedItemIcons = collectedItems.ConvertAll(i=>i.itemSprite);
 
-            playerDamage = state.playerDamage;
-            playerSpeed = state.playerSpeed;
-            playerAttackSpeed = state.playerAttackSpeed;
-            playerRange = state.playerRange;
-            playerHealth = state.playerHealth;
-            playerMaxHearts = state.playerMaxHearts;
-
-            canPoison = state.canPoison;
-            canFire = state.canFire;
-            canSlow = state.canSlow;
-            hasThorns = state.hasThorns;
-
-            currentEquippedItem = !string.IsNullOrEmpty(state.currentItemName)
-                ? Resources.Load<ItemData>($"Items/{state.currentItemName}")
-                : null;
-            collectedItemIcons = state.collectedItemNames?.ConvertAll(n =>
-                Resources.Load<Sprite>($"Icons/{n}")) ?? new List<Sprite>();
-
-            previousSceneName = state.previousSceneName;
-            returnPosition = state.returnPosition.ToVector3();
-
-            destroyedPortals = state.destroyedPortals ?? new List<string>();
-            destroyedSpawnerIDs = state.destroyedSpawnerIDs ?? new List<string>();
-            killedEnemies = state.killedEnemies ?? new List<string>();
-            enemyStates = state.enemyStates ?? new List<EnemyState>();
-            Debug.Log($"[GameData] Loaded {enemyStates.Count} enemyStates.");
-
-            playerCoins = state.playerCoins;
-            Debug.Log("Game loaded from: " + savePath);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Error loading save: " + ex.Message);
-        }
+        previousSceneName = state.previousSceneName;
+        returnPosition = state.returnPosition.ToVector3();
+        destroyedPortals = state.destroyedPortals;
+        destroyedSpawnerIDs = state.destroyedSpawnerIDs;
+        killedEnemies = state.killedEnemies;
+        enemyStates = state.enemyStates;
+        // Kill counters
+        boomlingKills = state.boomlingKills;
+        skeletonMeleeKills = state.skeletonMeleeKills;
+        zombieKills = state.zombieKills;
+        Boomling.boomlingKillCounter = boomlingKills;
+        Skeleton_Meele.skeletonKillCounter = skeletonMeleeKills;
+        Zombie.zombieKillCounter = zombieKills;
+        playerCoins = state.playerCoins;
     }
 
     public void LoadPlayerData(Player player)
@@ -258,31 +243,26 @@ public class GameData : MonoBehaviour
         player.ApplyLoadedStats(
             playerDamage, playerSpeed, playerAttackSpeed,
             playerRange, playerHealth, playerMaxHearts,
-            canPoison, canFire, canSlow, hasThorns, currentEquippedItem, changeCameraSize
-        );
-        if (CoinManager.Instance != null)
-            CoinManager.Instance.totalCoins = playerCoins;
+            canPoison, canFire, canSlow, hasThorns, currentEquippedItem, changeCameraSize);
+        if (CoinManager.Instance!=null) CoinManager.Instance.totalCoins = playerCoins;
     }
 
     public void ResetData()
     {
-        playerDamage = playerSpeed = playerAttackSpeed = playerRange = playerHealth = 0f;
-        playerMaxHearts = 0;
-        canPoison = false;
-        canFire = false;
-        canSlow = false;
-        hasThorns = false;
-        changeCameraSize = false;
-        currentEquippedItem = null;
-        collectedItemIcons.Clear();
-        previousSceneName = string.Empty;
-        returnPosition = Vector3.zero;
-        destroyedPortals.Clear();
-        destroyedSpawnerIDs.Clear();
-        killedEnemies.Clear();
+        playerDamage=playerSpeed=playerAttackSpeed=playerRange=playerHealth=0;
+        playerMaxHearts=0;
+        canPoison=canFire=canSlow=hasThorns=changeCameraSize=false;
+        currentEquippedItem=null;
+        collectedItems.Clear(); collectedItemIcons.Clear();
+        previousSceneName=string.Empty;
+        returnPosition=Vector3.zero;
+        destroyedPortals.Clear(); destroyedSpawnerIDs.Clear(); killedEnemies.Clear();
         enemyStates.Clear();
-        playerCoins = 0;
-        if (File.Exists(savePath))
-            File.Delete(savePath);
+        boomlingKills=skeletonMeleeKills=zombieKills=0;
+        Boomling.boomlingKillCounter       = 0;
+        Skeleton_Meele.skeletonKillCounter = 0;
+        Zombie.zombieKillCounter           = 0;
+        playerCoins =0;
+        if(File.Exists(savePath)) File.Delete(savePath);
     }
 }

@@ -46,12 +46,11 @@ namespace enemySpace
         private bool isPathUpdating;
         public float pathUpdateInterval = 0.75f;
 
-        public static int skeletonKillCounter;
+        public static int skeletonKillCounter = 0;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            skeletonKillCounter = 0;
 
             if (player == null)
                 player = FindObjectOfType<Player>();

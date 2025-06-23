@@ -16,9 +16,18 @@ public class KillCounter : MonoBehaviour
 
     void Start()
     {
-        boomlingKills = Boomling.boomlingKillCounter;
-        skeletonMeleeKills = Skeleton_Meele.skeletonKillCounter;
-        zombieKills = Zombie.zombieKillCounter;
+        if (GameData.Instance != null)
+        {
+            boomlingKills        = GameData.Instance.boomlingKills;
+            skeletonMeleeKills   = GameData.Instance.skeletonMeleeKills;
+            zombieKills          = GameData.Instance.zombieKills;
+        }
+        else
+        {
+            boomlingKills        = Boomling.boomlingKillCounter;
+            skeletonMeleeKills   = Skeleton_Meele.skeletonKillCounter;
+            zombieKills          = Zombie.zombieKillCounter;
+        }
 
         UpdateKillTexts();
     }
