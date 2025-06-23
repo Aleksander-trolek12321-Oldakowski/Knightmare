@@ -70,6 +70,8 @@ public class ItemSpawner : MonoBehaviour
                 if (selectedItem.itemSprite != null)
                 {
                     InventoryUI.Instance.AddItemToUI(selectedItem.itemSprite, selectedItem.name);
+                    GameData.Instance.collectedItemIcons.Add(selectedItem.itemSprite);
+                    GameData.Instance.collectedItems.Add(selectedItem);
                 }
 
                 persist.RegisterRemoval();
@@ -84,6 +86,7 @@ public class ItemSpawner : MonoBehaviour
                 {
                     InventoryUI.Instance.AddItemToUI(selectedItem.itemSprite, selectedItem.name);
                     GameData.Instance.collectedItemIcons.Add(selectedItem.itemSprite);
+                    GameData.Instance.collectedItems.Add(selectedItem);
                 }
 
 

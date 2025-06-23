@@ -95,7 +95,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &9057794028472537680
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   tilemapCollider: {fileID: 0}
   tilemap: {fileID: 0}
   hitReactCooldown: 0.23
-  attackCooldown: 2
+  attackCooldown: 1.5
   shootPointRadius: 2
   rotationSpeed: 5
   retreatDistance: 3
