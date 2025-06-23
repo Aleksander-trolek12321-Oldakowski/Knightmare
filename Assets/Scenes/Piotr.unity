@@ -101595,6 +101595,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[16].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f79721fe4142b2541a23261db6f09173, type: 3}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[16].name
+      value: Teleport
+      objectReference: {fileID: 0}
+    - target: {fileID: 212323740354462333, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
+      propertyPath: sounds.Array.data[16].volume
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 7545221117318548743, guid: b6fad0d7b39151342b2d0ca41fbbd230, type: 3}
       propertyPath: m_Name
       value: Audio Manager
