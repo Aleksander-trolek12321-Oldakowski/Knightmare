@@ -170,7 +170,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5750796131222945630
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -257,5 +257,6 @@ MonoBehaviour:
   loseSightRange: 10
   patrolRadius: 5
   changePatrolTargetInterval: 3
-  attackCooldown: 2
+  attackCooldown: 1.5
+  hitReactCooldown: 1.5
   pathUpdateInterval: 0.75

@@ -116,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5634277985361065652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   patrolRadius: 10
   changePatrolTargetInterval: 3
   attackCooldown: 1.5
+  hitReactCooldown: 1.5
   spriteRenderer: {fileID: 0}
   pathUpdateInterval: 0.75
 --- !u!61 &8024524685503616884

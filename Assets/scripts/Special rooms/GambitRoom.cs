@@ -67,6 +67,7 @@ public class GambitRoom : MonoBehaviour
 
                 InventoryUI.Instance.AddItemToUI(currentItem.itemSprite, currentItem.name);
                 GameData.Instance.collectedItemIcons.Add(currentItem.itemSprite);
+                GameData.Instance.collectedItems.Add(currentItem);
             }
 
             if (changeCoroutine != null)
