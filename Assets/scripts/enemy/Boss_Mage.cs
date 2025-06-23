@@ -154,6 +154,8 @@ namespace enemySpace
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
+            AudioManager.Instance.PlaySound("HitBossMage");
+
             isHit = true;
             float lastX = animator.GetFloat("LastXinput");
             if (lastX >= 0f) animator.SetTrigger("HitRight"); else animator.SetTrigger("HitLeft");
