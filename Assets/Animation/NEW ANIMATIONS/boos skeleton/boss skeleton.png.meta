@@ -1,0 +1,1280 @@
+fileFormatVersion: 2
+guid: b42c0c071a108734cbce9c06695afe7f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: boss skeleton_idle_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 2392
+        width: 172
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d49dcbed7ba5145b45c3b391121f63
+      internalID: 41866118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_2
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 2391
+        width: 172
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a954ec2ace70054c88413c30f3cb2e4
+      internalID: 767214797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_3
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 2392
+        width: 172
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc6dc3135ecd801478d02f9332f7bbf0
+      internalID: -1196316478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_4
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 2391
+        width: 172
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b1e89aaac24cd740b02abecdfa58ef2
+      internalID: 1584259914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_5
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 2392
+        width: 177
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f1eaac96cb90e44ae5708b2eb87b4e
+      internalID: 639038226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_6
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 2392
+        width: 178
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 523658f2eef2eaa4d8ae1202bb706235
+      internalID: 679796045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_7
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 2392
+        width: 177
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20be4d9bbc21dfd438a5d48c8e755afb
+      internalID: -1041560338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_8
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 2398
+        width: 178
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f7071e8332387240aa575a878a796db
+      internalID: -1616887007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_idle_9
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 2403
+        width: 172
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f00620da5607f91498607f26bf2f5833
+      internalID: 936141888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 2112
+        width: 181
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02cfb023498aedc4fbcfcee2cdb1491d
+      internalID: 1419639043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_2
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 2112
+        width: 180
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e9910cbd9c5e174a85e08179eb41682
+      internalID: -1870586598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_3
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 2112
+        width: 180
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e7cd75e32d49bb4d9ea2792aaa55d41
+      internalID: 1809850080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_4
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 2110
+        width: 180
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0153a13df1a43c645889bb2ffb5a2b4a
+      internalID: -102770063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_5
+      rect:
+        serializedVersion: 2
+        x: 875
+        y: 2109
+        width: 180
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 540b1f2f1300a3045b7503e7fa47f9fd
+      internalID: 3220270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_6
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 2109
+        width: 181
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eead81e2358453d4c9a2c4d51acb54f5
+      internalID: -299401256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_7
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 2109
+        width: 180
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 980dfc8198497344ea2ee1887f971510
+      internalID: -797990387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2106
+        width: 179
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 058401b7ea495a34e898c368b81ad55a
+      internalID: -1134268285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_9
+      rect:
+        serializedVersion: 2
+        x: 1768
+        y: 2110
+        width: 180
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ec881c50249d34fa295eef0791c439
+      internalID: -605241098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1843
+        width: 180
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c578b69ef74ab794ab798af2c53cda52
+      internalID: 616404725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_left_11
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 1847
+        width: 179
+        height: 246
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d3750cd5033e2c47bfbacb1c94c1484
+      internalID: 308931403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1557
+        width: 178
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4227355a2e7884cafc3f288bb5befe
+      internalID: -217309380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_2
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 1557
+        width: 178
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0204f3beae711d345ab35c89244e4131
+      internalID: 1906842361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_3
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 1557
+        width: 178
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1220c2cbbd8e194e90b18f5a0bbfe34
+      internalID: -1924014572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_4
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 1557
+        width: 178
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf10c5c981ac5a4d9d5467ab30d9a8b
+      internalID: -1036850000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_5
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 1555
+        width: 179
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca8242a47373b9142a550fc937500078
+      internalID: -1152169030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_6
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 1554
+        width: 179
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc287846437ba1f4a99c2fb040f347ec
+      internalID: -1577150909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_7
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 1553
+        width: 179
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84af6d49dadf84a4eab993c88d4c7c30
+      internalID: 1094512891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_8
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 1551
+        width: 179
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 025aae84bab37164d9a5999a4d521d73
+      internalID: -1404204098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_9
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 1557
+        width: 178
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2436a97ba5ad28b419888fbc0c0d3857
+      internalID: 2094700317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_10
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 1277
+        width: 182
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78ef002c6b497e04c98f4cda08abe337
+      internalID: -585913327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_walk_right_11
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 1277
+        width: 182
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5b2b6667b7aec4696cba1093567b97
+      internalID: 441653947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_right_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 994
+        width: 189
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdf64cbb8d6771d4d94b7b33a38f99fd
+      internalID: -1889658380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_right_2
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 994
+        width: 291
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d71e7469566d534fad99c9ecbe20940
+      internalID: -126413789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_right_3
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 994
+        width: 275
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f7a3720e06d564887f6d0c538aecaa
+      internalID: 2071871974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_right_4
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 1017
+        width: 280
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85ef8568f365434fbc5b53750f7ea88
+      internalID: -2147125569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_right_5
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 1017
+        width: 280
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1388d625bb85b94085336937d30a9f3
+      internalID: 390399355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_right_6
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 1017
+        width: 275
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dac9c6bdce63a6343a20a2cf2d190e89
+      internalID: -1247911800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_left_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 702
+        width: 189
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d593c18bf5d2b1e45889da2552ea0b13
+      internalID: -899084022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_left_2
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 699
+        width: 291
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7479577290b93d419935cb05eec7ae9
+      internalID: 1487612180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_left_3
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 702
+        width: 275
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82cf07014b255754ba7ea7c14c2def40
+      internalID: 1727748799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_left_4
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 719
+        width: 280
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20302a608ab17d349a4b78ac38827640
+      internalID: 1689941316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_left_5
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 705
+        width: 280
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b444b9305aecdf45b16b2f4432b07e7
+      internalID: -1165815552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_attack_left_6
+      rect:
+        serializedVersion: 2
+        x: 1704
+        y: 699
+        width: 275
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 804b6cb67b4577942bea34ce203bdc2c
+      internalID: 983715439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 371
+        width: 188
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0a9ed9dcfe00394498bdc91f57a0d29
+      internalID: -1111847237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt_2
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 358
+        width: 187
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a37aea55017ae0b4590c5fcba40bb24e
+      internalID: 1416025065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt_3
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 366
+        width: 203
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e555c0bf89835ce4088412c357121a6c
+      internalID: 1986231035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt_4
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 366
+        width: 214
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37d8f6c8a1012a8499857a5b61ebd952
+      internalID: 1640809510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt_5
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 371
+        width: 193
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22a16c5571efa2f4bb6e4c9e00f2ac44
+      internalID: -1879081398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt2_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 77
+        width: 188
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c4933c3ec882f4e9c8c68f03d1f1e9
+      internalID: 1242361937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt2_2
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 69
+        width: 187
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f334287ca013c4d46bd54acf3b894c10
+      internalID: -36233724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt2_3
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 69
+        width: 203
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00b679d5e1422894796d4fd8980b055f
+      internalID: -138249772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt2_4
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 59
+        width: 214
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af821ed41ceeb0446beccc3816fe7119
+      internalID: 481245836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss skeleton_hurt2_5
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 69
+        width: 193
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfe2a8268986407468d484b2e2f94b1f
+      internalID: 831164897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ecf2c2cd84640724697052b0b1042e8c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      boss skeleton_attack_left_1: -899084022
+      boss skeleton_attack_left_2: 1487612180
+      boss skeleton_attack_left_3: 1727748799
+      boss skeleton_attack_left_4: 1689941316
+      boss skeleton_attack_left_5: -1165815552
+      boss skeleton_attack_left_6: 983715439
+      boss skeleton_attack_right_1: -1889658380
+      boss skeleton_attack_right_2: -126413789
+      boss skeleton_attack_right_3: 2071871974
+      boss skeleton_attack_right_4: -2147125569
+      boss skeleton_attack_right_5: 390399355
+      boss skeleton_attack_right_6: -1247911800
+      boss skeleton_hurt2_1: 1242361937
+      boss skeleton_hurt2_2: -36233724
+      boss skeleton_hurt2_3: -138249772
+      boss skeleton_hurt2_4: 481245836
+      boss skeleton_hurt2_5: 831164897
+      boss skeleton_hurt_1: -1111847237
+      boss skeleton_hurt_2: 1416025065
+      boss skeleton_hurt_3: 1986231035
+      boss skeleton_hurt_4: 1640809510
+      boss skeleton_hurt_5: -1879081398
+      boss skeleton_idle_1: 41866118
+      boss skeleton_idle_2: 767214797
+      boss skeleton_idle_3: -1196316478
+      boss skeleton_idle_4: 1584259914
+      boss skeleton_idle_5: 639038226
+      boss skeleton_idle_6: 679796045
+      boss skeleton_idle_7: -1041560338
+      boss skeleton_idle_8: -1616887007
+      boss skeleton_idle_9: 936141888
+      boss skeleton_walk_left_1: 1419639043
+      boss skeleton_walk_left_10: 616404725
+      boss skeleton_walk_left_11: 308931403
+      boss skeleton_walk_left_2: -1870586598
+      boss skeleton_walk_left_3: 1809850080
+      boss skeleton_walk_left_4: -102770063
+      boss skeleton_walk_left_5: 3220270
+      boss skeleton_walk_left_6: -299401256
+      boss skeleton_walk_left_7: -797990387
+      boss skeleton_walk_left_8: -1134268285
+      boss skeleton_walk_left_9: -605241098
+      boss skeleton_walk_right_1: -217309380
+      boss skeleton_walk_right_10: -585913327
+      boss skeleton_walk_right_11: 441653947
+      boss skeleton_walk_right_2: 1906842361
+      boss skeleton_walk_right_3: -1924014572
+      boss skeleton_walk_right_4: -1036850000
+      boss skeleton_walk_right_5: -1152169030
+      boss skeleton_walk_right_6: -1577150909
+      boss skeleton_walk_right_7: 1094512891
+      boss skeleton_walk_right_8: -1404204098
+      boss skeleton_walk_right_9: 2094700317
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
