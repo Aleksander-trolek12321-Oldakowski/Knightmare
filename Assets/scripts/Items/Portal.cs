@@ -27,6 +27,8 @@ public class Portal : MonoBehaviour
                 {
                     if (nextLevelPortal != null)
                     {
+                        GameData.Instance.SavePlayerData(player);
+                        GameData.Instance.SaveSceneName(player);
                         nextLevelPortal.SetActive(true);
                     }
                 }

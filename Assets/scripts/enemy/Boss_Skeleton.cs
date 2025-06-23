@@ -1,32 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace enemySpace
 {
-    public enum BossState { Chase, Attack, Retreat, Patrol }
+    public enum BossState { Chase, Attack, Patrol, Retreat }
 
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Boss_Skeleton : enemy
     {
         [Header("Referencje")]
         [SerializeField] private Player player;
         [SerializeField] private Animator animator;
-        [SerializeField] private GameObject arrowPrefab;
-        [SerializeField] private Transform shootPoint;
         [SerializeField] private TilemapCollider2D tilemapCollider;
         [SerializeField] private Tilemap tilemap;
-
-        [Header("Animacja i hit-react")]
-        [SerializeField] private float hitReactCooldown = 0.23f;
-
-        [Header("Ustawienia ataku")]
-        [SerializeField] private float attackCooldown = 1.5f;
-        [SerializeField] private float tripleShotDelay = 0.3f;
-        [SerializeField] private float shootPointRadius = 2f;
-        [SerializeField] private float rotationSpeed = 5f;
-        [SerializeField] private float retreatDistance = 2f;
 
         [Header("Ruch i wykrywanie")]
         [SerializeField] private float chaseSpeed = 2f;
@@ -37,47 +25,39 @@ namespace enemySpace
         [SerializeField] private float patrolRadius = 5f;
         [SerializeField] private float changePatrolTargetInterval = 3f;
 
+        [Header("Atak melee")]
+        [SerializeField] private float attackCooldown = 1.5f;
+        [SerializeField] private float hitReactCooldown = 0.23f;
+
         private BossState currentState;
         private bool isAttacking = false;
         private bool canAttack = true;
-        private Coroutine attackCoroutine;
+        private Coroutine meleeCoroutine;
+
+        private Vector3 patrolCenter;
         private Vector3 patrolTarget;
         private float patrolTimer = 0f;
 
-        // Now store a fixed center for patrol
-        private Vector3 patrolCenter;
-
-        // ** pola dla pathfindingu **
+        // Pathfinding
         private List<Vector3> currentPath;
         private int pathIndex = 0;
         private bool isPathUpdating = false;
         public float pathUpdateInterval = 0.75f;
-        [SerializeField] private GameObject portalToNextLevel;
 
         private Rigidbody2D rb;
 
-        public override void Start()
-        {
-            base.Start();
-            if (portalToNextLevel != null && GameData.Instance.killedEnemies.Contains(uniqueID) == false)
-                portalToNextLevel.SetActive(false);
-        }
+        public GameObject PortalToNextLevel;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            if (player == null)
-                player = FindObjectOfType<Player>();
-            if (tilemapCollider == null)
-                tilemapCollider = FindObjectOfType<TilemapCollider2D>();
-            if (tilemap == null && tilemapCollider != null)
-                tilemap = tilemapCollider.GetComponent<Tilemap>();
+            if (player == null) player = FindObjectOfType<Player>();
+            if (tilemapCollider == null) tilemapCollider = FindObjectOfType<TilemapCollider2D>();
+            if (tilemap == null && tilemapCollider != null) tilemap = tilemapCollider.GetComponent<Tilemap>();
 
-            // Initialize state
             currentState = BossState.Patrol;
-            // Set patrol center to the initial spawn position
             patrolCenter = transform.position;
-            patrolTarget = patrolCenter;
+            SetNewPatrolTarget();
         }
 
         void Update()
@@ -90,76 +70,86 @@ namespace enemySpace
             }
 
             float distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance < retreatDistance)
-                currentState = BossState.Retreat;
-            else if (distance <= attackRange && PlayerInSight())
+            bool inSight = PlayerInSight();
+
+            // State decision
+            if (distance <= attackRange && inSight)
                 currentState = BossState.Attack;
-            else if (distance <= sightRange && PlayerInSight())
+            else if (distance <= sightRange && inSight)
                 currentState = BossState.Chase;
             else
                 currentState = BossState.Patrol;
 
-            // Handle states
+            // State actions
             switch (currentState)
             {
                 case BossState.Chase:
                     UpdatePath(player.transform.position);
-                    break;
-                case BossState.Retreat:
-                    UpdatePath(transform.position + (transform.position - player.transform.position));
+                    MoveAlongPath();
                     break;
                 case BossState.Patrol:
                     PatrolPath();
+                    MoveAlongPath();
                     break;
                 case BossState.Attack:
+                    // if out of range -> chase
+                    if (distance > attackRange)
+                    {
+                        currentState = BossState.Chase;
+                        break;
+                    }
                     if (canAttack && !isAttacking)
                         Attack();
                     break;
             }
+        }
 
-            // Movement along path
-            if (currentPath != null && pathIndex < currentPath.Count && currentState != BossState.Attack)
-            {
-                Vector3 targetPos = currentPath[pathIndex];
-                float speed = (currentState == BossState.Chase || currentState == BossState.Retreat)
-                              ? chaseSpeed
-                              : patrolSpeed;
-                Vector2 next = Vector2.MoveTowards(rb.position, (Vector2)targetPos, speed * Time.deltaTime);
-                rb.MovePosition(next);
+        public override void Attack()
+        {
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            if (isAttacking || !canAttack || distance > attackRange) return;
 
-                if (Vector3.Distance(transform.position, targetPos) < 0.1f)
-                    pathIndex++;
+            // Trigger melee animation
+            Vector3 dir = (player.transform.position - transform.position).normalized;
+            animator.SetFloat("AttackXinput", dir.x);
+            animator.SetFloat("AttackYinput", dir.y);
+            animator.SetBool("IsAttacking", true);
 
-                // Movement animation
-                Vector3 dir = (targetPos - transform.position).normalized;
-                if (dir != Vector3.zero)
-                {
-                    animator.SetFloat("Xinput", dir.x);
-                    animator.SetFloat("Yinput", dir.y);
-                    animator.SetFloat("LastXinput", dir.x);
-                    animator.SetFloat("LastYinput", dir.y);
-                }
-            }
+            isAttacking = true;
+            canAttack = false;
+            meleeCoroutine = StartCoroutine(PerformMeleeAttack());
+        }
 
-            RotateShootPoint();
-            UpdateShootPointPosition();
+        private IEnumerator PerformMeleeAttack()
+        {
+            // Wind-up
+            yield return new WaitForSeconds(0.5f);
+            // Only apply if still attacking
+            if (!isAttacking) yield break;
+
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            if (distance <= attackRange && PlayerInSight())
+                player.TakeDamage(damage);
+
+            animator.SetBool("IsAttacking", false);
+            isAttacking = false;
+            yield return new WaitForSeconds(attackCooldown);
+            canAttack = true;
         }
 
         public override void TakeDamage(float damageAmount)
         {
             base.TakeDamage(damageAmount);
             animator.SetTrigger("Hit");
-            InterruptAttack();
-        }
 
-        private void InterruptAttack()
-        {
             if (isAttacking)
             {
-                if (attackCoroutine != null)
-                    StopCoroutine(attackCoroutine);
+                // Interrupt attack
+                if (meleeCoroutine != null)
+                    StopCoroutine(meleeCoroutine);
                 isAttacking = false;
                 animator.SetBool("IsAttacking", false);
+                // delay next attack
                 canAttack = false;
                 StartCoroutine(ResetAttackCooldown());
             }
@@ -171,104 +161,31 @@ namespace enemySpace
             canAttack = true;
         }
 
-        public override void Attack()
+        private void SetNewPatrolTarget()
         {
-            if (isAttacking || !canAttack)
-                return;
-            attackCoroutine = StartCoroutine(PerformAttack());
-        }
-
-        private IEnumerator PerformAttack()
-        {
-            isAttacking = true;
-            canAttack = false;
-            animator.SetBool("IsAttacking", true);
-
-            int attackType = Random.Range(0, 2);
-            if (attackType == 0)
-            {
-                yield return new WaitForSeconds(0.05f);
-                ShootArrow();
-            }
-            else
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    yield return new WaitForSeconds(0.05f);
-                    ShootArrow();
-                    yield return new WaitForSeconds(tripleShotDelay);
-                }
-            }
-
-            yield return new WaitForSeconds(attackCooldown);
-            animator.SetBool("IsAttacking", false);
-            isAttacking = false;
-            canAttack = true;
-        }
-
-        private void ShootArrow()
-        {
-            if (arrowPrefab && shootPoint)
-            {
-                GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, shootPoint.rotation);
-                Rigidbody2D rbArrow = arrow.GetComponent<Rigidbody2D>();
-                if (rbArrow != null)
-                    rbArrow.velocity = shootPoint.right * speed;
-            }
-        }
-
-        private bool PlayerInSight()
-        {
-            RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
-            if (hit.collider == null || hit.collider.gameObject == player.gameObject)
-                return true;
-            if (tilemapCollider != null && hit.collider.gameObject == tilemapCollider.gameObject)
-                return false;
-            return true;
+            patrolTimer = 0f;
+            Vector2 rand = Random.insideUnitCircle * patrolRadius;
+            patrolTarget = patrolCenter + new Vector3(rand.x, rand.y, 0f);
         }
 
         private void PatrolPath()
         {
             patrolTimer += Time.deltaTime;
             if (patrolTimer >= changePatrolTargetInterval)
-            {
-                // Pick random point within fixed patrol radius around initial center
-                Vector2 rand = Random.insideUnitCircle * patrolRadius;
-                patrolTarget = patrolCenter + new Vector3(rand.x, rand.y, 0f);
-                patrolTimer = 0f;
-            }
+                SetNewPatrolTarget();
             UpdatePath(patrolTarget);
         }
 
-        private void RotateShootPoint()
-        {
-            if (!player || !shootPoint) return;
-            Vector2 dir = (player.transform.position - shootPoint.position).normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            shootPoint.rotation = Quaternion.Lerp(
-                shootPoint.rotation,
-                Quaternion.Euler(0, 0, angle),
-                Time.deltaTime * rotationSpeed
-            );
-        }
-
-        private void UpdateShootPointPosition()
-        {
-            if (!player || !shootPoint) return;
-            Vector2 dir = (player.transform.position - transform.position).normalized;
-            shootPoint.position = (Vector2)transform.position + dir * shootPointRadius;
-        }
-
-        private void UpdatePath(Vector3 targetPosition)
+        private void UpdatePath(Vector3 target)
         {
             if (!isPathUpdating)
-                StartCoroutine(PathfindingRoutine(targetPosition));
+                StartCoroutine(PathfindingRoutine(target));
         }
 
-        private IEnumerator PathfindingRoutine(Vector3 targetPosition)
+        private IEnumerator PathfindingRoutine(Vector3 target)
         {
             isPathUpdating = true;
-            List<Vector3> newPath = FindPath(transform.position, targetPosition);
+            List<Vector3> newPath = FindPath(transform.position, target);
             if (newPath != null && newPath.Count > 0)
             {
                 currentPath = newPath;
@@ -280,33 +197,50 @@ namespace enemySpace
 
         private List<Vector3> FindPath(Vector3 startWorld, Vector3 targetWorld)
         {
-            Vector3Int startCell = tilemap.WorldToCell(startWorld);
-            Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
-            List<Vector3> path = new List<Vector3>();
-            Vector3Int current = startCell;
-
-            while (current != targetCell)
+            Vector3Int current = tilemap.WorldToCell(startWorld);
+            Vector3Int target = tilemap.WorldToCell(targetWorld);
+            var path = new List<Vector3>();
+            while (current != target)
             {
-                if (tilemapCollider.OverlapPoint(tilemap.GetCellCenterWorld(current)))
-                    return null;
-
-                path.Add(tilemap.GetCellCenterWorld(current));
-                Vector3Int dir = new Vector3Int(
-                    Mathf.Clamp(targetCell.x - current.x, -1, 1),
-                    Mathf.Clamp(targetCell.y - current.y, -1, 1),
-                    0
-                );
+                var dir = new Vector3Int(
+                    Mathf.Clamp(target.x - current.x, -1, 1),
+                    Mathf.Clamp(target.y - current.y, -1, 1), 0);
                 current += dir;
+                var worldPt = tilemap.GetCellCenterWorld(current);
+                if (tilemapCollider.OverlapPoint(worldPt)) return null;
+                path.Add(worldPt);
             }
             return path;
         }
+
+        private void MoveAlongPath()
+        {
+            if (currentPath == null || pathIndex >= currentPath.Count) return;
+            var targetPos = currentPath[pathIndex];
+            float speed = currentState == BossState.Chase ? chaseSpeed : patrolSpeed;
+            var next = Vector2.MoveTowards(rb.position, (Vector2)targetPos, speed * Time.deltaTime);
+            rb.MovePosition(next);
+
+            if (Vector2.Distance(transform.position, targetPos) < 0.1f) pathIndex++;
+            var dir = (targetPos - transform.position).normalized;
+            if (dir != Vector3.zero)
+            {
+                animator.SetFloat("Xinput", dir.x);
+                animator.SetFloat("Yinput", dir.y);
+                animator.SetFloat("LastXinput", dir.x);
+                animator.SetFloat("LastYinput", dir.y);
+            }
+        }
+
+        private bool PlayerInSight()
+        {
+            var hit = Physics2D.Linecast(transform.position, player.transform.position, LayerMask.GetMask("Wall", "Player"));
+            return hit.collider == null || hit.collider.gameObject == player.gameObject;
+        }
+
         public override void Die()
         {
-            AudioManager.Instance.PlaySound("BossDeath");
-            AudioManager.Instance.StopPlaylist();
-            if (portalToNextLevel!=null)
-                portalToNextLevel.SetActive(true);
-
+            PortalToNextLevel.SetActive(true);
             base.Die();
         }
     }

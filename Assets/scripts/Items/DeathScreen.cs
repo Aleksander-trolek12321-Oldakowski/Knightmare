@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class DeathScreen : MonoBehaviour
 {
@@ -13,6 +12,11 @@ public class DeathScreen : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        GameData.Instance.ResetData();
+
+        string savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
+        if (File.Exists(savePath))
+            File.Delete(savePath);
         SceneManager.LoadScene("MainMenu");
     }
 }

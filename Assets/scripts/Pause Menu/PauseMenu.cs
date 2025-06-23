@@ -50,11 +50,6 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
         player.playerInputActions.Player.Disable();
 
-        // Zapisz stan gry w pamięci i na dysku
-        GameData.Instance.SaveSceneData(player);
-        GameData.Instance.SavePlayerData(player);
-        GameData.Instance.SaveToDisk();
-
         // Zresetuj zaznaczenie w UI
         EventSystem.current.SetSelectedGameObject(null);
     }
