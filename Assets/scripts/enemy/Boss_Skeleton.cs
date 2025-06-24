@@ -129,8 +129,7 @@ namespace enemySpace
 
             float distance = Vector2.Distance(transform.position, player.transform.position);
             if (distance <= attackRange && PlayerInSight())
-                player.TakeDamage(damage);
-
+                player.TakeDamage(damage, transform.position);
             animator.SetBool("IsAttacking", false);
             isAttacking = false;
             yield return new WaitForSeconds(attackCooldown);

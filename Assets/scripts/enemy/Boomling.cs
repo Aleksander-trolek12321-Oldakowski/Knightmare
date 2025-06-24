@@ -230,7 +230,7 @@ namespace enemySpace
             {
                 IDamageable target = hit.GetComponent<IDamageable>();
                 if (target != null)
-                    player.TakeDamage(damage);
+                    player.TakeDamage(damage, transform.position);
             }
 
             Die();

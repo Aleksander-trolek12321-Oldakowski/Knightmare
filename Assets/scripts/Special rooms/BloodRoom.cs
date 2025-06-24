@@ -58,7 +58,7 @@ public class BloodRoom : MonoBehaviour
             {
                 spawnPortal.CreateReturnPortal();
                 player.ApplyItemStats(selectedItem);
-                player.TakeDamage(selectedItem.priceInBloodRoom * 4);
+                player.TakeDamage(selectedItem.priceInBloodRoom * 4, transform.position);
 
                 if (selectedItem.itemSprite != null)
                 {
