@@ -198,6 +198,46 @@ namespace enemySpace
                 ChangeState(ZombieState.Patrol);
         }
 
+        private IEnumerator PerformAttack()
+        {
+            yield return new WaitForSeconds(0.5f);
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+            {
+                player.TakeDamage(damage, transform.position);
+            }
+            animator.SetBool("IsAttacking", false);
+
+            yield return new WaitForSeconds(attackCooldown);
+            isAttacking = false;
+            canAttack = true;
+
+            float dist = Vector3.Distance(transform.position, player.transform.position);
+            if (dist <= sightRange && PlayerInSight())
+                ChangeState(ZombieState.Chase);
+            else
+                ChangeState(ZombieState.Patrol);
+        }
+
+        private bool PlayerInSight()
+        {
+            Vector2 startPos  = transform.position;
+            Vector2 targetPos = player.transform.position;
+            Vector2 dir       = (targetPos - startPos).normalized;
+            float distance    = Vector2.Distance(startPos, targetPos);
+
+            int combinedMask = Wall | Player;
+            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, combinedMask);
+
+            if (hit.collider == null)
+                return false;
+
+            int hitLayer = hit.collider.gameObject.layer;
+            if (((1 << hitLayer) & Wall.value) != 0)
+                return false;
+
+            return ((1 << hitLayer) & Player.value) != 0;
+        }
+
         private void SetNewPatrolTarget()
         {
             for (int i = 0; i < 10; i++)

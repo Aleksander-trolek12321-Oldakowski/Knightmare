@@ -16,8 +16,8 @@ public class Fireball : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            player.TakeDamage(damage);
-            Debug.Log("Strzała trafiła gracza!");
+                player.TakeDamage(damage, transform.position);
+                Debug.Log("Strzała trafiła gracza!");
             Destroy(gameObject);
         }
         else if(collision.gameObject.TryGetComponent<enemy>(out enemy enemy))

@@ -143,10 +143,9 @@ namespace enemySpace
         {
             yield return new WaitForSeconds(0.5f);
             if (!isAttacking) yield break;
-
-            float dist = Vector3.Distance(transform.position, player.transform.position);
-            if (dist <= attackRange && PlayerInSight())
-                player.TakeDamage(damage);
+            
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+                player.TakeDamage(damage, transform.position);
 
             animator.SetBool("IsAttacking", false);
             isAttacking = false;

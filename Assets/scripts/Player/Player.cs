@@ -332,8 +332,7 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    public void TakeDamage(float damageAmount)
+    public void HealMaxHp(float damageAmount)
     {
         if (isDead) return;
         AudioManager.Instance.PlaySound("PlayerHitReaction");
@@ -341,14 +340,32 @@ public class Player : MonoBehaviour
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
 
-        UpdateHearts(); 
+        UpdateHearts();
 
         if (currentHealth <= 0)
         {
             Die();
         }
     }
+    public void TakeDamage(float damageAmount, Vector2 damageSourcePosition)
+    {
+        if (isDead) return;
+        AudioManager.Instance.PlaySound("PlayerHitReaction");
 
+        Vector2 toPlayer = (Vector2)transform.position - damageSourcePosition;
+        string hitTrigger = toPlayer.x >= 0 ? "HitReactionLeft" : "HitReactionRight";
+        animator.SetTrigger(hitTrigger);
+
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
+
+        UpdateHearts();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
     [SerializeField] private GameObject gameOverScreen; 
     [SerializeField] private GameObject UI;
 
@@ -408,7 +425,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            TakeDamage(-healthToAdd);
+            HealMaxHp(-healthToAdd);
         }
 
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHearts * healthPerHeart);
