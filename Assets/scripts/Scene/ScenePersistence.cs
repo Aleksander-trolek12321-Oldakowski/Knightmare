@@ -1,30 +1,38 @@
+using System;
 using UnityEngine;
 
 public class ScenePersistence : MonoBehaviour
 {
-    [Tooltip("Unikalne ID tego obiektu lub spawnera")]
+    [Tooltip("Unique ID for this object or spawner")]
     public string uniqueID;
 
-    [Tooltip("Jeśli true, ID trafi do destroyedPortals; jeśli false — to spawner/item z destroyedSpawnerIDs")]
+    [Tooltip("If true, ID is saved/loaded in destroyedSpawnerIDs; if false, in destroyedPortals.")]
     public bool isSpawner = false;
 
-    void Awake()
+    private void Awake()
     {
+        if (GameData.Instance == null)
+            return;
+
         var list = isSpawner
                  ? GameData.Instance.destroyedSpawnerIDs
                  : GameData.Instance.destroyedPortals;
 
         if (list.Contains(uniqueID))
         {
-            if (isSpawner)
-                gameObject.SetActive(false);
-            else
-                Destroy(gameObject);
+            Destroy(gameObject);
+            return;
         }
+
+        Debug.Log($"[ScenePersistence] Awake on '{uniqueID}'. Should remove? {list.Contains(uniqueID)}");
     }
+
 
     public void RegisterRemoval()
     {
+        if (GameData.Instance == null)
+            return;
+
         var list = isSpawner
                  ? GameData.Instance.destroyedSpawnerIDs
                  : GameData.Instance.destroyedPortals;
@@ -35,7 +43,6 @@ public class ScenePersistence : MonoBehaviour
             GameData.Instance.SaveToDisk();
         }
 
-        // Natychmiast ukryj/deaktywuj:
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

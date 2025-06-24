@@ -54,6 +54,7 @@ namespace enemySpace
                 }
                 hasSpawned = true;
                 persistence.RegisterRemoval();
+                GameData.Instance.SaveToDisk();
                 return;
             }
 
@@ -74,6 +75,7 @@ namespace enemySpace
                 SpawnEnemies();
                 hasSpawned = true;
                 persistence.RegisterRemoval();
+                GameData.Instance.SaveToDisk();
             }
         }
 

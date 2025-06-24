@@ -15,6 +15,7 @@ public class ItemSpawner : MonoBehaviour
     public SecretRoom secretRoom;
     [SerializeField] private TMP_Text itemPriceText;
     [SerializeField] private GameObject questionMarkPrefab;
+    public string spawnerID;
 
     private ScenePersistence persist;
 
@@ -22,7 +23,9 @@ public class ItemSpawner : MonoBehaviour
     {
         persist = GetComponent<ScenePersistence>();
         persist.isSpawner = true;
+        persist.uniqueID = spawnerID;
         spawnedItems.Clear();
+        Debug.Log($"[ItemSpawner] Awake: gameObject.name = '{gameObject.name}', persist.uniqueID = '{persist.uniqueID}'");
     }
 
     void Start()
@@ -75,6 +78,7 @@ public class ItemSpawner : MonoBehaviour
                 }
 
                 persist.RegisterRemoval();
+                GameData.Instance.SaveToDisk();
                 Destroy(itemPriceText);
                 Destroy(gameObject);
             }
@@ -93,14 +97,17 @@ public class ItemSpawner : MonoBehaviour
                 if (treasureRoom != null)
                 {
                     persist.RegisterRemoval();
+                    GameData.Instance.SaveToDisk();
                     treasureRoom.DestroyItem(gameObject);
                 }
                 if (secretRoom != null)
                 {
                     persist.RegisterRemoval();
+                    GameData.Instance.SaveToDisk();
                     secretRoom.DestroyItem(gameObject);
                 }
                 persist.RegisterRemoval();
+                GameData.Instance.SaveToDisk();
                 Destroy(gameObject);
             }
         }
