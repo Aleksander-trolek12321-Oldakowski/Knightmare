@@ -19,6 +19,7 @@ public class TutorialPopup : MonoBehaviour
     void OnDestroy()
     {
         targetPersistence.RegisterRemoval();
+        GameData.Instance.SaveToDisk();
     }
 }
 

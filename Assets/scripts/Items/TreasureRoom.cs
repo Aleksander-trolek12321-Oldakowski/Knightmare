@@ -10,20 +10,20 @@ public class TreasureRoom : MonoBehaviour
     [SerializeField] private Vector3 portalSpawnPosition;
 
 
-    public void DestroyItem(GameObject collectedItem)
+public void DestroyItem(GameObject collectedItem)
+{
+    foreach (var itemSpawner in itemSpawners)
     {
-        foreach (ItemSpawner itemSpawner in itemSpawners)
+        if (itemSpawner != null && itemSpawner.gameObject != collectedItem)
         {
-            if (itemSpawner != null && itemSpawner.gameObject != collectedItem)
-            {
-                var spawnerPersist = itemSpawner.GetComponent<ScenePersistence>();
-                if (spawnerPersist != null)
-                    spawnerPersist.RegisterRemoval();
-
-                Destroy(itemSpawner.gameObject);
-            }
+            var sp = itemSpawner.GetComponent<ScenePersistence>();
+            if (sp != null)
+                sp.RegisterRemoval();
+            Destroy(itemSpawner.gameObject);
         }
     }
+    GameData.Instance.SaveToDisk();
+}
  
 
 }

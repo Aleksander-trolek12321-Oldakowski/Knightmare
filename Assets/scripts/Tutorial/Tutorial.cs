@@ -45,6 +45,7 @@ public class Tutorial : MonoBehaviour
         {
             targetObject.SetActive(false);
             targetPersistence.RegisterRemoval();
+            GameData.Instance.SaveToDisk();
 
             Destroy(targetObject);
             Destroy(this.gameObject);

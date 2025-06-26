@@ -1,3 +1,4 @@
+// Zombie with interruptible melee attack and feedback color
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,8 @@ namespace enemySpace
         [SerializeField] private Player player;
         [SerializeField] private GameObject moneyPrefab;
         [SerializeField] private Animator animator;
-        [SerializeField] private LayerMask Wall;   // Warstwa ścian
-        [SerializeField] private LayerMask Player; // Warstwa gracza
+        [SerializeField] private LayerMask Wall;
+        [SerializeField] private LayerMask Player;
 
         [Header("Ruch, Pościg i Patrol")]
         public float patrolSpeed = 1f;
@@ -27,14 +28,14 @@ namespace enemySpace
         public float patrolRadius = 5f;
         public float changePatrolTargetInterval = 3f;
 
-        [Header("Atak")]
+        [Header("Atak melee")]
         public float attackCooldown = 1.5f;
+        public float hitReactCooldown = 1f;
 
         [Header("Kolor po obrażeniach")]
         [SerializeField] private SpriteRenderer spriteRenderer;
         private Color originalColor;
         private Color damageColor = new Color(1f, 0.45f, 0.45f);
-        private Coroutine damageCoroutine;
 
         private ZombieState currentState = ZombieState.Patrol;
         private Vector3 startPosition;
@@ -44,11 +45,12 @@ namespace enemySpace
         private Rigidbody2D rb;
         private bool isAttacking = false;
         private bool canAttack = true;
+        private Coroutine attackCoroutine;
+        private Coroutine damageCoroutine;
 
-        // Simplified path and movement
         private List<Vector3> currentPath;
         private int pathIndex;
-        private bool isPathUpdating = false;
+        private bool isPathUpdating;
         public float pathUpdateInterval = 0.5f;
 
         public static int zombieKillCounter = 0;
@@ -56,18 +58,10 @@ namespace enemySpace
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-
-            if (player == null)
-                player = FindObjectOfType<Player>();
-
-            if (tilemapCollider == null)
-                tilemapCollider = FindObjectOfType<TilemapCollider2D>();
-
-            if (tilemap == null && tilemapCollider != null)
-                tilemap = tilemapCollider.GetComponent<Tilemap>();
-
-            if (spriteRenderer == null)
-                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (player == null) player = FindObjectOfType<Player>();
+            if (tilemapCollider == null) tilemapCollider = FindObjectOfType<TilemapCollider2D>();
+            if (tilemap == null && tilemapCollider != null) tilemap = tilemapCollider.GetComponent<Tilemap>();
+            if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
             originalColor = spriteRenderer.color;
             startPosition = transform.position;
@@ -76,18 +70,19 @@ namespace enemySpace
 
         void Update()
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            bool inSight = PlayerInSight();
 
-            if (distanceToPlayer <= attackRange && canAttack && !isAttacking)
+            if (distance <= attackRange && !isAttacking && canAttack && inSight)
             {
                 ChangeState(ZombieState.Attack);
                 Attack();
             }
-            else if (distanceToPlayer <= sightRange && PlayerInSight())
+            else if (distance <= sightRange && inSight)
             {
                 ChangeState(ZombieState.Chase);
             }
-            else if (distanceToPlayer > loseSightRange)
+            else if (distance > loseSightRange)
             {
                 startPosition = transform.position;
                 ChangeState(ZombieState.Patrol);
@@ -140,57 +135,19 @@ namespace enemySpace
             }
         }
 
-        private void FixedUpdate()
-        {
-            // Velocity handled in MoveAlongPath or attack state
-        }
-
         public override void Attack()
         {
-            if (isAttacking || !canAttack)
-                return;
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (isAttacking || !canAttack || distance > attackRange) return;
 
-            AudioManager.Instance.PlaySound("ZombieAttack");
-            isAttacking = true;
-            canAttack = false;
-
-            Vector3 attackDir = (player.transform.position - transform.position).normalized;
-            animator.SetFloat("AttackXinput", attackDir.x);
-            animator.SetFloat("AttackYinput", attackDir.y);
+            Vector3 dir = (player.transform.position - transform.position).normalized;
+            animator.SetFloat("AttackXinput", dir.x);
+            animator.SetFloat("AttackYinput", dir.y);
             animator.SetBool("IsAttacking", true);
 
-            StartCoroutine(PerformAttack());
-        }
-
-        public override void TakeDamage(float damageAmount)
-        {
-            base.TakeDamage(damageAmount);
-            AudioManager.Instance.PlaySound("ZombieDamageTaken");
-
-            if (damageCoroutine != null)
-                StopCoroutine(damageCoroutine);
-
-            damageCoroutine = StartCoroutine(HandleDamageEffect());
-        }
-
-        private IEnumerator HandleDamageEffect()
-        {
-            StopCoroutine("PerformAttack");
-            animator.SetBool("IsAttacking", false);
-            isAttacking = false;
+            isAttacking = true;
             canAttack = false;
-
-            spriteRenderer.color = damageColor;
-            yield return new WaitForSeconds(1f);
-
-            spriteRenderer.color = originalColor;
-            canAttack = true;
-
-            float dist = Vector3.Distance(transform.position, player.transform.position);
-            if (dist <= sightRange && PlayerInSight())
-                ChangeState(ZombieState.Chase);
-            else
-                ChangeState(ZombieState.Patrol);
+            attackCoroutine = StartCoroutine(PerformAttack());
         }
 
         private IEnumerator PerformAttack()
@@ -212,26 +169,39 @@ namespace enemySpace
             else
                 ChangeState(ZombieState.Patrol);
         }
-
-        private bool PlayerInSight()
+        public override void TakeDamage(float damageAmount)
         {
-            Vector2 startPos  = transform.position;
-            Vector2 targetPos = player.transform.position;
-            Vector2 dir       = (targetPos - startPos).normalized;
-            float distance    = Vector2.Distance(startPos, targetPos);
+            base.TakeDamage(damageAmount);
+            AudioManager.Instance.PlaySound("ZombieDamageTaken");
 
-            int combinedMask = Wall | Player;
-            RaycastHit2D hit = Physics2D.Raycast(startPos, dir, distance, combinedMask);
+            // Interrupt attack coroutine
+            if (attackCoroutine != null)
+                StopCoroutine(attackCoroutine);
+            isAttacking = false;
+            animator.SetBool("IsAttacking", false);
+            canAttack = false;
 
-            if (hit.collider == null)
-                return false;
-
-            int hitLayer = hit.collider.gameObject.layer;
-            if (((1 << hitLayer) & Wall.value) != 0)
-                return false;
-
-            return ((1 << hitLayer) & Player.value) != 0;
+            // Damage color effect
+            if (damageCoroutine != null)
+                StopCoroutine(damageCoroutine);
+            damageCoroutine = StartCoroutine(HandleDamageEffect());
         }
+
+        private IEnumerator HandleDamageEffect()
+        {
+            spriteRenderer.color = damageColor;
+            yield return new WaitForSeconds(1f);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(hitReactCooldown);
+            canAttack = true;
+
+            float dist = Vector3.Distance(transform.position, player.transform.position);
+            if (dist <= sightRange && PlayerInSight())
+                ChangeState(ZombieState.Chase);
+            else
+                ChangeState(ZombieState.Patrol);
+        }
+
 
         private void SetNewPatrolTarget()
         {
@@ -239,27 +209,24 @@ namespace enemySpace
             {
                 Vector3 raw = startPosition + (Vector3)(Random.insideUnitCircle * patrolRadius);
                 Vector3Int cell = tilemap.WorldToCell(raw);
-                Vector3 cellCenter = tilemap.GetCellCenterWorld(cell);
-
-                if (tilemapCollider.OverlapPoint(cellCenter))
-                    continue;
-
-                patrolTarget = cellCenter;
+                Vector3 center = tilemap.GetCellCenterWorld(cell);
+                if (tilemapCollider.OverlapPoint(center)) continue;
+                patrolTarget = center;
                 return;
             }
             patrolTarget = startPosition;
         }
 
-        private void UpdatePath(Vector3 targetPosition)
+        private void UpdatePath(Vector3 target)
         {
             if (!isPathUpdating)
-                StartCoroutine(PathfindingRoutine(targetPosition));
+                StartCoroutine(PathingRoutine(target));
         }
 
-        private IEnumerator PathfindingRoutine(Vector3 targetPosition)
+        private IEnumerator PathingRoutine(Vector3 target)
         {
             isPathUpdating = true;
-            List<Vector3> newPath = FindSimplePath(transform.position, targetPosition);
+            var newPath = FindSimplePath(transform.position, target);
             if (newPath != null && newPath.Count > 0)
             {
                 currentPath = newPath;
@@ -269,53 +236,49 @@ namespace enemySpace
             isPathUpdating = false;
         }
 
-        private List<Vector3> FindSimplePath(Vector3 startWorld, Vector3 targetWorld)
+        private List<Vector3> FindSimplePath(Vector3 start, Vector3 target)
         {
-            if (tilemap == null || tilemapCollider == null)
-                return null;
-
-            Vector3Int startCell = tilemap.WorldToCell(startWorld);
-            Vector3Int targetCell = tilemap.WorldToCell(targetWorld);
+            if (tilemap == null || tilemapCollider == null) return null;
+            Vector3Int cur = tilemap.WorldToCell(start);
+            Vector3Int tar = tilemap.WorldToCell(target);
             var path = new List<Vector3>();
-            Vector3Int current = startCell;
-
-            while (current != targetCell)
+            while (cur != tar)
             {
-                Vector3Int dir = new Vector3Int(
-                    Mathf.Clamp(targetCell.x - current.x, -1, 1),
-                    Mathf.Clamp(targetCell.y - current.y, -1, 1),
-                    0);
-                Vector3Int next = current + dir;
-
-                Vector3 nextWorld = tilemap.GetCellCenterWorld(next);
-                if (tilemapCollider.OverlapPoint(nextWorld))
-                    return null;
-
-                path.Add(nextWorld);
-                current = next;
+                var dir = new Vector3Int(
+                    Mathf.Clamp(tar.x - cur.x, -1, 1),
+                    Mathf.Clamp(tar.y - cur.y, -1, 1), 0);
+                cur += dir;
+                var pt = tilemap.GetCellCenterWorld(cur);
+                if (tilemapCollider.OverlapPoint(pt)) return null;
+                path.Add(pt);
             }
             return path;
         }
 
         private void MoveAlongPath(float speed)
         {
-            if (currentPath == null || pathIndex >= currentPath.Count)
-                return;
-
-            Vector3 targetPos = currentPath[pathIndex];
-            Vector3 dir = (targetPos - transform.position).normalized;
-            rb.MovePosition(Vector2.MoveTowards(rb.position, (Vector2)targetPos, speed * Time.fixedDeltaTime));
-
+            if (currentPath == null || pathIndex >= currentPath.Count) return;
+            var targetPos = currentPath[pathIndex];
+            var next = Vector2.MoveTowards(rb.position, (Vector2)targetPos, speed * Time.fixedDeltaTime);
+            rb.MovePosition(next);
+            var dir = (targetPos - transform.position).normalized;
             animator.SetFloat("Xinput", dir.x);
             animator.SetFloat("Yinput", dir.y);
-            if (dir != Vector3.zero)
-            {
-                animator.SetFloat("LastXinput", dir.x);
-                animator.SetFloat("LastYinput", dir.y);
-            }
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f) pathIndex++;
+        }
 
-            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
-                pathIndex++;
+        private bool PlayerInSight()
+        {
+            Vector2 s = transform.position;
+            Vector2 t = player.transform.position;
+            Vector2 d = (t - s).normalized;
+            float dist = Vector2.Distance(s, t);
+            int mask = Wall | Player;
+            var hit = Physics2D.Raycast(s, d, dist, mask);
+            if (!hit) return false;
+            int lay = hit.collider.gameObject.layer;
+            if (((1 << lay) & Wall.value) != 0) return false;
+            return ((1 << lay) & Player.value) != 0;
         }
 
         private void DropLoot()

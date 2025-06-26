@@ -64,6 +64,7 @@ public class BloodRoom : MonoBehaviour
                 {
                     InventoryUI.Instance.AddItemToUI(selectedItem.itemSprite, selectedItem.name);
                     GameData.Instance.collectedItemIcons.Add(selectedItem.itemSprite);
+                    GameData.Instance.collectedItems.Add(selectedItem);
                 }
 
                

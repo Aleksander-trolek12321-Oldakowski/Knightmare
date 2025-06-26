@@ -218,9 +218,22 @@ public class GameData : MonoBehaviour
         hasThorns = state.hasThorns;
         currentEquippedItem = !string.IsNullOrEmpty(state.currentItemName)?
             Resources.Load<ItemData>($"Items/{state.currentItemName}"):null;
-        collectedItems = state.collectedItemIDs.ConvertAll(id=>
-            Resources.Load<ItemData>($"Items/{id}"));
-        collectedItemIcons = collectedItems.ConvertAll(i=>i.itemSprite);
+        if (state.collectedItemIDs != null)
+        {
+            foreach (var id in state.collectedItemIDs)
+            {
+                var item = Resources.Load<ItemData>($"Items/{id}");
+                if (item != null)
+                {
+                    collectedItems.Add(item);
+                    collectedItemIcons.Add(item.itemSprite);
+                }
+                else
+                {
+                    Debug.LogWarning($"ItemData '{id}' not found in Resources/Items.");
+                }
+            }
+        }
 
         previousSceneName = state.previousSceneName;
         returnPosition = state.returnPosition.ToVector3();
