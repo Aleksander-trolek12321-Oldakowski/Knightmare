@@ -306,6 +306,7 @@ namespace enemySpace
             }
             return path;
         }
+      public GameObject win;
 
         public override void Die()
         {
@@ -313,6 +314,13 @@ namespace enemySpace
             AudioManager.Instance.PlaySound("BossDeath");
             AudioManager.Instance.StopPlaylist();
             AudioManager.Instance.PlaySound("BossMusicAfterKill");
+
+            // Wyświetlanie elementu canvasu po śmierci bossa
+            if (win != null)
+            {
+                win.SetActive(true);
+            }
+
             base.Die();
         }
 
