@@ -69,8 +69,8 @@ MonoBehaviour:
   patrolSpeed: 2
   patrolRadius: 5
   changePatrolTargetInterval: 3
-  attackCooldown: 1.5
-  hitReactCooldown: 1
+  attackCooldown: 3
+  hitReactCooldown: 2
   pathUpdateInterval: 0.75
   PortalToNextLevel: {fileID: 0}
 --- !u!50 &2107765689983642952

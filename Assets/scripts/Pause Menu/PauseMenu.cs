@@ -20,6 +20,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (isPaused) ResumeGame();
         else PauseGame();
+
+        Debug.Log("TogglePause – isPaused = " + isPaused);
     }
 
     public void ResumeGame()
@@ -32,7 +34,9 @@ public class PauseMenu : MonoBehaviour
         }
         Time.timeScale = 1f;
         isPaused = false;
+        AudioManager.Instance.PlayPlaylist("MusicGame1", "MusicGame2");
         player.playerInputActions.Player.Enable();
+        player.playerInputActions.UI.Disable();
     }
 
     void PauseGame()
@@ -49,6 +53,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         isPaused = true;
         player.playerInputActions.Player.Disable();
+        player.playerInputActions.UI.Enable();
 
         // Zresetuj zaznaczenie w UI
         EventSystem.current.SetSelectedGameObject(null);
