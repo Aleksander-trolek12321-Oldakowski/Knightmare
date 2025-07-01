@@ -135,7 +135,7 @@ MonoBehaviour:
   health: 10
   speed: 2
   damage: 1
-  attackRange: 5
+  attackRange: 4.5
   attackSpeed: 2
   minimumDistance: 5
   isOnFire: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
   loseSightRange: 10
   patrolRadius: 10
   changePatrolTargetInterval: 3
-  attackCooldown: 1.5
-  hitReactCooldown: 1.5
+  attackCooldown: 2
+  hitReactCooldown: 2
   spriteRenderer: {fileID: 0}
   pathUpdateInterval: 0.75
 --- !u!61 &8024524685503616884
