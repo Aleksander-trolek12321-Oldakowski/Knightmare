@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public List<Sound> sounds;
-    private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
+    public Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
 
     private float musicVolume = 1f;
     private float sfxVolume   = 1f;
