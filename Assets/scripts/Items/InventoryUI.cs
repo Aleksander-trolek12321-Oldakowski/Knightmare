@@ -84,4 +84,24 @@ public class InventoryUI : MonoBehaviour
         }
         cg.alpha = end;
     }
+
+    public void ClearAllIcons()
+    {
+        for (int i = itemIcons.Count - 1; i >= 0; i--)
+        {
+            Destroy(itemIcons[i]);
+        }
+        itemIcons.Clear();
+    }
+
+    public void RebuildFromGameData()
+    {
+        ClearAllIcons();
+        if (GameData.Instance == null) return;
+
+        foreach (var sprite in GameData.Instance.collectedItemIcons)
+        {
+            AddItemIconOnly(sprite);
+        }
+    }
 }
